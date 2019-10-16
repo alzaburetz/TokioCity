@@ -30,11 +30,18 @@ namespace TokioCity.Views
             BindingContext = viewModel = new CategoriesViewModel(client);
         }
 
+        public async void OpenProducts(object sender, SelectedItemChangedEventArgs args)
+        {
+            var item = args.SelectedItem;
+            Console.WriteLine(item.GetType());
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
             viewModel.LoadCategoriesCommand.Execute(null);
+            //viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

@@ -2,7 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TokioCity.Services;
-using TokioCity.Views;
+using TokioCity.Models;
+using System.Collections.Generic;
 
 namespace TokioCity
 {

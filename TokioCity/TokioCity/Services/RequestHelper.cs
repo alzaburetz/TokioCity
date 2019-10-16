@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System;
@@ -7,6 +8,7 @@ namespace TokioCity.Services
 {
     public static class RequestHelper
     {
+       
         public async static Task<T> GetData<T>(HttpClient client, string endpoint)
         {
             var request = await client.GetAsync(endpoint);
@@ -15,7 +17,9 @@ namespace TokioCity.Services
                 if (request.IsSuccessStatusCode)
                 {
                     string response = await request.Content.ReadAsStringAsync();
-                    T result = JsonConvert.DeserializeObject<T>(response);
+                    T result = JsonConvert.DeserializeObject<T>(response, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                    string test = JsonConvert.SerializeObject(result);
+                    Console.WriteLine();
                     return result;
                 }
                 else

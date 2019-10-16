@@ -5,23 +5,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TokioCity.Views.Categories"
-             xmlns:vm="clr-namespace:TokioCity.ViewModels"
+             xmlns:components="clr-namespace:TokioCity.Views.Components"
              Title="Категории">
     <ContentPage.Content>
         <StackLayout>
+            <components:ButtonBar/>
             <ListView x:Name="listView"
                       ItemsSource="{Binding CatList}"
+                      ItemSelected="OpenProducts"
                       >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            
+                            <Label Text="{Binding name}"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <!--<CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal" Span="2"/>
-                </CollectionView.ItemsLayout>-->
+
             </ListView>
             
             
