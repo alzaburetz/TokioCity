@@ -33,15 +33,16 @@ namespace TokioCity.Views
         public async void OpenProducts(object sender, SelectedItemChangedEventArgs args)
         {
             var item = args.SelectedItem;
-            Console.WriteLine(item.GetType());
+            if (item.GetType() == typeof(Category))
+            {
+                viewModel.CurrentCategory = ((Category)item).id;
+            }
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             viewModel.LoadCategoriesCommand.Execute(null);
-            //viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

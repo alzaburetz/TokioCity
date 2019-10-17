@@ -10,21 +10,39 @@
     <ContentPage.Content>
         <StackLayout>
             <components:ButtonBar/>
-            <ListView x:Name="listView"
-                      ItemsSource="{Binding CatList}"
-                      ItemSelected="OpenProducts"
-                      >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Label Text="{Binding name}"/>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            <ScrollView Orientation="Vertical">
+                <StackLayout>
+                    <CarouselView
+                        ItemsSource="{Binding CatList}" FlowDirection="LeftToRight" IsEnabled="True" IsVisible="True">
+                        <CarouselView.ItemsLayout>
+                            <GridItemsLayout Orientation="Horizontal" Span="1"/>
+                        </CarouselView.ItemsLayout>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label Text="RRRR"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <!--<ListView
+                    
+                    ItemsSource="{Binding CatList}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Label Text="{Binding name}"/>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>-->
+                </StackLayout>
+                
+            </ScrollView>
+            
 
-            </ListView>
-            
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

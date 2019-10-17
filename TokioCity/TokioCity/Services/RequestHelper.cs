@@ -17,10 +17,19 @@ namespace TokioCity.Services
                 if (request.IsSuccessStatusCode)
                 {
                     string response = await request.Content.ReadAsStringAsync();
-                    T result = JsonConvert.DeserializeObject<T>(response, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-                    string test = JsonConvert.SerializeObject(result);
-                    Console.WriteLine();
-                    return result;
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)Convert.ChangeType(response, typeof(T));
+                    }
+                    else
+                    {
+                        T result = JsonConvert.DeserializeObject<T>(response, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                        string test = JsonConvert.SerializeObject(result);
+                        Console.WriteLine();
+                        return result;
+                    }
+                    
+                    
                 }
                 else
                 {

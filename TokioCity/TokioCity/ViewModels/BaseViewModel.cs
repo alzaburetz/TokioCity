@@ -13,6 +13,7 @@ namespace TokioCity.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataBase DataBase => DependencyService.Get<IDataBase>();
 
         bool isBusy = false;
         public bool IsBusy
