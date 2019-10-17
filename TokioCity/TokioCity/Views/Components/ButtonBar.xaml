@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TokioCity.Views.Components.ButtonBar">
+    <ContentView.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+        </Style>
+
+        <Style TargetType="Image">
+            <Setter Property="WidthRequest" Value="35"/>
+        </Style>
+
+        <Style TargetType="StackLayout">
+            <Setter Property="WidthRequest" Value="95"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+    </ContentView.Resources>
+  <ContentView.Content>
+        <StackLayout
+          BackgroundColor="#181818"
+          HeightRequest="50"
+          Orientation="Horizontal"
+          Padding="15,15,15,40"
+          Margin="0">
+
+            <StackLayout>
+                <Image Source="favorite.png"/>
+                <Label Text="Избранное"/>
+            </StackLayout>
+            <StackLayout>
+                <Image Source="favorite.png"/>
+                <Label Text="Ланчи"/>
+            </StackLayout>
+            <StackLayout>
+                <Image Source="pasta.png"/>
+                <Label Text="Паста"/>
+            </StackLayout>
+            <StackLayout>
+                <Image Source="sushi.png"/>
+                <Label Text="Суши"/>
+            </StackLayout>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>
