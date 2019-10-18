@@ -8,12 +8,14 @@
              xmlns:components="clr-namespace:TokioCity.Views.Components"
              Shell.BackgroundColor="#181818"
              xmlns:converters="clr-namespace:TokioCity.Services.Converters"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="Категории">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ToUpperConverter x:Key="ToUpper"/>
             <converters:PriceConverter x:Key="Price"/>
+            <converters:ImageUrlConverter x:Key="ImageUrl"/>
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
@@ -42,11 +44,15 @@
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout HorizontalOptions="Fill"
-                                                 WidthRequest="370"
                                                  Padding="20"
+                                                 WidthRequest="370"
                                                  Orientation="Vertical">
                                         <Label Text="{Binding name, Converter={StaticResource ToUpper}}"
                                                TextColor="White"/>
+                                        <image:CachedImage Source="{Binding image}"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           VerticalOptions="FillAndExpand"
+                                                           Aspect="Fill"/>
                                         <Image BackgroundColor="White"
                                                Source="{Binding image}"
                                                VerticalOptions="FillAndExpand"
@@ -80,9 +86,7 @@
                     </StackLayout>
                     <StackLayout 
                                  Padding="10">
-                        <CollectionView ItemsSource="{Binding Products}"
-                                       
-                                        >
+                        <CollectionView ItemsSource="{Binding Products}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Span="2"
                                                  Orientation="Vertical"
@@ -98,7 +102,7 @@
                                            >
                                         <StackLayout Orientation="Vertical"
                                                      Padding="10">
-                                            <Image Source="{Binding image}"
+                                            <image:CachedImage Source="{Binding image, Converter={StaticResource ImageUrl}}"
                                                    Aspect="AspectFit"
                                                    VerticalOptions="StartAndExpand"
                                                    HorizontalOptions="FillAndExpand"/>
@@ -108,7 +112,7 @@
                                                    FontAttributes="Bold"
                                                        HorizontalOptions="StartAndExpand"
                                                    />
-                                                <ImageButton Source="{Binding image}"
+                                                <ImageButton Source="addtocart.png"
                                                              VerticalOptions="EndAndExpand"
                                                              WidthRequest="30"/>
                                             </StackLayout>
