@@ -16,9 +16,10 @@ namespace TokioCity.ViewModels
 {
     public class CategoriesViewModel : BaseViewModel
     {
-        
+
         public ObservableCollection<Category> CatList { get; set; }
         public ObservableCollection<AppItem> Products { get; set; }
+        public ObservableCollection<Subcategory> SubCats { get; set; }
         public Command LoadCategoriesCommand { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Command LoadCategoryItemsCommand { get; set; }
@@ -28,61 +29,80 @@ namespace TokioCity.ViewModels
         public AppItem MainProduct { get; set; }
 
         public int CurrentCategory { get; set; }
+        public int CategoryIndex { get; set; }
 
         public CategoriesViewModel(HttpClient client)
         {
             CatList = new ObservableCollection<Category>();
             Products = new ObservableCollection<AppItem>();
+            SubCats = new ObservableCollection<Subcategory>();
             items = new List<AppItem>();
             data = new List<Category>();
             MainProduct = new AppItem();
-            
+
             LoadCategoriesCommand = new Command(async () =>
             {
-                data = await RequestHelper.GetData<List<Category>>(client, "data/app_categs.php?version=1.8");
+                data = await RequestHelper.GetData<List<Category>>(client, "data/app_categs.php?version=");
                 CatList.Clear();
                 if (data != null)
                     foreach (Category category in data)
                     {
                         category.image = "https://www.tokyo-city.ru" + category.image;
-                        CatList.Add(category);
+                        if (category.subcategories != null)
+                            CatList.Add(category);
                     }
                 CurrentCategory = CatList[0].id;
-                LoadCategoryItemsCommand.Execute(null);
+
+                LoadItemsCommand.Execute(null);
             });
 
             LoadItemsCommand = new Command(async () =>
             {
-                var hash = await RequestHelper.GetData<string>(client, "/data/app_items.php?hash=1&version=1.8");
-                if (Application.Current.Properties.ContainsKey("Hash"))
-                    Application.Current.Properties["Hash"] = hash;
-                else
-                    Application.Current.Properties.Add("Hash", hash);
-
-                if (hash != Application.Current.Properties["Hash"].ToString())
+                var hash = await RequestHelper.GetData<string>(client, "/data/app_items.php?hash=1&version=");
+                if (!Application.Current.Properties.ContainsKey("Hash"))
                 {
-                    items = await RequestHelper.GetData<List<AppItem>>(client, "/data/app_items.php?version=1.8");
+                    items = await RequestHelper.GetData<List<AppItem>>(client, "/data/app_items.php?version=");
                     if (items != null)
                     {
                         DataBase.WriteAll("Items", items);
                     }
+                    Application.Current.Properties.Add("Hash", hash);
                 }
+                else if (hash != Application.Current.Properties["Hash"].ToString())
+                {
+                    items = await RequestHelper.GetData<List<AppItem>>(client, "/data/app_items.php?version=");
+                    if (items != null)
+                    {
+                        DataBase.WriteAll("Items", items);
+                    }
+                    Application.Current.Properties["Hash"] = hash;
+                }
+                items.Clear();
+                LoadCategoryItemsCommand.Execute(null);
             });
 
-            LoadCategoryItemsCommand = new Command(() =>
+            LoadCategoryItemsCommand = new Command(async () =>
             {
                 int count = DataBase.GetRecordCount<AppItem>("Items");
                 var query = Query.Where("category", category => category.AsArray.Contains(CurrentCategory));
                 var itemsFound = DataBase.GetByQueryEnumerable<AppItem>("Items", query);
-                var ie = itemsFound;
+
                 Products.Clear();
                 List<AppItem> tempList = new List<AppItem>();
-                while(ie.MoveNext())
+                while (itemsFound.MoveNext())
                 {
-                    
-                    Products.Add(ie.Current);
+
+                    Products.Add(itemsFound.Current);
                 }
-                ie.Dispose();
+                if (CatList[CategoryIndex].subcategories.Count > 0)
+                {
+                    SubCats.Clear();
+                    foreach (var subcat in CatList[CategoryIndex].subcategories)
+                    {
+                        SubCats.Add(subcat);
+                    }
+                }
+                itemsFound.Dispose();
             });
 
             LoadFirstItemCommand = new Command(() =>
@@ -90,14 +110,5 @@ namespace TokioCity.ViewModels
                 MainProduct = DataBase.GetOneOfCategory<AppItem>("Items", CurrentCategory);
             });
         }
-
-
-    }
-
-    [Obsolete]
-    public class Test
-    {
-        public int Id;
-        public string name;
     }
 }

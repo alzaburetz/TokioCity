@@ -25,7 +25,7 @@
   <ContentView.Content>
         <StackLayout
           BackgroundColor="#181818"
-          HeightRequest="50"
+          HeightRequest="15"
           Orientation="Horizontal"
           Padding="15,15,15,40"
           Margin="0">

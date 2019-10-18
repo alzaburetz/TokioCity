@@ -5,7 +5,6 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
        xmlns:local="clr-namespace:TokioCity.Views"
-       xmlns:components="clr-namespace:TokioCity.Components"
        Title="TokioCity"
        x:Class="TokioCity.AppShell"
        FlyoutBackgroundColor="#202123"

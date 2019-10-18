@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using LiteDB;
-using TokioCity.Models;
 
 namespace TokioCity.Services
 {
