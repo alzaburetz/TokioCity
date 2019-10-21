@@ -9,7 +9,7 @@
              Shell.BackgroundColor="#181818"
              xmlns:converters="clr-namespace:TokioCity.Services.Converters"
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             Title="Категории">
+             Title="TokioCity">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -52,15 +52,8 @@
                                         <image:CachedImage Source="{Binding image}"
                                                            HorizontalOptions="FillAndExpand"
                                                            VerticalOptions="FillAndExpand"
-                                                           Aspect="Fill"/>
-                                        <Image BackgroundColor="White"
-                                               Source="{Binding image}"
-                                               VerticalOptions="FillAndExpand"
-                                               HorizontalOptions="FillAndExpand" >
-                                            <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                                            </Image.GestureRecognizers>
-                                        </Image>
+                                                           BackgroundColor="Red"
+                                                           Aspect="AspectFill"/>
                                     </StackLayout>
                                 </DataTemplate>
 
@@ -70,7 +63,9 @@
 
                     <StackLayout HeightRequest="30"
                                  Padding="10">
-                        <CollectionView ItemsSource="{Binding SubCats}">
+                        <CollectionView ItemsSource="{Binding SubCats}"
+                                        SelectionChanged="SubcatLoad"
+                                        SelectionMode="Single">
                             <CollectionView.ItemsLayout>
                                 <ListItemsLayout Orientation="Horizontal"></ListItemsLayout>
                             </CollectionView.ItemsLayout>
@@ -86,13 +81,14 @@
                     </StackLayout>
                     <StackLayout 
                                  Padding="10">
-                        <CollectionView ItemsSource="{Binding Products}">
+                        <CollectionView ItemsSource="{Binding Products}"
+                                        SelectionMode="Single"
+                                        SelectionChanged="OpenProduct">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Span="2"
                                                  Orientation="Vertical"
                                                  VerticalItemSpacing="10"
-                                                 HorizontalItemSpacing="10"
-                                    />
+                                                 HorizontalItemSpacing="10"/>
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>

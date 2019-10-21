@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:TokioCity.Services.Converters"
+             x:Class="TokioCity.Views.Product"
+             BackgroundColor="#202123">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ToUpperConverter x:Key="ToUpper"/>
+            <converters:PriceConverter x:Key="Price"/>
+            <converters:ImageUrlConverter x:Key="ImageUrl"/>
+            <converters:WeightConverter x:Key="Weight"/>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="pf-bold.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
+                <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <!--<StackLayout>-->
+
+            <AbsoluteLayout 
+                            BackgroundColor="Transparent">
+                
+            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout>
+                    <image:CachedImage Source="{Binding product.image, Converter={StaticResource ImageUrl}}"
+                                       x:Name="Img"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="FillAndExpand"
+                                       HeightRequest="300"
+                                       Aspect="AspectFill"/>
+                    <StackLayout Padding="30">
+                        <Label Text="{Binding product.name, Converter={StaticResource ToUpper}}"
+                           FontSize="Large"
+                               
+                           FontFamily="{StaticResource RegularFont}"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="FillAndExpand"
+                           TextColor="White"/>
+
+                        
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding product.price, Converter={StaticResource Price}}"
+                                   FontSize="Large"
+                                   FontFamily="{StaticResource RegularFont}"
+                                   WidthRequest="70"/>
+                            <Image Source="calories.png"
+                                   WidthRequest="150"/>
+                            <Label x:Name="Mass"
+                                    Text="{Binding product.weight1, Converter={StaticResource Weight}}"
+                                    FontSize="Body"
+                                    TextColor="#55545A"
+                                    HorizontalOptions="CenterAndExpand"
+                           />
+                        </StackLayout>
+
+                        <Label Text="{Binding product.ingredients_rus}"
+                           TextColor="White"
+                           LineHeight="1.2"/>
+
+                        <BoxView HeightRequest="30"></BoxView>
+
+                        <Frame BackgroundColor="#007AFF"
+                               HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal"
+                                         Padding="-5">
+                                <StackLayout WidthRequest="130"
+                                             Orientation="Horizontal">
+                                    <ImageButton Source="minus.png"
+                                                 WidthRequest="15"
+                                                 HeightRequest="25"
+                                                 BackgroundColor="Transparent"
+                                                 HorizontalOptions="StartAndExpand"
+                                                 VerticalOptions="CenterAndExpand"
+                                                 Clicked="Reduce"/>
+
+                                    <Label Text="{Binding amount}"
+                                           HorizontalOptions="FillAndExpand"
+                                           VerticalTextAlignment="Center"
+                                           FontSize="Medium"
+                                           HorizontalTextAlignment="Center"
+                                           x:Name="Amount"/>
+
+                                    <ImageButton Source="plus.png"
+                                           WidthRequest="15"
+                                           HeightRequest="25"
+                                           HorizontalOptions="EndAndExpand"
+                                           VerticalOptions="CenterAndExpand"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="Add">
+
+                                    </ImageButton>
+                                </StackLayout>
+                                <StackLayout WidthRequest="180">
+                                    <Label Text="Добавить"
+                                           FontSize="Medium"
+                                           HorizontalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="End">
+                                    </Label>
+
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                        
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <Image Source="scrim.png"/>
+            <Image Source="back.png"
+                   AbsoluteLayout.LayoutBounds="20,20,20,20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoBack"/>
+                </Image.GestureRecognizers>
+                
+            </Image>
+            <Image Source="cart.png"
+                       AbsoluteLayout.LayoutBounds="370,20,25,25"></Image>
+        </AbsoluteLayout>
+        <!--</StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>

@@ -15,6 +15,8 @@
 
         <Style TargetType="Image">
             <Setter Property="WidthRequest" Value="35"/>
+            <Setter Property="HeightRequest" Value="35"/>
+            <Setter Property="Aspect" Value="AspectFit"/>
         </Style>
 
         <Style TargetType="StackLayout">
@@ -27,7 +29,7 @@
           BackgroundColor="#181818"
           HeightRequest="15"
           Orientation="Horizontal"
-          Padding="15,15,15,40"
+          Padding="15,15,15,60"
           Margin="0">
 
             <StackLayout>
@@ -35,7 +37,7 @@
                 <Label Text="Избранное"/>
             </StackLayout>
             <StackLayout>
-                <Image Source="favorite.png"/>
+                <Image Source="lunch.png"/>
                 <Label Text="Ланчи"/>
             </StackLayout>
             <StackLayout>

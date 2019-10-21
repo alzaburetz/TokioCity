@@ -23,34 +23,19 @@ namespace TokioCity.Views
         private HttpClient client;
         private int currentitem;
         CategoriesViewModel viewModel;
+
+        public Command LoadSubcat { get; set; }
         public Categories()
         {
             InitializeComponent();
             client = new HttpClient();
             client.BaseAddress = new Uri("https://www.tokyo-city.ru");
             BindingContext = viewModel = new CategoriesViewModel(client);
+            LoadSubcat = new Command((subcat) =>
+            {
+                var a = subcat;
+            });
             currentitem = -1;
-        }
-
-        public async void OpenProducts(object sender, SelectionChangedEventArgs args)
-        {
-            var item = args.CurrentSelection[0];
-            if (item.GetType() == typeof(Category))
-            {
-                viewModel.CurrentCategory = ((Category)item).id;
-                var currentObj = viewModel.CatList.Single<Category>(x => x.id == viewModel.CurrentCategory);
-                viewModel.CategoryIndex = viewModel.CatList.IndexOf(currentObj);
-            }
-            viewModel.LoadCategoryItemsCommand.Execute(null);
-        }
-
-        public void CategorySwiped(object sender, SwipedEventArgs e)
-        {
-            if (e.Direction == SwipeDirection.Left)
-            {
-                var str = "Left";
-                
-            }
         }
 
         protected override void OnAppearing()
@@ -59,16 +44,13 @@ namespace TokioCity.Views
             viewModel.LoadCategoriesCommand.Execute(null);
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            var str = "Tapped";
-            var type = sender.GetType();
-        }
-
         private async void CarouselView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
         {
             var index = e.CenterItemIndex;
-            
+            if (e.HorizontalOffset == 0)
+            {
+                var test = "Test";
+            }
             if (currentitem != index)
             {
                 var cat = viewModel.CatList[index];
@@ -80,5 +62,30 @@ namespace TokioCity.Views
             
         }
 
+        private void SubcatLoad(object sender, SelectionChangedEventArgs args)
+        {
+            try 
+            { 
+                var index = (args.CurrentSelection[0] as Subcategory).id;
+                viewModel.LoadSubcat.Execute(index);
+                
+            }
+            catch (ArgumentOutOfRangeException e) { }
+            var Collection = (CollectionView)sender;
+            Collection.SelectedItem = null;
+        }
+
+
+        private async void OpenProduct(object sender, SelectionChangedEventArgs items)
+        {
+            try
+            {
+                var item = ((AppItem)items.CurrentSelection[0] as AppItem);
+                await Navigation.PushModalAsync(new Product(item));
+            }
+            catch { }
+            var Collection = (CollectionView)sender;
+            Collection.SelectedItem = null;
+        }
     }
 }

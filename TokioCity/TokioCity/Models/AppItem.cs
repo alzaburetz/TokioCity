@@ -48,7 +48,6 @@ namespace TokioCity.Models
         public List<string> site { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public List<string> toppings { get; set; }
-
         [JsonProperty("max-toppings")]
         public int max_toppings { get; set; }
         [JsonProperty("component-count")]

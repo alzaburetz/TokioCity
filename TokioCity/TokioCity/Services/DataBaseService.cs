@@ -77,6 +77,11 @@ namespace TokioCity.Services
             return database.GetCollection<T>(collection).FindOne(Query.Where("category", predicate));
         }
 
+        public T GetProduct<T>(string collection, string uid)
+        {
+            return database.GetCollection<T>(collection).FindOne(Query.EQ("uid", uid));
+        }
+
         public DataBaseService()
         {
             DataBasePath = Path

@@ -11,6 +11,7 @@ using System.Net.Http;
 using LiteDB;
 using System.IO;
 using CarouselView.FormsPlugin.Abstractions;
+using System.Threading.Tasks;
 
 namespace TokioCity.ViewModels
 {
@@ -24,6 +25,7 @@ namespace TokioCity.ViewModels
         public Command LoadItemsCommand { get; set; }
         public Command LoadCategoryItemsCommand { get; set; }
         public Command LoadFirstItemCommand { get; set; }
+        public Command LoadSubcat { get; set; }
         public List<Category> data { get; set; }
         public List<AppItem> items { get; set; }
         public AppItem MainProduct { get; set; }
@@ -39,6 +41,17 @@ namespace TokioCity.ViewModels
             items = new List<AppItem>();
             data = new List<Category>();
             MainProduct = new AppItem();
+
+            LoadSubcat = new Command(async (subcat) =>
+            {
+                var items = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains((int)subcat)));
+                Products.Clear(); 
+                while (items.MoveNext())
+                {
+                    await Task.Delay(TimeSpan.FromMilliseconds(200));
+                    Products.Add(items.Current);
+                }
+            });
 
             LoadCategoriesCommand = new Command(async () =>
             {
@@ -91,7 +104,7 @@ namespace TokioCity.ViewModels
                 List<AppItem> tempList = new List<AppItem>();
                 while (itemsFound.MoveNext())
                 {
-
+                    await Task.Delay(TimeSpan.FromMilliseconds(200));
                     Products.Add(itemsFound.Current);
                 }
                 if (CatList[CategoryIndex].subcategories.Count > 0)

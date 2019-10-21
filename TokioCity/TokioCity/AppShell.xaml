@@ -78,11 +78,7 @@
             </ShellContent>
         </Tab>
 
-        <Tab Title="About">
-            <ShellContent>
-                <local:AboutPage/>
-            </ShellContent>
-        </Tab>
+        
             
 
     </FlyoutItem>

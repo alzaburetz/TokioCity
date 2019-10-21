@@ -6,6 +6,7 @@ namespace TokioCity.Services
     public interface IDataBase
     {
        string DataBasePath { get; set; }
+        T GetProduct<T>(string collection, string uid);
        List<T> GetAll<T>(string collection);
        IEnumerable<T> GetAllStream<T>(string collection);
        void WriteAll<T>(string collection, List<T> items);
