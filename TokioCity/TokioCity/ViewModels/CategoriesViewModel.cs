@@ -100,13 +100,6 @@ namespace TokioCity.ViewModels
                 var query = Query.Where("category", category => category.AsArray.Contains(CurrentCategory));
                 var itemsFound = DataBase.GetByQueryEnumerable<AppItem>("Items", query);
 
-                Products.Clear();
-                List<AppItem> tempList = new List<AppItem>();
-                while (itemsFound.MoveNext())
-                {
-                    await Task.Delay(TimeSpan.FromMilliseconds(200));
-                    Products.Add(itemsFound.Current);
-                }
                 if (CatList[CategoryIndex].subcategories.Count > 0)
                 {
                     SubCats.Clear();
@@ -114,6 +107,13 @@ namespace TokioCity.ViewModels
                     {
                         SubCats.Add(subcat);
                     }
+                }
+                Products.Clear();
+                List<AppItem> tempList = new List<AppItem>();
+                while (itemsFound.MoveNext())
+                {
+                    await Task.Delay(TimeSpan.FromMilliseconds(200));
+                    Products.Add(itemsFound.Current);
                 }
                 itemsFound.Dispose();
             });

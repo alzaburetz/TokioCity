@@ -40,7 +40,7 @@
                                        VerticalOptions="FillAndExpand"
                                        HeightRequest="300"
                                        Aspect="AspectFill"/>
-                    <StackLayout Padding="30">
+                    <StackLayout Padding="20">
                         <Label Text="{Binding product.name, Converter={StaticResource ToUpper}}"
                            FontSize="Large"
                                

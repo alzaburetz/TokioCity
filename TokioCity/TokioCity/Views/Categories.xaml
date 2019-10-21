@@ -9,7 +9,7 @@
              Shell.BackgroundColor="#181818"
              xmlns:converters="clr-namespace:TokioCity.Services.Converters"
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             Title="TokioCity">
+             Title="ТОКИО-CITY">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -20,6 +20,13 @@
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="pf-bold.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
+                <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -48,7 +55,9 @@
                                                  WidthRequest="370"
                                                  Orientation="Vertical">
                                         <Label Text="{Binding name, Converter={StaticResource ToUpper}}"
-                                               TextColor="White"/>
+                                               TextColor="White"
+                                               FontSize="Large"
+                                               FontFamily="{StaticResource RegularFont}"/>
                                         <image:CachedImage Source="{Binding image}"
                                                            HorizontalOptions="FillAndExpand"
                                                            VerticalOptions="FillAndExpand"
@@ -71,8 +80,12 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout Padding="5">
+                                    <StackLayout Padding="5,5,15,5">
                                         <Label Text="{Binding name, Converter={StaticResource ToUpper}}"
+                                               VerticalOptions="FillAndExpand"
+                                               HorizontalOptions="FillAndExpand"
+                                               FontSize="Large"
+                                               FontFamily="{StaticResource RegularFont}"
                                                TextColor="White"/>
                                     </StackLayout>
                                 </DataTemplate>
@@ -102,7 +115,8 @@
                                                    Aspect="AspectFit"
                                                    VerticalOptions="StartAndExpand"
                                                    HorizontalOptions="FillAndExpand"/>
-                                            <Label Text="{Binding name, Converter={StaticResource ToUpper}}"/>
+                                            <Label Text="{Binding name}"
+                                                   Opacity="0.6"/>
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="{Binding price, Converter={StaticResource Price}}"
                                                    FontAttributes="Bold"
