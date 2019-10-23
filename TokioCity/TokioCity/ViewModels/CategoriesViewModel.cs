@@ -61,8 +61,7 @@ namespace TokioCity.ViewModels
                     foreach (Category category in data)
                     {
                         category.image = "https://www.tokyo-city.ru" + category.image;
-                        if (category.subcategories != null)
-                            CatList.Add(category);
+                        CatList.Add(category);
                     }
                 CurrentCategory = CatList[0].id;
 
@@ -99,10 +98,10 @@ namespace TokioCity.ViewModels
                 int count = DataBase.GetRecordCount<AppItem>("Items");
                 var query = Query.Where("category", category => category.AsArray.Contains(CurrentCategory));
                 var itemsFound = DataBase.GetByQueryEnumerable<AppItem>("Items", query);
-
-                if (CatList[CategoryIndex].subcategories.Count > 0)
+                SubCats.Clear();
+                if (CatList[CategoryIndex].subcategories?.Count > 0)
                 {
-                    SubCats.Clear();
+                    
                     foreach (var subcat in CatList[CategoryIndex].subcategories)
                     {
                         SubCats.Add(subcat);

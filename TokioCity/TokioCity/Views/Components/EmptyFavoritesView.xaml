@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TokioCity.Views.Components.EmptyFavoritesView"
+             BackgroundColor="#181818">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Opacity" Value="0.7"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="LineHeight" Value="1.2"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+  <ContentView.Content>
+      <StackLayout>
+            <Frame CornerRadius="10"
+                   BackgroundColor="#202123">
+                <StackLayout BackgroundColor="#202123">
+                    <Label Text="У вас пока нет любимых блюд. Чтобы сделать блюдо любимым, нажмите на сердечко возле названия блюда в каталоге или в списке заказов в вашем профиле."/>
+                    <Label Text="Также здесь мы сохраним блюда, которые вы создали в конструкторе воков и конструкторе бургеров."/>
+                </StackLayout>
+            </Frame>
+      </StackLayout>
+  </ContentView.Content>
+</ContentView>

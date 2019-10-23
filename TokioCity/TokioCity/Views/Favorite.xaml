@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:TokioCity.Views.Components"
+             x:Class="TokioCity.Views.Favorite"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Title="Избранное"
+             BackgroundColor="#181818">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="pf-bold.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
+                <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFont}"/>
+                <Setter Property="FontSize" Value="36"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="30">
+            <Label Text="ИЗБРАННОЕ"/>
+            <CollectionView ItemsSource="{Binding favorites}">
+                <CollectionView.EmptyView>
+                    <local:EmptyFavoritesView/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="2"
+                                                 Orientation="Vertical"
+                                                 VerticalItemSpacing="10"
+                                                 HorizontalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10"
+                                           Padding="5"
+                                           BackgroundColor="#202123"
+                                           >
+                            <StackLayout Orientation="Vertical"
+                                                     Padding="10">
+                                <image:CachedImage Source="{Binding image, Converter={StaticResource ImageUrl}}"
+                                                   Aspect="AspectFit"
+                                                   VerticalOptions="StartAndExpand"
+                                                   HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{Binding name}"
+                                                   Opacity="0.6"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding price, Converter={StaticResource Price}}"
+                                                   FontAttributes="Bold"
+                                                       HorizontalOptions="StartAndExpand"
+                                                   />
+                                    <ImageButton Source="addtocart.png"
+                                                             VerticalOptions="EndAndExpand"
+                                                             WidthRequest="30"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

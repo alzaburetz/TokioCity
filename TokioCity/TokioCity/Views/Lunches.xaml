@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:components="clr-namespace:TokioCity.Views.Components"
+             x:Class="TokioCity.Views.Lunches"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:TokioCity.Services.Converters"
+             Title="Ланчи"
+             BackgroundColor="#181818">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="pf-bold.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
+                <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <Style TargetType="Label" x:Key="Title">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFont}"/>
+                <Setter Property="FontSize" Value="36"/>
+            </Style>
+            <Style TargetType="Label" x:Key="CommonLabel">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}"/>
+                <Setter Property="FontSize" Value="24"/>
+            </Style>
+            <converters:ImageUrlConverter x:Key="Image"/>
+            <converters:PriceConverter x:Key="Price"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Padding="30">
+                    <Label Text="ЛАНЧИ" Style="{StaticResource Title}"/>
+                    <components:LunchesCard/>
+                    <Label Text="ГАРНИРЫ" Style="{StaticResource Title}" Opacity="0.7" FontSize="28"/>
+                    <CollectionView ItemsSource="{Binding garnish}">
+                        <CollectionView.ItemsLayout>
+                            <ListItemsLayout Orientation="Horizontal"
+                                             SnapPointsAlignment="Start"
+                                             SnapPointsType="MandatorySingle">
+
+                            </ListItemsLayout>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="0,50,50,50">
+                                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+                                    <Label Text="{Binding name}" Style="{StaticResource CommonLabel}"/>
+                                    <Label Text="{Binding price, Converter={StaticResource Price}}" Style="{StaticResource CommonLabel}"/>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                
+            </ScrollView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

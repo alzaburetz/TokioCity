@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TokioCity.Views.Components.ButtonBar">
-    <ContentView.Resources>
+    <!--<ContentView.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="White"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
@@ -20,34 +20,28 @@
         </Style>
 
         <Style TargetType="StackLayout">
-            <Setter Property="WidthRequest" Value="95"/>
+            <Setter Property="WidthRequest" Value="90"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
-    </ContentView.Resources>
+    </ContentView.Resources>-->
   <ContentView.Content>
+      
         <StackLayout
-          BackgroundColor="#181818"
-          HeightRequest="15"
-          Orientation="Horizontal"
-          Padding="15,15,15,60"
-          Margin="0">
-
-            <StackLayout>
-                <Image Source="favorite.png"/>
-                <Label Text="Избранное"/>
-            </StackLayout>
-            <StackLayout>
-                <Image Source="lunch.png"/>
-                <Label Text="Ланчи"/>
-            </StackLayout>
-            <StackLayout>
-                <Image Source="pasta.png"/>
-                <Label Text="Паста"/>
-            </StackLayout>
-            <StackLayout>
-                <Image Source="sushi.png"/>
-                <Label Text="Суши"/>
-            </StackLayout>
+          BackgroundColor="#181818">
+            <CollectionView ItemsSource="{Binding buttons}">
+                <CollectionView.ItemsLayout>
+                    <ListItemsLayout Orientation="Horizontal"></ListItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Image Source="{Binding image}"></Image>
+                            <Label Text="{Binding name}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+           
         </StackLayout>
   </ContentView.Content>
 </ContentView>

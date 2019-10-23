@@ -31,7 +31,6 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout BackgroundColor="#181818">
-            <components:ButtonBar/>
             <ScrollView Orientation="Vertical">
                 <StackLayout>
                     <StackLayout>
@@ -61,7 +60,6 @@
                                         <image:CachedImage Source="{Binding image}"
                                                            HorizontalOptions="FillAndExpand"
                                                            VerticalOptions="FillAndExpand"
-                                                           BackgroundColor="Red"
                                                            Aspect="AspectFill"/>
                                     </StackLayout>
                                 </DataTemplate>
