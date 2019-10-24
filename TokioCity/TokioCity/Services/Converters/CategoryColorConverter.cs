@@ -23,7 +23,7 @@ namespace TokioCity.Services.Converters
             {
                 return (Color)Color.FromHex("#E39C00");
             }
-            else return null;
+            else return (Color)Color.Transparent;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
