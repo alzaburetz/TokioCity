@@ -10,7 +10,9 @@
 
    
     <TabbedPage.Children>
-        <local:Favorite IconImageSource="favorite.png"></local:Favorite>
+        <local:Favorite IconImageSource="favorite.png"/>
         <local:Lunches IconImageSource="lunch.png"/>
+        <local:Woks IconImageSource="wok.png"/>
+        <local:Burgers IconImageSource="burger.png"/>
     </TabbedPage.Children>
 </TabbedPage>

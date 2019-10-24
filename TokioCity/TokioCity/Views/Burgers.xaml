@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TokioCity.Views.Burgers"
+             xmlns:converters="clr-namespace:TokioCity.Services.Converters"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="#181818"
+             Title="Бургеры">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CategoryColorConverter x:Key="CategoryColor"/>
+            <converters:CategoryConverter x:Key="Category"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout Padding="30">
+                        <Label Text="БУРГЕРЫ" Style="{StaticResource Title}"/>
+                    </StackLayout>
+                    <StackLayout Padding="30,0,0,0" HeightRequest="400">
+                        <CollectionView ItemsSource="{Binding burgers}">
+                            <CollectionView.ItemsLayout>
+                                <ListItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="0,0,20,0">
+                                        <Frame BackgroundColor="#202123"
+                                               CornerRadius="20">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="70"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition Height="40"/>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition Height="150"/>
+                                                    <!--<RowDefinition Height="50"/>-->
+                                                    <RowDefinition Height="40"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Label Text="{Binding price, Converter={StaticResource Price}}" 
+                                                   Style="{StaticResource PriceLabel}" 
+                                                   HorizontalTextAlignment="Start"
+                                                   Grid.Column="0" Grid.Row="0"/>
+                                                <Label Text="{Binding category, Converter={StaticResource Category}}"
+                                                   TextColor="White"
+                                                   BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}"
+                                                   VerticalTextAlignment="Center"
+                                                   HorizontalTextAlignment="Center"
+                                                   Grid.Column="1" Grid.Row="0"/>
+                                                
+                                                <Label Text="{Binding name}" 
+                                                       Style="{StaticResource CommonLabel}"
+                                                       Grid.Row="1" Grid.ColumnSpan="3"/>
+                                                <Label Text="{Binding weight1, Converter={StaticResource Weight}}" 
+                                                       Style="{StaticResource Counter}"
+                                                       Grid.Row="2"/>
+                                                <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                                                   Grid.Row="3" Grid.ColumnSpan="3"/>
+
+                                                <Image Source="addtocart.png"
+                                                       Grid.Row="4"
+                                                       Grid.Column="2"
+                                                       />
+
+                                            </Grid>
+
+                                        </Frame>
+                                    </StackLayout>
+                                    
+                                    
+                                    <!--<StackLayout Padding="20">
+                                        <Frame CornerRadius="10"
+                                           
+                                           WidthRequest="180"
+                                               HeightRequest="350">
+                                            <StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding price, Converter={StaticResource Price}}" 
+                                                           Style="{StaticResource PriceLabel}" 
+                                                           HorizontalTextAlignment="Start"/>
+                                                    <Label Text="{Binding category, Converter={StaticResource Category}}"
+                                                           TextColor="White"
+                                                           BackgroundColor="Green"/>
+                                                </StackLayout>
+                                                
+                                                
+                                            </StackLayout>
+                                        </Frame>
+
+                                    </StackLayout>-->
+                                    
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

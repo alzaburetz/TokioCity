@@ -7,18 +7,32 @@
              x:Class="TokioCity.Views.Components.LunchesCard">
     <ContentView.Resources>
         <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
+                <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            
             <Style TargetType="Frame">
                 <Setter Property="BackgroundColor" Value="#202123"/>
-                <Setter Property="Opacity" Value="0.7"/>
+                <!--<Setter Property="Opacity" Value="0.7"/>-->
                 <Setter Property="CornerRadius" Value="10"/>
             </Style>
 
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="Opacity" Value="0.7"/>
-                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontSize" Value="16"/>
                 <Setter Property="LineHeight" Value="1.2"/>
                 <Setter Property="Margin" Value="5"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="Price">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="HorizontalTextAlignment" Value="End"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Opacity" Value="1"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}"/>
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -29,6 +43,33 @@
                     <Label Text="Выбирайте 1 - 4 любых блюда и оплачивайте по фиксированной цене. В одном ланче доступно только 1 блюдо раздела Горячие Блюда."
                            HorizontalTextAlignment="Start"
                            HorizontalOptions="Start"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Padding="0,0,20,0">
+                            <Label Text="1 блюдо"/>
+                            <Label Text="195.-" Style="{StaticResource Price}"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Padding="0,0,20,0">
+                            <Label Text="2 блюдa"/>
+                            <Label Text="240.-" Style="{StaticResource Price}"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Padding="20,0,0,0">
+                            <Label Text="3 блюдa"/>
+                            <Label Text="290.-" Style="{StaticResource Price}"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Padding="20,0,0,0">
+                            <Label Text="4 блюдa"/>
+                            <Label Text="365.-" Style="{StaticResource Price}"/>
+                        </StackLayout>
+                    </Grid>
                 </StackLayout>
             </Frame>
       </StackLayout>

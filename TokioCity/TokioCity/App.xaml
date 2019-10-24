@@ -4,8 +4,48 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:converters="clr-namespace:TokioCity.Services.Converters"
              x:Class="TokioCity.App">
     <Application.Resources>
-        
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="pf-bold.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
+                <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <Style TargetType="Label" x:Key="Title">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFont}"/>
+                <Setter Property="FontSize" Value="36"/>
+            </Style>
+            <Style TargetType="Label" x:Key="CommonLabel">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <Style TargetType="Label" x:Key="PriceLabel">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="HorizontalTextAlignment" Value="End"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Opacity" Value="1"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}"/>
+            </Style>
+            <Style TargetType="Label" x:Key="Counter" BaseResourceKey="CommonLabel">
+                <Setter Property="Opacity" Value="0.2"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+            <Style TargetType="Label" x:Key="Header" BaseResourceKey="Title">
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="Opacity" Value="0.5"/>
+            </Style>
+            <converters:ImageUrlConverter x:Key="Image"/>
+            <converters:PriceConverter x:Key="Price"/>
+            <converters:WeightConverter x:Key="Weight"/>
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="#181818"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
