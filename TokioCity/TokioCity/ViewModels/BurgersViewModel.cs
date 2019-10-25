@@ -20,20 +20,7 @@ namespace TokioCity.ViewModels
     {
         public ObservableCollection<AppItem> burgers { get; set; }
         public ObservableCollection<AppItem> toppings { get; set; }
-        public ICommand AddToFavorite
-        {
-            get
-            {
-                return new Command((item) =>
-                {
-                    var t = item.GetType();
-                });
-            }
-            set
-            {
-                AddToFavorite = value;
-            }
-        }
+        public Command AddToFavorite { get; set; }
         public Command LoadBurgers { get; set; }
         public Command LoadToppings { get; set; }
 
@@ -41,6 +28,11 @@ namespace TokioCity.ViewModels
         {
             burgers = new ObservableCollection<AppItem>();
             toppings = new ObservableCollection<AppItem>();
+
+            AddToFavorite = new Command(() =>
+            {
+                Console.WriteLine("Pressed!");
+            });
             LoadBurgers = new Command(() =>
             {
                 var burgers = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(222)));

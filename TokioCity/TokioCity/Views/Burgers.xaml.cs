@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using TokioCity.ViewModels;
+using TokioCity.Models;
 
 namespace TokioCity.Views
 {
@@ -26,6 +27,24 @@ namespace TokioCity.Views
             base.OnAppearing();
 
             viewModel.LoadBurgers.Execute(null);
+        }
+
+        private async void SelectBurger(object sender, SelectionChangedEventArgs args)
+        {
+            try
+            {
+                var item = args.CurrentSelection[0] as AppItem;
+                await Navigation.PushModalAsync(new Product(item));
+            }
+            catch { }
+            var Collection = (CollectionView)sender;
+            Collection.SelectedItem = null;
+            
+        }
+
+        private void AddToFavorite(object sender, EventArgs args)
+        {
+            viewModel.AddToFavorite.Execute(null);
         }
     }
 }
