@@ -21,9 +21,5 @@ namespace TokioCity.Models
         public string alert { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public List<Subcategory> subcategories;
-        //public Category() : base()
-        //{
-        //    subcategories = new List<Subcategory>();
-        //}
     }
 }
