@@ -46,5 +46,15 @@ namespace TokioCity.Views
             viewModel.amount--;
             Amount.Text = viewModel.amount.ToString();
         }
+
+        private async void OpenCalories(object sender, EventArgs args)
+        {
+            await CaloriesCard.TranslateTo(0, -220, 2000);
+        }
+
+        private async void SwipeGestureRecognizer_Swiped(object sender, SwipedEventArgs e)
+        {
+            await CaloriesCard.TranslateTo(0, 220, 3000);
+        }
     }
 }

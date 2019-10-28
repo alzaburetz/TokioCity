@@ -55,8 +55,10 @@
                                    FontSize="Large"
                                    FontFamily="{StaticResource RegularFont}"
                                    WidthRequest="70"/>
-                            <Image Source="calories.png"
-                                   WidthRequest="150"/>
+                            <ImageButton Source="calories.png"
+                                         BackgroundColor="Transparent"
+                                         Clicked="OpenCalories"
+                                         WidthRequest="150"/>
                             <Label x:Name="Mass"
                                     Text="{Binding product.weight1, Converter={StaticResource Weight}}"
                                     FontSize="Body"
@@ -126,6 +128,76 @@
             </Image>
             <Image Source="cart.png"
                        AbsoluteLayout.LayoutBounds="370,20,25,25"></Image>
+
+            <Frame x:Name="CaloriesCard"
+                   BackgroundColor="White"
+                   AbsoluteLayout.LayoutBounds="0,660,410,240"
+                   CornerRadius="20">
+                <StackLayout Padding="10">
+                    <StackLayout Margin="120, -10, 120, 0"
+                                 Padding="0,0,0,20">
+                        <BoxView WidthRequest="100"
+                                 HeightRequest="5"
+                                 BackgroundColor="Gray"
+                                 Opacity="0.5"/>
+                        <StackLayout.GestureRecognizers>
+                            <SwipeGestureRecognizer Direction="Down" Swiped="SwipeGestureRecognizer_Swiped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="БЕЛКИ" 
+                               Style="{StaticResource Header}" 
+                               TextColor="Black"
+                               Opacity="1"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding product.protein}"
+                               TextColor="Black"
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="End"
+                               Style="{StaticResource Header}"
+                               Opacity="1"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="ЖИРЫ" 
+                               Style="{StaticResource Header}" 
+                               TextColor="Black"
+                               Opacity="1"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding product.fat}"
+                               TextColor="Black"
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="End"
+                               Style="{StaticResource Header}"
+                               Opacity="1"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="УГЛЕВОДЫ" 
+                               Style="{StaticResource Header}" 
+                               TextColor="Black"
+                               Opacity="1"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding product.carbohydrates}"
+                               TextColor="Black"
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="End"
+                               Style="{StaticResource Header}"
+                               Opacity="1"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="КАЛОРИЙНОСТЬ" 
+                               Style="{StaticResource Header}" 
+                               TextColor="Black"
+                               Opacity="1"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding product.calories}"
+                               TextColor="Black"
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="End"
+                               Style="{StaticResource Header}"
+                               Opacity="1"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
         </AbsoluteLayout>
         <!--</StackLayout>-->
     </ContentPage.Content>
