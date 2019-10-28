@@ -23,7 +23,7 @@ namespace TokioCity.Services.Converters
             {
                 return (string)"Хит";
             }
-            else return null;
+            else return "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -74,18 +74,6 @@
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <Tab Title="КАТЕГОРИИ">
             <ShellContent>
-                <local:Categories/>
-            </ShellContent>
-        </Tab>
-
-        <Tab Title="РЕЦЕПТЫ">
-            <ShellContent>
-                <local:Recepies/>
-            </ShellContent>
-        </Tab>
-
-        <Tab Title="ВКЛАДКИ">
-            <ShellContent>
                 <local:CategoriesTabs/>
             </ShellContent>
         </Tab>

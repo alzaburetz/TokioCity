@@ -66,7 +66,7 @@ namespace TokioCity.Services
         public void WriteAll<T>(string collection, List<T> items)
         {
             RemoveAll<T>(collection);
-            var Items = database.GetCollection<T>(collection);
+            var Items = database.GetCollection<T>(collection).IncludeAll(3);
             Items.Delete(Query.All());
             Items.InsertBulk(items);
         }
@@ -80,6 +80,11 @@ namespace TokioCity.Services
         public T GetProduct<T>(string collection, string uid)
         {
             return database.GetCollection<T>(collection).FindOne(Query.EQ("uid", uid));
+        }
+
+        public IEnumerator<T> GetOneItem<T>(string collection)
+        {
+            return database.GetCollection<T>(collection).Find(Query.Where("id",x => x.AsInt32 != 0)).GetEnumerator();
         }
 
         public DataBaseService()

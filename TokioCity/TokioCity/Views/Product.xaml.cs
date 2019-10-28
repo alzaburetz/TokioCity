@@ -45,16 +45,24 @@ namespace TokioCity.Views
             if (viewModel.amount > 0)
             viewModel.amount--;
             Amount.Text = viewModel.amount.ToString();
+
         }
 
-        private async void OpenCalories(object sender, EventArgs args)
+        public void OpenCalories(object sender, EventArgs args)
         {
-            await CaloriesCard.TranslateTo(0, -220, 2000);
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await CaloriesCard.TranslateTo(0, -220, 3000);
+            });
+
+            CaloriesCard.IsVisible = true;
+            
         }
 
         private async void SwipeGestureRecognizer_Swiped(object sender, SwipedEventArgs e)
         {
             await CaloriesCard.TranslateTo(0, 220, 3000);
+            CaloriesCard.IsVisible = false;
         }
     }
 }

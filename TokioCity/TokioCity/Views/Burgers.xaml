@@ -50,109 +50,11 @@
                     <StackLayout Padding="30,0,0,0" HeightRequest="400">
                         <CollectionView ItemsSource="{Binding burgers}"
                                         SelectionMode="Single"
-                                        SelectionChanged="SelectBurger">
+                                        SelectionChanged="SelectBurger"
+                                        ItemTemplate="{StaticResource ProductInCategory}">
                             <CollectionView.ItemsLayout>
                                 <ListItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout Padding="0,0,20,0">
-
-                                        <Grid HeightRequest="300">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="40"/>
-                                                <ColumnDefinition Width="100"/>
-                                                <ColumnDefinition Width="100"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="0.2*"/>
-                                                <RowDefinition Height="0.2*"/>
-                                                <RowDefinition Height="0.4*"/>
-                                                <RowDefinition Height="0.1*"/>
-                                            </Grid.RowDefinitions>
-                                            <Frame Grid.Column="0"
-                                                   Grid.Row="0"
-                                                   Grid.ColumnSpan="3"
-                                                   Grid.RowSpan="5"
-                                                   BackgroundColor="#202123"
-                                                   CornerRadius="5">
-                                                <StackLayout>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="{Binding price, Converter={StaticResource Price}}" 
-                                                           Style="{StaticResource PriceLabel}" 
-                                                           HorizontalTextAlignment="Start"
-                                                           HorizontalOptions="Start"
-                                                           />
-                                                        <StackLayout Padding="10" WidthRequest="70">
-                                                            <Frame CornerRadius="5"
-                                                                   Padding="1"
-                                                                   BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}">
-                                                                <Label Text="{Binding category, Converter={StaticResource Category}}"
-                                                                       TextColor="White"
-                                                                       HorizontalOptions="FillAndExpand"
-                                                                       VerticalTextAlignment="Center"
-                                                                       HorizontalTextAlignment="Center"/>
-                                                            </Frame>
-
-                                                        </StackLayout>
-
-                                                        <ImageButton Source="heart.png"
-                                                                     HeightRequest="20"
-                                                                     HorizontalOptions="EndAndExpand"
-                                                                     BackgroundColor="Transparent"
-                                                                     Clicked="AddToFavorite"
-                                                                     Command="{Binding AddToFavorite}"
-                                                                     >
-                                                            <VisualStateManager.VisualStateGroups>
-                                                                <VisualStateGroup x:Name="ButtonStates">
-                                                                    <VisualState x:Name="Normal">
-                                                                        <VisualState.Setters>
-                                                                            <Setter Property="BackgroundColor" Value="Transparent"/>
-                                                                        </VisualState.Setters>
-                                                                    </VisualState>
-
-                                                                    <VisualState x:Name="Pressed">
-                                                                        <VisualState.Setters>
-                                                                            <Setter Property="Source" Value="cart.png"/>
-                                                                        </VisualState.Setters>
-                                                                    </VisualState>
-                                                                </VisualStateGroup>
-                                                            </VisualStateManager.VisualStateGroups>
-                                                        </ImageButton>
-                                                    </StackLayout>
-
-
-                                                    <Label Text="{Binding name}" 
-                                                       Style="{StaticResource CommonLabel}"/>
-                                                    <Label Text="{Binding weight1, Converter={StaticResource Weight}}" 
-                                                       Style="{StaticResource Counter}"/>
-                                                </StackLayout>
-
-                                            </Frame>
-                                            <StackLayout  Grid.Row="2" 
-                                                               Grid.RowSpan="3"
-                                                               Grid.Column="0" 
-                                                               Grid.ColumnSpan="3"
-                                                          Padding="20,50">
-                                                <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
-                                            </StackLayout>
-
-
-                                            <StackLayout Grid.Row="4"
-                                                         Grid.Column="2"
-                                                         Grid.ColumnSpan="1"
-                                                         Padding="5,70">
-                                                <ImageButton Source="addtocart.png"
-                                                             BackgroundColor="Transparent"
-                                                                Scale=".5"/>
-                                            </StackLayout>
-
-
-                                        </Grid>
-                                    </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
                         </CollectionView>
 
                     </StackLayout>

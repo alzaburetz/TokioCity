@@ -23,18 +23,12 @@ namespace TokioCity.Views
         private HttpClient client;
         private int currentitem;
         CategoriesViewModel viewModel;
-
-        public Command LoadSubcat { get; set; }
         public Categories()
         {
             InitializeComponent();
             client = new HttpClient();
             client.BaseAddress = new Uri("https://www.tokyo-city.ru");
             BindingContext = viewModel = new CategoriesViewModel(client);
-            LoadSubcat = new Command((subcat) =>
-            {
-                var a = subcat;
-            });
             currentitem = -1;
         }
 

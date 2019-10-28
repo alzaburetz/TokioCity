@@ -12,7 +12,11 @@
     <TabbedPage.Children>
         <local:Favorite IconImageSource="favorite.png"/>
         <local:Lunches IconImageSource="lunch.png"/>
+        <local:Pasta IconImageSource="pasta.png"/>
+        <local:Sushi IconImageSource="sushi.png"/>
         <local:Woks IconImageSource="wok.png"/>
         <local:Burgers IconImageSource="burger.png"/>
+        <local:Rolls IconImageSource="rolls.png"/>
+        <local:Sets IconImageSource="set.png"/>
     </TabbedPage.Children>
 </TabbedPage>

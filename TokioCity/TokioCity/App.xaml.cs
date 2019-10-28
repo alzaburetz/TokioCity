@@ -9,6 +9,8 @@ namespace TokioCity
 {
     public partial class App : Application
     {
+        public Command AddToFavorite { get; set; }
+        public Command RemoveFromFavorite { get; set; }
         public App()
         {
             InitializeComponent();
@@ -16,8 +18,11 @@ namespace TokioCity
             DependencyService.Register<MockDataStore>();
             DependencyService.Register<DataBaseService>();
             MainPage = new AppShell();
+            AddToFavorite = new Command((item) =>
+            {
+                Favorite.AddToFavorite(null, null, (AppItem)item);
+            });
         }
-
         protected override void OnStart()
         {
             // Handle when your app starts

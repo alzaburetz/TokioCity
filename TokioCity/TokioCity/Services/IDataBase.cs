@@ -15,5 +15,6 @@ namespace TokioCity.Services
        IEnumerator<T> GetByQueryEnumerable<T>(string collection, Query query);
        int GetRecordCount<T>(string collection);
        T GetOneOfCategory<T>(string collection, int category);
+        IEnumerator<T> GetOneItem<T>(string collection);
     }
 }

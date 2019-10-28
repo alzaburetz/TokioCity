@@ -57,8 +57,8 @@
                                    WidthRequest="70"/>
                             <ImageButton Source="calories.png"
                                          BackgroundColor="Transparent"
-                                         Clicked="OpenCalories"
-                                         WidthRequest="150"/>
+                                         WidthRequest="150"
+                                         Clicked="OpenCalories"/>
                             <Label x:Name="Mass"
                                     Text="{Binding product.weight1, Converter={StaticResource Weight}}"
                                     FontSize="Body"
@@ -130,6 +130,7 @@
                        AbsoluteLayout.LayoutBounds="370,20,25,25"></Image>
 
             <Frame x:Name="CaloriesCard"
+                   IsVisible="False"
                    BackgroundColor="White"
                    AbsoluteLayout.LayoutBounds="0,660,410,240"
                    CornerRadius="20">

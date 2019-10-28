@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TokioCity.Views.Sets"
+             BackgroundColor="#181818"
+             Title="Сеты"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:page="clr-namespace:TokioCity.Views">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+            <Style TargetType="StackLayout">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                        Value="#007AFF" />
+
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout Padding="30,30,30,0">
+                        <Label Text="СЕТЫ" Style="{StaticResource Title}"/>
+
+                    </StackLayout>
+                    <CollectionView ItemsSource="{Binding products}"
+                            SelectionMode="Single"
+                            SelectionChanged="OpenProduct"
+                            HeightRequest="400">
+                        <CollectionView.ItemsLayout>
+                            <ListItemsLayout Orientation="Horizontal"
+                                     SnapPointsAlignment="Start"
+                                     SnapPointsType="Mandatory"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid WidthRequest="410">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="70"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="100"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.8*"/>
+                                        <ColumnDefinition Width="0.2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Frame BackgroundColor="#202123"
+                                   CornerRadius="10"
+                                   Grid.Column="0"
+                                   Grid.Row="0"
+                                   Grid.RowSpan="5">
+                                        <StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding price, Converter={StaticResource Price}}" 
+                                                           Style="{StaticResource PriceLabel}" 
+                                                           HorizontalTextAlignment="Start"
+                                                           HorizontalOptions="Start"
+                                                           />
+                                                <StackLayout Padding="10" WidthRequest="70">
+                                                    <Frame CornerRadius="5"
+                                                                   Padding="1"
+                                                                   BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}">
+                                                        <Label Text="{Binding category, Converter={StaticResource Category}}"
+                                                                       TextColor="White"
+                                                                       HorizontalOptions="FillAndExpand"
+                                                                       VerticalTextAlignment="Center"
+                                                                       HorizontalTextAlignment="Center"/>
+                                                    </Frame>
+
+                                                </StackLayout>
+
+                                                <ImageButton Source="heart.png"
+                                                 HeightRequest="20"
+                                                 HorizontalOptions="EndAndExpand"
+                                                 BackgroundColor="Transparent"
+                                                 Command="{Binding AddToFavorite}"
+                                                 CommandParameter="{Binding .}">
+                                                </ImageButton>
+                                            </StackLayout>
+                                            <Label Text="{Binding name}" Style="{StaticResource CommonLabel}"/>
+                                            <Label Text="{Binding weight1, Converter={StaticResource Weight}}" Style="{StaticResource Counter}"/>
+                                        </StackLayout>
+
+                                    </Frame>
+
+                                    <StackLayout 
+                                               Grid.Row="3"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="2"
+                                               Grid.RowSpan="2">
+                                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+                                    </StackLayout>
+
+                                    <StackLayout Padding="270,-10,10,0" 
+                                         Grid.Column="0"
+                                         Grid.Row="4"
+                                         Grid.ColumnSpan="2">
+                                        <ImageButton Source="addtocart.png"
+                                             Scale="0.5"
+                                             BackgroundColor="Transparent"/>
+                                    </StackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <!--<CollectionView ItemsSource="{Binding subcats}"
+                                    SelectionChanged="LoadSubcat"
+                                    SelectionMode="Single"
+                                    HeightRequest="50">
+                        <CollectionView.ItemsLayout>
+                            <ListItemsLayout Orientation="Horizontal"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="5,5,15,5">
+                                    <Label Text="{Binding name, Converter={StaticResource ToUpper}}"
+                                               VerticalOptions="FillAndExpand"
+                                               HorizontalOptions="FillAndExpand"
+                                               FontSize="Large"
+                                               FontFamily="{StaticResource RegularFont}"
+                                               TextColor="White"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <StackLayout 
+                                 Padding="10">
+                        <CollectionView ItemsSource="{Binding Products}"
+                                        SelectionMode="Single">
+                            <CollectionView.EmptyView>
+                                <Label Text="AAAAAAAAAAAAA" Style="{StaticResource Header}"/>
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="2"
+                                                 Orientation="Vertical"
+                                                 VerticalItemSpacing="10"
+                                                 HorizontalItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame CornerRadius="10"
+                                           Padding="5"
+                                           BackgroundColor="#202123"
+                                           >
+                                        <StackLayout Orientation="Vertical"
+                                                     Padding="10">
+                                            <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                                   Aspect="AspectFit"
+                                                   VerticalOptions="StartAndExpand"
+                                                   HorizontalOptions="FillAndExpand"/>
+                                            <Label Text="{Binding name}"
+                                                   Opacity="0.6"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding price, Converter={StaticResource Price}}"
+                                                   FontAttributes="Bold"
+                                                       HorizontalOptions="StartAndExpand"
+                                                   />
+                                                <ImageButton Source="addtocart.png"
+                                                             VerticalOptions="EndAndExpand"
+                                                             WidthRequest="30"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>-->
+                </StackLayout>
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

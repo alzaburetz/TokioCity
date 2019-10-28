@@ -57,6 +57,8 @@ namespace TokioCity.ViewModels
             {
                 data = await RequestHelper.GetData<List<Category>>(client, "data/app_categs.php?version=");
                 CatList.Clear();
+                DataBase.RemoveAll<Category>("Categories");
+                DataBase.WriteAll<Category>("Categories", data);
                 if (data != null)
                     foreach (Category category in data)
                     {
