@@ -44,13 +44,15 @@
                     <CollectionView ItemsSource="{Binding products}"
                             SelectionMode="Single"
                             SelectionChanged="OpenProduct"
-                            HeightRequest="400">
+                            HeightRequest="{Binding height}"
+                                    ItemTemplate="{StaticResource HorizontalProducts}">
                         <CollectionView.ItemsLayout>
                             <ListItemsLayout Orientation="Horizontal"
                                      SnapPointsAlignment="Start"
                                      SnapPointsType="Mandatory"/>
                         </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
+                        
+                        <!--<CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Grid WidthRequest="410">
                                     <Grid.RowDefinitions>
@@ -122,7 +124,7 @@
                                     </StackLayout>
                                 </Grid>
                             </DataTemplate>
-                        </CollectionView.ItemTemplate>
+                        </CollectionView.ItemTemplate>-->
                     </CollectionView>
                     <!--<CollectionView ItemsSource="{Binding subcats}"
                                     SelectionChanged="LoadSubcat"

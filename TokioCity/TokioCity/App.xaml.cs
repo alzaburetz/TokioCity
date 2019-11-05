@@ -11,10 +11,10 @@ namespace TokioCity
     {
         public Command AddToFavorite { get; set; }
         public Command RemoveFromFavorite { get; set; }
+        public static int screenHeight, screenWidth;
         public App()
         {
             InitializeComponent();
-
             DependencyService.Register<MockDataStore>();
             DependencyService.Register<DataBaseService>();
             MainPage = new AppShell();

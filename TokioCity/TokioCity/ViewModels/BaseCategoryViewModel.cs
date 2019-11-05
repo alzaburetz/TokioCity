@@ -22,6 +22,8 @@ namespace TokioCity.ViewModels
         public ObservableCollection<Subcategory> subcats { get; set; }
         public ObservableCollection<AppItem> products { get; set; }
         public ObservableCollection<AppItem> Products { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
 
         public BaseCategoryViewModel()
         {
@@ -32,6 +34,8 @@ namespace TokioCity.ViewModels
         }
         public BaseCategoryViewModel(int[] category)
         {
+            width = App.screenWidth / 4;
+            height = App.screenHeight / 2;
             products = new ObservableCollection<AppItem>();
             subcats = new ObservableCollection<Subcategory>();
             Products = new ObservableCollection<AppItem>();

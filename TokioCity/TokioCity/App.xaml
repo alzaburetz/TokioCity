@@ -47,17 +47,19 @@
             <converters:CategoryColorConverter x:Key="CategoryColor"/>
             <converters:CategoryConverter x:Key="Category"/>
             <converters:ToUpperConverter x:Key="ToUpper"/>
+            <!--<converters:WidthConverter x:Key="Width"/>
+            <converters:HeightConverter x:Key="Height"/>-->
             <Style TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="#181818"/>
             </Style>
             <DataTemplate x:Key="ProductInCategory">
                         <StackLayout Padding="0,0,20,0">
 
-                            <Grid HeightRequest="350">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="0.2*"/>
+                                    <ColumnDefinition Width="0.4*"/>
+                                    <ColumnDefinition Width="0.4*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Grid.RowDefinitions>
@@ -146,8 +148,191 @@
                             </Grid>
                         </StackLayout>
                     </DataTemplate>
-            
-           
+            <DataTemplate x:Key="HorizontalView">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.15*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5.5*"/>
+                        <ColumnDefinition Width="3.0*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame BackgroundColor="#202123"
+                                   CornerRadius="10"
+                                   Grid.Column="0"
+                                   Grid.Row="0"
+                                   Grid.RowSpan="5">
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding price, Converter={StaticResource Price}}" 
+                                                           Style="{StaticResource PriceLabel}" 
+                                                           HorizontalTextAlignment="Start"
+                                                           HorizontalOptions="Start"
+                                                           />
+                                <StackLayout Padding="10" WidthRequest="70">
+                                    <Frame CornerRadius="5"
+                                                                   Padding="1"
+                                                                   BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}">
+                                        <Label Text="{Binding category, Converter={StaticResource Category}}"
+                                                                       TextColor="White"
+                                                                       HorizontalOptions="FillAndExpand"
+                                                                       VerticalTextAlignment="Center"
+                                                                       HorizontalTextAlignment="Center"/>
+                                    </Frame>
+
+                                </StackLayout>
+
+                                <ImageButton Source="heart.png"
+                                                 HeightRequest="20"
+                                                 HorizontalOptions="EndAndExpand"
+                                                 BackgroundColor="Transparent"
+                                                 Command="{Binding AddToFavorite}"
+                                                 CommandParameter="{Binding .}">
+                                </ImageButton>
+                            </StackLayout>
+                            <Label Text="{Binding name}" Style="{StaticResource CommonLabel}"/>
+                            <Label Text="{Binding weight1, Converter={StaticResource Weight}}" Style="{StaticResource Counter}"/>
+                        </StackLayout>
+
+                    </Frame>
+
+                    <AbsoluteLayout
+                                        Margin="20,0,0,20"
+                                               Grid.Row="3"
+                                               FlowDirection="LeftToRight"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="2"
+                                               Grid.RowSpan="2">
+                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+
+
+                    </AbsoluteLayout>
+
+                    <StackLayout FlowDirection="LeftToRight"
+                                           Grid.Column="1"
+                                           Grid.Row="4"
+                                                 Orientation="Horizontal"
+                                           >
+
+                        <Image
+                                           Source="addtocart.png"/>
+                    </StackLayout>
+
+
+
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="HorizontalProducts">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5.5*"/>
+                        <ColumnDefinition Width="3.0*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame BackgroundColor="#202123"
+                                   CornerRadius="10"
+                                   Grid.Column="0"
+                                   Grid.Row="0"
+                                   Grid.RowSpan="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.7*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.5*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="0.5*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                                    <Label Text="{Binding price, Converter={StaticResource Price}}" 
+                                                           Style="{StaticResource PriceLabel}" 
+                                                           HorizontalTextAlignment="Start"
+                                                           HorizontalOptions="Start"
+                                                           />
+                                    <StackLayout Padding="10" WidthRequest="70">
+                                        <Frame CornerRadius="5"
+                                                           Padding="2"
+                                                           Margin="-7"
+                                                           BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}">
+                                            <Label Text="{Binding category, Converter={StaticResource Category}}"
+                                                                       TextColor="White"
+                                                                       VerticalTextAlignment="Center"
+                                                                       HorizontalTextAlignment="Center"/>
+                                        </Frame>
+
+                                    </StackLayout>
+
+                                    <ImageButton Source="heart.png"
+                                                 HeightRequest="20"
+                                                 HorizontalOptions="EndAndExpand"
+                                                 BackgroundColor="Transparent"
+                                                 Command="{Binding AddToFavorite}"
+                                                 CommandParameter="{Binding .}">
+                                    </ImageButton>
+                                </StackLayout>
+                                <Label Text="{Binding name}" 
+                                                   Grid.Row="1"
+                                                   Style="{StaticResource CommonLabel}"
+                                                                         HorizontalOptions="Fill"
+                                                                         WidthRequest="100"
+                                                                         VerticalOptions="Start"/>
+                                <Label Grid.Row="2" 
+                                                Text="{Binding weight1, Converter={StaticResource Weight}}" 
+                                                   Style="{StaticResource Counter}"/>
+                            </Grid>
+
+                        </Grid>
+                    </Frame>
+
+                    <AbsoluteLayout
+                                        Margin="20,0,0,20"
+                                               Grid.Row="3"
+                                               FlowDirection="LeftToRight"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="2"
+                                               Grid.RowSpan="2">
+                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+
+
+                    </AbsoluteLayout>
+
+                    <StackLayout FlowDirection="LeftToRight"
+                                           Grid.Column="1"
+                                           Grid.Row="4"
+                                                 Orientation="Horizontal"
+                                           >
+
+                        <Image
+                                           Source="addtocart.png"/>
+                    </StackLayout>
+
+
+
+                </Grid>
+            </DataTemplate>
+
 
             <!--<Style TargetType="StackLayout">
                 

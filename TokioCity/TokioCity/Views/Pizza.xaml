@@ -4,11 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TokioCity.Views.Rolls"
-             BackgroundColor="#181818"
-             Title="Роллы"
+             x:Class="TokioCity.Views.Pizza"
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:page="clr-namespace:TokioCity.Views">
+             BackgroundColor="#181818"
+             Title="Пицца">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
@@ -38,7 +37,7 @@
             <ScrollView>
                 <StackLayout>
                     <StackLayout Padding="30,30,30,0">
-                        <Label Text="РОЛЛЫ" Style="{StaticResource Title}"/>
+                        <Label Text="ПАСТА" Style="{StaticResource Title}"/>
 
                     </StackLayout>
                     <CollectionView ItemsSource="{Binding products}"
@@ -51,8 +50,9 @@
                                      SnapPointsAlignment="Start"
                                      SnapPointsType="Mandatory"/>
                         </CollectionView.ItemsLayout>
+                        
                     </CollectionView>
-                    <CollectionView ItemsSource="{Binding subcats}"
+                    <!--<CollectionView ItemsSource="{Binding subcats}"
                                     SelectionChanged="LoadSubcat"
                                     SelectionMode="Single"
                                     HeightRequest="50">
@@ -75,11 +75,10 @@
                     <StackLayout 
                                  Padding="10">
                         <CollectionView ItemsSource="{Binding Products}"
-                                        SelectionMode="Single"
-                                        SelectionChanged="OpenProduct">
-                            <!--<CollectionView.EmptyView>
+                                        SelectionMode="Single">
+                            <CollectionView.EmptyView>
                                 <Label Text="AAAAAAAAAAAAA" Style="{StaticResource Header}"/>
-                            </CollectionView.EmptyView>-->
+                            </CollectionView.EmptyView>
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Span="2"
                                                  Orientation="Vertical"
@@ -114,7 +113,7 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                    </StackLayout>
+                    </StackLayout>-->
                 </StackLayout>
             </ScrollView>
 

@@ -22,7 +22,13 @@ namespace TokioCity.Droid
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            
+            var widthPixels = Resources.DisplayMetrics.WidthPixels;//getting the width in pixels  
+            var scale = Resources.DisplayMetrics.Density;//density i.e., pixels per inch or cms  
+            var width = (double)((widthPixels - 0.5f) / scale);//width in units  
+            var heightPixels = Resources.DisplayMetrics.HeightPixels;////getting the height in pixels  
+            var height = (double)((heightPixels - 0.5f) / scale);//height in units  
+            App.screenHeight = (int)height;
+            App.screenWidth = (int)width;
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

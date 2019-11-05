@@ -7,7 +7,9 @@
             xmlns:local="clr-namespace:TokioCity.Views"
              x:Class="TokioCity.Views.CategoriesTabs">
   <!--Pages can be added as references or inline-->
-
+    <TabbedPage.Title>
+        ТОКИО-CITY
+    </TabbedPage.Title>
    
     <TabbedPage.Children>
         <local:Favorite IconImageSource="favorite.png"/>
@@ -18,5 +20,6 @@
         <local:Burgers IconImageSource="burger.png"/>
         <local:Rolls IconImageSource="rolls.png"/>
         <local:Sets IconImageSource="set.png"/>
+        <local:Pizza IconImageSource="pizza.png"/>
     </TabbedPage.Children>
 </TabbedPage>
