@@ -64,5 +64,6 @@ namespace TokioCity.Models
         public string ingredients_lat { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int weight1 { get; set; }
+        public bool selected { get; set; }
     }
 }

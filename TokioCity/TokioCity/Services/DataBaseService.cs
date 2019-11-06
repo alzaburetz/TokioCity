@@ -82,7 +82,7 @@ namespace TokioCity.Services
             return database.GetCollection<T>(collection).FindOne(Query.EQ("uid", uid));
         }
 
-        public IEnumerator<T> GetOneItem<T>(string collection)
+        public IEnumerator<T> GetOneItem<T>(string collection, Query query = null)
         {
             return database.GetCollection<T>(collection).Find(Query.Where("id",x => x.AsInt32 != 0)).GetEnumerator();
         }

@@ -29,10 +29,13 @@
     <ContentPage.Content>
         <!--<StackLayout>-->
 
-            <AbsoluteLayout 
-                            BackgroundColor="Transparent">
-                
-            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1072*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="0" Grid.RowSpan="2">
                 <StackLayout>
                     <image:CachedImage Source="{Binding product.image, Converter={StaticResource ImageUrl}}"
                                        x:Name="Img"
@@ -118,16 +121,22 @@
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
-            <Image Source="scrim.png"/>
-            <Image Source="back.png"
-                   AbsoluteLayout.LayoutBounds="20,20,20,20">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="GoBack"/>
-                </Image.GestureRecognizers>
-                
-            </Image>
-            <Image Source="cart.png"
-                       AbsoluteLayout.LayoutBounds="370,20,25,25"></Image>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="scrim.png" Grid.ColumnSpan="3"/>
+                <Image Source="back.png" Grid.Column="0" Margin="20">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="GoBack"/>
+                    </Image.GestureRecognizers>
+
+                </Image>
+                <Image Source="cart.png" Grid.Column="2" Margin="15"></Image>
+            </Grid>
+            
 
             <Frame x:Name="CaloriesCard"
                    IsVisible="False"
@@ -199,7 +208,7 @@
                     </StackLayout>
                 </StackLayout>
             </Frame>
-        </AbsoluteLayout>
+        </Grid>
         <!--</StackLayout>-->
     </ContentPage.Content>
 </ContentPage>

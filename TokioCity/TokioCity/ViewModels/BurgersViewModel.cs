@@ -24,11 +24,13 @@ namespace TokioCity.ViewModels
         public Command LoadBurgers { get; set; }
         public Command LoadToppings { get; set; }
 
+        public int height { get; set; }
+
         public BurgersViewModel()
         {
             burgers = new ObservableCollection<AppItem>();
             toppings = new ObservableCollection<AppItem>();
-
+            height = App.screenHeight / 2;
             AddToFavorite = new Command(() =>
             {
                 Console.WriteLine("Pressed!");

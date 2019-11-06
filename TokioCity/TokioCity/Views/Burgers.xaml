@@ -44,20 +44,21 @@
         <StackLayout>
             <ScrollView>
                 <StackLayout>
-                    <StackLayout Padding="30">
+                    <StackLayout Padding="30,30,30,0">
                         <Label Text="БУРГЕРЫ" Style="{StaticResource Title}"/>
                     </StackLayout>
-                    <StackLayout Padding="30,0,0,0" HeightRequest="400">
-                        <CollectionView ItemsSource="{Binding burgers}"
-                                        SelectionMode="Single"
-                                        SelectionChanged="SelectBurger"
-                                        ItemTemplate="{StaticResource ProductInCategory}">
-                            <CollectionView.ItemsLayout>
-                                <ListItemsLayout Orientation="Horizontal"/>
-                            </CollectionView.ItemsLayout>
-                        </CollectionView>
+                    <CollectionView ItemsSource="{Binding burgers}"
+                            SelectionMode="Single"
+                            SelectionChanged="SelectBurger"
+                            HeightRequest="{Binding height}"
+                                    ItemTemplate="{StaticResource HorizontalProducts}">
+                        <CollectionView.ItemsLayout>
+                            <ListItemsLayout Orientation="Horizontal"
+                                     SnapPointsAlignment="Start"
+                                     SnapPointsType="Mandatory"/>
+                        </CollectionView.ItemsLayout>
 
-                    </StackLayout>
+                    </CollectionView>
                     <StackLayout BackgroundColor="#202123"
                                  Margin="0,30,0,0">
                         <StackLayout Padding="30,10,10,10"

@@ -55,20 +55,37 @@
                     <CollectionView ItemsSource="{Binding subcats}"
                                     SelectionChanged="LoadSubcat"
                                     SelectionMode="Single"
-                                    HeightRequest="50">
+                                    HeightRequest="30">
                         <CollectionView.ItemsLayout>
                             <ListItemsLayout Orientation="Horizontal"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <StackLayout Padding="5,5,15,5">
-                                    <Label Text="{Binding name, Converter={StaticResource ToUpper}}"
-                                               VerticalOptions="FillAndExpand"
+                                <Label Text="{Binding name, Converter={StaticResource ToUpper}}"
+                                              VerticalOptions="FillAndExpand"
                                                HorizontalOptions="FillAndExpand"
                                                FontSize="Large"
+                                       Margin="5"
                                                FontFamily="{StaticResource RegularFont}"
-                                               TextColor="White"/>
-                                </StackLayout>
+                                               TextColor="White">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup>
+                                            <VisualState Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="#181818"/>
+                                                    <Setter Property="TextColor" Value="White"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="#181818"/>
+                                                    <Setter Property="TextColor" Value="#007AFF"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </Label>
+
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -99,7 +116,9 @@
                                                    VerticalOptions="StartAndExpand"
                                                    HorizontalOptions="FillAndExpand"/>
                                             <Label Text="{Binding name}"
-                                                   Opacity="0.6"/>
+                                                   Opacity="0.6">
+                                               
+                                            </Label>
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="{Binding price, Converter={StaticResource Price}}"
                                                    FontAttributes="Bold"

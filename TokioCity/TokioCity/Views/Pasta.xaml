@@ -44,12 +44,12 @@
                     <CollectionView ItemsSource="{Binding products}"
                             SelectionMode="Single"
                             SelectionChanged="OpenProduct"
-                            HeightRequest="{Binding height}"
-                                    ItemTemplate="{StaticResource HorizontalProducts}">
+                                    ItemTemplate="{StaticResource ProductGrid}">
                         <CollectionView.ItemsLayout>
-                            <ListItemsLayout Orientation="Horizontal"
-                                     SnapPointsAlignment="Start"
-                                     SnapPointsType="Mandatory"/>
+                            <GridItemsLayout Span="2"
+                                                 Orientation="Vertical"
+                                                 VerticalItemSpacing="10"
+                                                 HorizontalItemSpacing="10"/>
                         </CollectionView.ItemsLayout>
                         
                         <!--<CollectionView.ItemTemplate>

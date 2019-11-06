@@ -17,11 +17,14 @@ namespace TokioCity.ViewModels
     {
         public Command LoadProducts { get; set; }
         public Command AddFavorite { get; set; }
+        public Command LoadToppings { get; set; }
         private Command ReloadCategories { get; set; }
         public Command LoadProductSubcatd { get; set; }
+        public Command ItemTapped { get; set; }
         public ObservableCollection<Subcategory> subcats { get; set; }
         public ObservableCollection<AppItem> products { get; set; }
         public ObservableCollection<AppItem> Products { get; set; }
+        public ObservableCollection<AppItem> Toppings { get; set; }
         public int width { get; set; }
         public int height { get; set; }
 
@@ -39,6 +42,19 @@ namespace TokioCity.ViewModels
             products = new ObservableCollection<AppItem>();
             subcats = new ObservableCollection<Subcategory>();
             Products = new ObservableCollection<AppItem>();
+            Toppings = new ObservableCollection<AppItem>();
+            LoadToppings = new Command(async (toppings) =>
+            {
+                Toppings.Clear();
+                List<string> ids = (List<string>)toppings as List<string>;
+                foreach (var id in ids)
+                {
+                    var query = Query.Where("uid", x => x.AsString == id.ToString());
+                    var item = DataBase.GetProduct<AppItem>("Items", id.ToString());
+                    Toppings.Add(item);
+                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(200));
+                }
+            });
             LoadProducts = new Command(() =>
             {
                 products.Clear();
@@ -90,6 +106,13 @@ namespace TokioCity.ViewModels
                     Products.Add(itemsFound.Current);
                 }
                 itemsFound.Dispose();
+            });
+
+            
+
+            ItemTapped = new Command((param) =>
+            {
+                var item = param.GetType();
             });
 
         }
