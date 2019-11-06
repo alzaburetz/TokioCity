@@ -27,6 +27,9 @@ namespace TokioCity.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            viewModel.LoadProductCommand.Execute(viewModel.product.uid);
+            bool hasToppings = viewModel.product.toppings.Count > 1;
+            Toppings.IsVisible = hasToppings;
         }
 
         public async void GoBack(object sender, EventArgs args)
@@ -63,6 +66,16 @@ namespace TokioCity.Views
         {
             await CaloriesCard.TranslateTo(0, 220, 3000);
             CaloriesCard.IsVisible = false;
+        }
+
+        private void SelectToppings(object sender, SelectionChangedEventArgs args)
+        {
+            List<AppItem> items = new List<AppItem>();
+            foreach (var item in args.CurrentSelection)
+            {
+                items.Add(item as AppItem);
+            }
+            viewModel.AddToppingCommand.Execute(items);
         }
     }
 }

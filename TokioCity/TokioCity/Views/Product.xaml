@@ -7,7 +7,7 @@
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:converters="clr-namespace:TokioCity.Services.Converters"
              x:Class="TokioCity.Views.Product"
-             BackgroundColor="#202123">
+             BackgroundColor="#25262A">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -33,6 +33,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1072*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="0.1072*"/>
             </Grid.RowDefinitions>
 
             <ScrollView Grid.Row="0" Grid.RowSpan="2">
@@ -76,13 +77,85 @@
 
                         <BoxView HeightRequest="30"></BoxView>
 
-                        <Frame BackgroundColor="#007AFF"
+                        <StackLayout x:Name="Toppings">
+                            <Label Text="Добавьте топпинги"
+                                   Style="{StaticResource Header}"
+                                   FontFamily="{StaticResource RegularFont}"
+                                   
+                                   Margin="0,10"/>
+                            <CollectionView ItemsSource="{Binding toppings}"
+                                            HeightRequest="100"
+                                            SelectionMode="Multiple"
+                                            SelectionChanged="SelectToppings"
+                                       >
+                                <CollectionView.ItemsLayout>
+                                    <ListItemsLayout Orientation="Horizontal"
+                                                 ItemSpacing="10"
+                                                 />
+                                </CollectionView.ItemsLayout>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame CornerRadius="10"
+                                               WidthRequest="100"
+                                               BackgroundColor="#202123">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.5*"/>
+                                                    <RowDefinition Height="0.8*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.8*"/>
+                                                    <ColumnDefinition Width="0.5*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding price, Converter={StaticResource Price}}"
+                                                       Style="{StaticResource PriceLabel}"
+                                                       Grid.Row="0"
+                                                       Grid.ColumnSpan="2"/>
+                                                <Label Text="{Binding name}"
+                                                       Style="{StaticResource CommonLabel}"
+                                                       VerticalTextAlignment="Center"
+                                                       Grid.Row="1"
+                                                       Grid.ColumnSpan="2"/>
+                                                <!-- Somehow change this-->
+                                                <BoxView BackgroundColor="Blue"
+                                                         Grid.Row="0"
+                                                         Grid.Column="1"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <CollectionView ItemsSource="{Binding selectedToppings}">
+                                <CollectionView.ItemsLayout>
+                                    <ListItemsLayout Orientation="Vertical"
+                                                     ItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Orientation="Horizontal" Padding="10">
+                                            <Label Text="{Binding name}" 
+                                                   Style="{StaticResource CommonLabel}"
+                                                   HorizontalOptions="FillAndExpand"/>
+                                            <Label Text="{Binding price, Converter={StaticResource Price}}" Style="{StaticResource PriceLabel}"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                        
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <Frame BackgroundColor="#007AFF"
+                   Margin="10,0,10,5"
+                   Grid.Row="2"
                                HorizontalOptions="FillAndExpand">
-                            <StackLayout Orientation="Horizontal"
+                <StackLayout Orientation="Horizontal"
                                          Padding="-5">
-                                <StackLayout WidthRequest="130"
+                    <StackLayout WidthRequest="130"
                                              Orientation="Horizontal">
-                                    <ImageButton Source="minus.png"
+                        <ImageButton Source="minus.png"
                                                  WidthRequest="15"
                                                  HeightRequest="25"
                                                  BackgroundColor="Transparent"
@@ -90,14 +163,14 @@
                                                  VerticalOptions="CenterAndExpand"
                                                  Clicked="Reduce"/>
 
-                                    <Label Text="{Binding amount}"
+                        <Label Text="{Binding amount}"
                                            HorizontalOptions="FillAndExpand"
                                            VerticalTextAlignment="Center"
                                            FontSize="Medium"
                                            HorizontalTextAlignment="Center"
                                            x:Name="Amount"/>
 
-                                    <ImageButton Source="plus.png"
+                        <ImageButton Source="plus.png"
                                            WidthRequest="15"
                                            HeightRequest="25"
                                            HorizontalOptions="EndAndExpand"
@@ -105,29 +178,25 @@
                                                  BackgroundColor="Transparent"
                                                  Clicked="Add">
 
-                                    </ImageButton>
-                                </StackLayout>
-                                <StackLayout WidthRequest="180">
-                                    <Label Text="Добавить"
+                        </ImageButton>
+                    </StackLayout>
+                    <StackLayout WidthRequest="180">
+                        <Label Text="Добавить"
                                            FontSize="Medium"
                                            HorizontalOptions="FillAndExpand"
                                            HorizontalTextAlignment="End">
-                                    </Label>
+                        </Label>
 
-                                </StackLayout>
-                            </StackLayout>
-                        </Frame>
-                        
                     </StackLayout>
                 </StackLayout>
-            </ScrollView>
+            </Frame>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="0.2*"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="scrim.png" Grid.ColumnSpan="3"/>
+                <Image Source="scrim.png" Grid.ColumnSpan="3" Aspect="AspectFill"/>
                 <Image Source="back.png" Grid.Column="0" Margin="20">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="GoBack"/>

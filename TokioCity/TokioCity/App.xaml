@@ -288,6 +288,7 @@
                                                  HeightRequest="20"
                                                  HorizontalOptions="EndAndExpand"
                                                  BackgroundColor="Transparent"
+                                                 
                                                  Command="{Binding AddToFavorite}"
                                                  CommandParameter="{Binding .}">
                                     </ImageButton>

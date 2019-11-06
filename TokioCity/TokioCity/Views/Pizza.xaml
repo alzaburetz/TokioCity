@@ -40,7 +40,18 @@
                         <Label Text="ПИЦЦА" Style="{StaticResource Title}"/>
 
                     </StackLayout>
-                    <CarouselView ItemsSource="{Binding products}"
+                    <CollectionView ItemsSource="{Binding products}"
+                            SelectionMode="Single"
+                            SelectionChanged="OpenProduct"
+                            HeightRequest="{Binding height}"
+                                    ItemTemplate="{StaticResource HorizontalProducts}">
+                        <CollectionView.ItemsLayout>
+                            <ListItemsLayout Orientation="Horizontal"
+                                     SnapPointsAlignment="Start"
+                                     SnapPointsType="Mandatory"/>
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
+                    <!--<CarouselView ItemsSource="{Binding products}"
                                   HeightRequest="{Binding height}"
                                   Scrolled="ChangedSelectedPizza">
                         <CarouselView.ItemsLayout>
@@ -136,9 +147,9 @@
                                                Grid.ColumnSpan="2"
                                                Grid.RowSpan="2">
                                         <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}">
-                                            <!--<image:CachedImage.GestureRecognizers>
+                                            --><!--<image:CachedImage.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                                            </image:CachedImage.GestureRecognizers>-->
+                                            </image:CachedImage.GestureRecognizers>--><!--
                                         </image:CachedImage>
 
 
@@ -160,72 +171,7 @@
                             </DataTemplate>
 
                         </CarouselView.ItemTemplate>
-                    </CarouselView>
-                    <StackLayout Padding="30,30,30,0">
-                        <Label Text="Добавьте топпинги" Style="{StaticResource Title}"/>
-
-                    </StackLayout>
-                    <CollectionView ItemsSource="{Binding Toppings}"
-                                    SelectionMode="Multiple"
-                                    SelectionChanged="SelectToppings"
-                                    >
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Span="3"
-                                             SnapPointsAlignment="Start"
-                                             Orientation="Vertical"
-                                             HorizontalItemSpacing="10"
-                                             VerticalItemSpacing="10">
-                                
-                            </GridItemsLayout>
-                        </CollectionView.ItemsLayout>
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="0.3*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="0.3*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Frame CornerRadius="10" 
-                                       BackgroundColor="#202123"
-                                       Grid.Column="0"
-                                       Grid.Row="0"
-                                       Grid.ColumnSpan="2"
-                                       Grid.RowSpan="2">
-                                        <StackLayout>
-                                            <Label Text="{Binding name}" Style="{StaticResource CommonLabel}"/>
-                                            <Label Text="{Binding price}" Style="{StaticResource PriceLabel}"/>
-                                            <StackLayout BackgroundColor="Red" Opacity="0">
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="CommonStates">
-                                                        <VisualState Name="Selected">
-                                                            <VisualState.Setters>
-                                                                <Setter Property="Opacity" Value="1"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                            </StackLayout>
-                                        </StackLayout>
-
-                                    </Frame>
-
-                                    <StackLayout BackgroundColor="Red" 
-                                                 Grid.Column="1" 
-                                                 Grid.Row="1"
-                                                 Margin="100,0,0,60"/>
-
-                                </Grid>
-                                
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    </CarouselView>-->
                 </StackLayout>
             </ScrollView>
 
