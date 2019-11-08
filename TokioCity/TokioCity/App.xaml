@@ -9,6 +9,44 @@
              x:Class="TokioCity.App">
     <Application.Resources>
         <ResourceDictionary>
+            <DataTemplate x:Key="ProductTopping">
+                <Frame CornerRadius="10"
+                       BackgroundColor="#202123"
+                       WidthRequest="150"
+                       Padding="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Spacing="10" Padding="10" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                            <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+                            <Label Text="{Binding price, Converter={StaticResource Price}}" Style="{StaticResource PriceLabel}"/>
+                            <Label Text="{Binding name}" Style="{StaticResource CommonLabel}"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent">
+                            <Frame CornerRadius="20"
+                                   BackgroundColor="#0577F3"
+                                   Padding="15"
+                                   IsVisible="{Binding selected}">
+                                <Label Text="1"
+                                       VerticalTextAlignment="Center"
+                                       VerticalOptions="CenterAndExpand"
+                                       FontSize="5"
+                                       Style="{StaticResource CommonLabel}"
+                                       Scale="3"
+                                       HorizontalTextAlignment="Center"/>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+
+                </Frame>
+
+            </DataTemplate>
             <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
                 <On Platform="Android" Value="pf-bold.ttf#Pf Din Text Comp Pro"/>
             </OnPlatform>

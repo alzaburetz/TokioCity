@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using TokioCity.ViewModels;
 using TokioCity.Models;
 
-namespace TokioCity.Views
+
+namespace TokioCity.Views.Components
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Woks : ContentPage
+    public partial class WokCreate : ContentView
     {
         public WoksViewModel viewModel;
-        private bool createNew;
-        public Woks()
+        public WokCreate()
         {
             BindingContext = viewModel = new WoksViewModel();
+            viewModel.LoadSubcatsCommand.Execute(null);
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override void OnApplyTemplate()
         {
-            base.OnAppearing();
-            viewModel.LoadSubcatsCommand.Execute(null);
+            base.OnApplyTemplate();
         }
+
 
         private void ProductSelected(object sender, SelectionChangedEventArgs args)
         {
@@ -48,7 +48,7 @@ namespace TokioCity.Views
             }
             catch { }
             ((CollectionView)sender).SelectedItem = null;
-            
+
         }
 
         private void MeatSelected(object sender, SelectionChangedEventArgs args)
@@ -70,7 +70,7 @@ namespace TokioCity.Views
             }
             catch { }
             ((CollectionView)sender).SelectedItem = null;
-            
+
         }
 
         private void ToppingSelected(object sender, SelectionChangedEventArgs args)
@@ -84,7 +84,7 @@ namespace TokioCity.Views
                     viewModel.toppingPrice -= item.price;
                 }
                 else
-                { 
+                {
                     viewModel.toppingPrice += item.price;
                 }
                 select.selected = !select.selected;
@@ -92,7 +92,7 @@ namespace TokioCity.Views
             }
             catch { }
             ((CollectionView)sender).SelectedItem = null;
-            
+
         }
 
         private void SauceSelected(object sender, SelectionChangedEventArgs args)
@@ -114,22 +114,26 @@ namespace TokioCity.Views
             }
             catch { }
             ((CollectionView)sender).SelectedItem = null;
-            
+
         }
 
-        private void SelectWokType(object sender, SelectionChangedEventArgs args)
+        private void CreateWok(object sender, EventArgs args)
         {
-            var selection = args.CurrentSelection[0];
-            if (selection.ToString() == "СОБРАТЬ ВОК")
+            Console.WriteLine(WokName.Text);
+            MyProduct wok = new MyProduct();
+            wok.Components = new System.Collections.ObjectModel.ObservableCollection<AppItem>();
+            wok.Name = WokName.Text;
+            wok.Components.Add(viewModel.main.First<AppItem>(x => x.selected == true));
+            wok.Components.Add(viewModel.meat.First<AppItem>(x => x.selected == true));
+            wok.Components.Add(viewModel.sauce.First<AppItem>(x => x.selected == true));
+            foreach (var topping in viewModel.toppings)
             {
-                MainContent.Children.Clear();
-                MainContent.Children.Add(new TokioCity.Views.Components.WokCreate());
+                if (topping.selected)
+                {
+                    wok.Components.Add(topping);
+                }
             }
-            else if (selection.ToString() == "МОИ ВОКИ")
-            {
-                MainContent.Children.Clear();
-                MainContent.Children.Add(new TokioCity.Views.Components.WokList());
-            }
+            viewModel.CreateWok.Execute(wok);
         }
     }
 }

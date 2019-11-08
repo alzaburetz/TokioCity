@@ -20,9 +20,10 @@ namespace TokioCity.Services
         {
             IEnumerable<T> result;
             var items = database.GetCollection<T>(collection).FindAll();
-            while (items.GetEnumerator().MoveNext())
+            var en = items.GetEnumerator();
+            while (en.MoveNext())
             {
-                yield return items.GetEnumerator().Current;
+                yield return en.Current;
             }
         }
 
@@ -87,6 +88,16 @@ namespace TokioCity.Services
             return database.GetCollection<T>(collection).Find(Query.Where("id",x => x.AsInt32 != 0)).GetEnumerator();
         }
 
+        public void WriteItem<T>(string collection, T item)
+        {
+            var col = database.GetCollection<T>(collection).IncludeAll(5);
+            var count =  col.Insert(item);
+        }
+
+        public void RemoveItem<T>(string collection, Query query)
+        {
+            database.GetCollection<T>(collection).Delete(query);
+        }
         public DataBaseService()
         {
             DataBasePath = Path

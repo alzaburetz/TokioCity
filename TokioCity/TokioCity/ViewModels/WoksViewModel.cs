@@ -35,6 +35,7 @@ namespace TokioCity.ViewModels
         public int toppingPrice;
 
         public Command LoadSubcatsCommand { get; set; }
+        public Command CreateWok { get; set; }
 
         public int CalculateFullPrice()
         {
@@ -47,8 +48,17 @@ namespace TokioCity.ViewModels
             sauce = new ObservableCollection<AppItem>();
             meat = new ObservableCollection<AppItem>();
             toppings = new ObservableCollection<AppItem>();
+            CreateWok = new Command((product) =>
+            {
+                DataBase.WriteItem<MyProduct>("Woks", (MyProduct)product as MyProduct);
+            });
             LoadSubcatsCommand = new Command(async () =>
             {
+                fullPrice = 0;
+                mainPrice = 0;
+                saucePrice = 0;
+                meatPrice = 0;
+                toppingPrice = 0;
                 var main = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(mainCateg)));
                 this.main.Clear();
                 while (main.MoveNext())

@@ -9,49 +9,10 @@
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:converters="clr-namespace:TokioCity.Services.Converters"
              BackgroundColor="#181818">
-    <!--<ContentPage.Resources>
-        <ResourceDictionary>
-            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
-                <On Platform="Android" Value="pf-bold.ttf#Pf Din Text Comp Pro"/>
-            </OnPlatform>
-            <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
-                <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
-            </OnPlatform>
-            <Style TargetType="Label" x:Key="Title">
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="FontFamily" Value="{StaticResource BoldFont}"/>
-                <Setter Property="FontSize" Value="36"/>
-            </Style>
-            <Style TargetType="Label" x:Key="CommonLabel">
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="FontSize" Value="14"/>
-            </Style>
-            <Style TargetType="Label" x:Key="PriceLabel">
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="FontSize" Value="Large"/>
-                <Setter Property="HorizontalTextAlignment" Value="End"/>
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="Opacity" Value="1"/>
-                <Setter Property="VerticalTextAlignment" Value="Center"/>
-                <Setter Property="FontFamily" Value="{StaticResource RegularFont}"/>
-            </Style>
-            <Style TargetType="Label" x:Key="Counter" BaseResourceKey="CommonLabel">
-                <Setter Property="Opacity" Value="0.2"/>
-                <Setter Property="FontSize" Value="Medium"/>
-            </Style>
-            <Style TargetType="Label" x:Key="Header" BaseResourceKey="Title">
-                <Setter Property="FontSize" Value="22"/>
-                <Setter Property="Opacity" Value="0.5"/>
-            </Style>
-            <converters:ImageUrlConverter x:Key="Image"/>
-            <converters:PriceConverter x:Key="Price"/>
-            <Style TargetType="ContentPage">
-                <Setter Property="BackgroundColor" Value="#181818"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>-->
     <ContentPage.Resources>
         <ResourceDictionary>
+           
+
             <DataTemplate x:Key="ProductItem">
                 <StackLayout Padding="20,0,0,0" WidthRequest="150">
                     <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
@@ -60,7 +21,7 @@
                 </StackLayout>
             </DataTemplate>
 
-            <Style TargetType="Button">
+            <Style TargetType="Label" x:Key="Button">
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="FontFamily" Value="{StaticResource RegularFont}"/>
                 <Setter Property="TextColor" Value="White"/>
@@ -68,7 +29,7 @@
                 <Setter Property="HorizontalOptions" Value="Start"/>
             </Style>
 
-            <Style TargetType="StackLayout">
+            <!--<Style TargetType="StackLayout">
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -83,7 +44,7 @@
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
-            </Style>
+            </Style>-->
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -93,130 +54,53 @@
                     <StackLayout Padding="20,20,0,0">
                         <Label Text="ВОКИ" Style="{StaticResource Title}"/>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
-                        <Button Text="Собрать вок" TextColor="White"/>
-                        <Button Text="Мои воки">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="White"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-
-                                    <VisualState x:Name="Focused">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="Black"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-
-                                    <VisualState x:Name="Disabled">
-                                        <VisualState.Setters>
-
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="ButtonStates">
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#007AFF"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Checked">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="White"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Button>
-                    </StackLayout>
-                    <StackLayout BackgroundColor="#202123" HeightRequest="280">
-                        <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
-                            <Label Text="ОСНОВА" Style="{StaticResource Header}"/>
-                            <Label Text="{Binding Path = main.Count}" Style="{StaticResource Counter}"/>
-                        </StackLayout>
-                        <CollectionView ItemsSource="{Binding main}"
+                    <StackLayout Orientation="Horizontal" Padding="10,0,0,0" HeightRequest="35">
+                        <CollectionView ItemsLayout="HorizontalList"
                                         SelectionMode="Single"
-                                        ItemTemplate="{StaticResource ProductItem}"
-                                        SelectionChanged="ProductSelected">
-                            <CollectionView.ItemsLayout>
-                                <ListItemsLayout Orientation="Horizontal"></ListItemsLayout>
-                            </CollectionView.ItemsLayout>
+                                        SelectionChanged="SelectWokType"
+                                        SelectedItem="">
+                            <CollectionView.ItemsSource>
+                                <x:Array Type="{x:Type x:String}" x:Name="Buttons">
+                                    <x:String>СОБРАТЬ ВОК</x:String>
+                                    <x:String>МОИ ВОКИ</x:String>
+                                </x:Array>
+                            </CollectionView.ItemsSource>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding}"
+                                           Style="{StaticResource Button}"
+                                           Margin="10">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup>
+                                                <VisualState Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="#181818"/>
+                                                        <Setter Property="TextColor" Value="White"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="#181818"/>
+                                                        <Setter Property="TextColor" Value="#007AFF"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+                                    </Label>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
                         </CollectionView>
 
-                    </StackLayout>
-                    <StackLayout BackgroundColor="#202123" HeightRequest="280" Margin="0,15,0,0">
-                        <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
-                            <Label Text="МЯСО, РЫБА, МОРЕПРОДУКТЫ" Style="{StaticResource Header}"/>
-                            <Label Text="{Binding Path = meat.Count}" Style="{StaticResource Counter}"/>
-                        </StackLayout>
-                        <CollectionView ItemsSource="{Binding meat}"
-                                        ItemTemplate="{StaticResource ProductItem}"
-                                        SelectionMode="Single"
-                                        SelectionChanged="MeatSelected">
-                            <CollectionView.ItemsLayout>
-                                <ListItemsLayout Orientation="Horizontal"></ListItemsLayout>
-                            </CollectionView.ItemsLayout>
-                        </CollectionView>
 
                     </StackLayout>
-                    <StackLayout BackgroundColor="#202123" HeightRequest="280" Margin="0,15,0,0">
-                        <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
-                            <Label Text="СОУС" Style="{StaticResource Header}"/>
-                            <Label Text="{Binding Path = sauce.Count}" Style="{StaticResource Counter}"/>
-                        </StackLayout>
-                        <CollectionView ItemsSource="{Binding sauce}"
-                                        ItemTemplate="{StaticResource ProductItem}"
-                                        SelectionMode="Single"
-                                        SelectionChanged="SauceSelected">
-                            <CollectionView.ItemsLayout>
-                                <ListItemsLayout Orientation="Horizontal"></ListItemsLayout>
-                            </CollectionView.ItemsLayout>
-                        </CollectionView>
+                    <StackLayout x:Name="MainContent">
+                       
                     </StackLayout>
-                    <StackLayout BackgroundColor="#202123" HeightRequest="280" Margin="0,15,0,0">
-                        <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
-                            <Label Text="ТОППИНГИ" Style="{StaticResource Header}"/>
-                            <Label Text="{Binding Path = toppings.Count}" Style="{StaticResource Counter}"/>
-                        </StackLayout>
-                        <CollectionView ItemsSource="{Binding toppings}"
-                                        ItemTemplate="{StaticResource ProductItem}"
-                                        SelectionMode="Single"
-                                        SelectionChanged="ToppingSelected">
-                            <CollectionView.ItemsLayout>
-                                <ListItemsLayout Orientation="Horizontal"></ListItemsLayout>
-                            </CollectionView.ItemsLayout>
-                        </CollectionView>
-                    </StackLayout>
+                    
                 </StackLayout>
-                
             </ScrollView>
-            <StackLayout HeightRequest="120" Padding="10">
-                <Frame BackgroundColor="#007AFF" 
-                       Padding="10,0,10,0" 
-                       HorizontalOptions="FillAndExpand" 
-                       VerticalOptions="FillAndExpand">
-                    <StackLayout Orientation="Horizontal">
-                        <Label x:Name="FullPrice" 
-                               Text="0.-" 
-                               Style="{StaticResource PriceLabel}" 
-                               HorizontalOptions="Start"/>
-                        <Label Text="Оформить" 
-                               Style="{StaticResource CommonLabel}" 
-                               HorizontalOptions="FillAndExpand" 
-                               HorizontalTextAlignment="End" 
-                               VerticalTextAlignment="Center"
-                               FontSize="Medium">
-                            <Label.GestureRecognizers>
-                                <!--Добавить добавление в корзину-->
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </StackLayout>
-
-                </Frame>
-            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

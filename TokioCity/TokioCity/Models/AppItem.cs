@@ -28,7 +28,18 @@ namespace TokioCity.Models
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string basecategory { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public int price2 { get; set; }
+        public int price2
+        {
+            get
+            {
+                return _price;
+            }
+            set
+            {
+                _price = value;
+                OnPropertyChanged("price2");
+            }
+        }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int price { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
@@ -92,6 +103,7 @@ namespace TokioCity.Models
                 OnPropertyChanged("Amount");
             }
         }
+        private int _price;
         protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TokioCity.Views.Components.WokCreate">
+  <ContentView.Content>
+        <StackLayout>
+            <StackLayout BackgroundColor="#202123" HeightRequest="280">
+                <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
+                    <Label Text="ОСНОВА" Style="{StaticResource Header}"/>
+                    <Label Text="{Binding Path = main.Count}" Style="{StaticResource Counter}"/>
+                </StackLayout>
+                <CollectionView ItemsSource="{Binding main}"
+                                        SelectionMode="Single"
+                                        SelectionChanged="ProductSelected"
+                                        ItemSizingStrategy="MeasureAllItems"
+                                        ItemTemplate="{StaticResource ProductTopping}"
+                                       >
+                    <CollectionView.ItemsLayout>
+                        <ListItemsLayout Orientation="Horizontal"
+                                                 ItemSpacing="10"
+                                                 />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+
+            </StackLayout>
+            <StackLayout BackgroundColor="#202123" HeightRequest="280" Margin="0,15,0,0">
+                <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
+                    <Label Text="МЯСО, РЫБА, МОРЕПРОДУКТЫ" Style="{StaticResource Header}"/>
+                    <Label Text="{Binding Path = meat.Count}" Style="{StaticResource Counter}"/>
+                </StackLayout>
+                <CollectionView ItemsSource="{Binding meat}"
+                                            ItemSizingStrategy="MeasureAllItems"
+                                            SelectionMode="Single"
+                                            SelectionChanged="MeatSelected"
+                                        ItemTemplate="{StaticResource ProductTopping}"
+                                       >
+                    <CollectionView.ItemsLayout>
+                        <ListItemsLayout Orientation="Horizontal"
+                                                 ItemSpacing="10"
+                                                 />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+
+            </StackLayout>
+            <StackLayout BackgroundColor="#202123" HeightRequest="280" Margin="0,15,0,0">
+                <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
+                    <Label Text="СОУС" Style="{StaticResource Header}"/>
+                    <Label Text="{Binding Path = sauce.Count}" Style="{StaticResource Counter}"/>
+                </StackLayout>
+                <CollectionView ItemsSource="{Binding sauce}"
+                                            ItemSizingStrategy="MeasureAllItems"
+                                            SelectionMode="Single"
+                                            SelectionChanged="SauceSelected"
+                                        ItemTemplate="{StaticResource ProductTopping}"
+                                       >
+                    <CollectionView.ItemsLayout>
+                        <ListItemsLayout Orientation="Horizontal"
+                                                 ItemSpacing="10"
+                                                 />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </StackLayout>
+            <StackLayout BackgroundColor="#202123" HeightRequest="280" Margin="0,15,0,0">
+                <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
+                    <Label Text="ТОППИНГИ" Style="{StaticResource Header}"/>
+                    <Label Text="{Binding Path = toppings.Count}" Style="{StaticResource Counter}"/>
+                </StackLayout>
+                <CollectionView ItemsSource="{Binding toppings}"
+                                            ItemSizingStrategy="MeasureAllItems"
+                                            SelectionMode="Single"
+                                            SelectionChanged="ToppingSelected"
+                                        ItemTemplate="{StaticResource ProductTopping}"
+                                       >
+                    <CollectionView.ItemsLayout>
+                        <ListItemsLayout Orientation="Horizontal"
+                                                 ItemSpacing="10"
+                                                 />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </StackLayout>
+            <StackLayout Padding="15">
+                <Frame BackgroundColor="#202123">
+                    <StackLayout>
+                        <Label Text="КАК НАЗОВЕМ?"
+                                   Style="{StaticResource Counter}"
+                                   FontFamily="{StaticResource RegularFont}"/>
+                        <Entry x:Name="WokName"
+                                        Placeholder="Название вашего вока" 
+                                       TextColor="White"
+                                       IsSpellCheckEnabled="True"
+                                       Opacity="0.8"
+                                       PlaceholderColor="White">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Property="TextColor" Value="White"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Entry>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <StackLayout HeightRequest="50" Padding="10">
+                <Frame BackgroundColor="#007AFF" 
+                       Padding="10,0,10,0" 
+                       HorizontalOptions="FillAndExpand" 
+                       VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="FullPrice" 
+                               Text="0.-" 
+                               Style="{StaticResource PriceLabel}" 
+                               HorizontalOptions="Start"/>
+                        <Label Text="Оформить" 
+                               Style="{StaticResource CommonLabel}" 
+                               HorizontalOptions="FillAndExpand" 
+                               HorizontalTextAlignment="End" 
+                               VerticalTextAlignment="Center"
+                               FontSize="Medium">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="CreateWok"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
