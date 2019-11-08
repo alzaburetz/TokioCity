@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using LiteDB.Shell;
+using System.ComponentModel;
 
 namespace TokioCity.Models
 {
     [Serializable]
-    public class AppItem
+    public class AppItem: INotifyPropertyChanged
     {
         public int Id { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
@@ -64,6 +65,40 @@ namespace TokioCity.Models
         public string ingredients_lat { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int weight1 { get; set; }
-        public bool selected { get; set; }
+        private bool _selected;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public bool selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                _selected = value;
+                OnPropertyChanged("selected");
+            }
+        }
+        private uint _amount;
+        public uint Amount
+        {
+            get
+            {
+                return _amount;
+            }
+            set
+            {
+                _amount = value;
+                OnPropertyChanged("Amount");
+            }
+        }
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
     }
 }

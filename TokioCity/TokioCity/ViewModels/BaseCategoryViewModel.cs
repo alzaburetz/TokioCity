@@ -71,6 +71,7 @@ namespace TokioCity.ViewModels
             });
             AddFavorite = new Command((item) =>
             {
+                var t = item.GetType();
                 DataBase.WriteAll<AppItem>("Favorite", new List<AppItem>() { (AppItem)item as AppItem });
             });
 

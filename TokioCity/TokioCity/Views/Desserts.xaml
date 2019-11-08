@@ -52,7 +52,7 @@
                                      SnapPointsType="Mandatory"/>
                         </CollectionView.ItemsLayout>
                     </CollectionView>
-                    <CollectionView ItemsSource="{Binding subcats}"
+                    <!--<CollectionView ItemsSource="{Binding subcats}"
                                     SelectionChanged="LoadSubcat"
                                     SelectionMode="Single"
                                     HeightRequest="50">
@@ -87,15 +87,15 @@
                                 </Label>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <StackLayout 
+                    </CollectionView>-->
+                    <!--<StackLayout 
                                  Padding="10">
                         <CollectionView ItemsSource="{Binding Products}"
                                         SelectionMode="Single"
                                         SelectionChanged="OpenProduct">
-                            <!--<CollectionView.EmptyView>
+                            --><!--<CollectionView.EmptyView>
                                 <Label Text="AAAAAAAAAAAAA" Style="{StaticResource Header}"/>
-                            </CollectionView.EmptyView>-->
+                            </CollectionView.EmptyView>--><!--
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Span="2"
                                                  Orientation="Vertical"
@@ -130,7 +130,7 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                    </StackLayout>
+                    </StackLayout>-->
                 </StackLayout>
             </ScrollView>
 

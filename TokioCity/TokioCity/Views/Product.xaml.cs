@@ -70,12 +70,43 @@ namespace TokioCity.Views
 
         private void SelectToppings(object sender, SelectionChangedEventArgs args)
         {
-            List<AppItem> items = new List<AppItem>();
-            foreach (var item in args.CurrentSelection)
+            try
             {
-                items.Add(item as AppItem);
+                var item = args.CurrentSelection[0];
+                (item as AppItem).selected = !(item as AppItem).selected;
+                if ((item as AppItem).selected)
+                    viewModel.AddToppingCommand.Execute(item);
+                else
+                    viewModel.RemoveToppingCommand.Execute(item);
             }
-            viewModel.AddToppingCommand.Execute(items);
+            catch { }
+            var Collection = (CollectionView)sender;
+            Collection.SelectedItem = null;
+        }
+
+        private void IncreaseToppingCount(object sender, EventArgs e)
+        {
+            var imgbtn = (ImageButton)sender as ImageButton;
+            viewModel.selectedToppings.First<AppItem>(x => x.uid == imgbtn.ClassId).Amount++;
+            //viewModel.toppings.First<AppItem>(x => x.uid == imgbtn.ClassId).Amount++;
+        }
+
+        private void DecreaseToppingCount(object sender, EventArgs e)
+        {
+            var imgbtn = (ImageButton)sender as ImageButton;
+            var amnt = viewModel.selectedToppings.First<AppItem>(x => x.uid == imgbtn.ClassId).Amount;
+            if (amnt > 1)
+            {
+                viewModel.selectedToppings.First<AppItem>(x => x.uid == imgbtn.ClassId).Amount--;
+                //viewModel.toppings.First<AppItem>(x => x.uid == imgbtn.ClassId).Amount--;
+            }
+            else
+            {
+                var itemToremove = viewModel.selectedToppings.First<AppItem>(x => x.uid == imgbtn.ClassId);
+                viewModel.selectedToppings.Remove(itemToremove);
+                viewModel.toppings.First<AppItem>(x => x.uid == imgbtn.ClassId).selected = false;
+            }
+                
         }
     }
 }

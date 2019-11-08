@@ -230,6 +230,7 @@
 
             <DataTemplate x:Key="HorizontalProducts">
                 <Grid>
+                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
                         <RowDefinition Height="0.2*"/>
@@ -286,11 +287,9 @@
 
                                     <ImageButton Source="heart.png"
                                                  HeightRequest="20"
+                                                 ClassId="{Binding uid}"
                                                  HorizontalOptions="EndAndExpand"
-                                                 BackgroundColor="Transparent"
-                                                 
-                                                 Command="{Binding AddToFavorite}"
-                                                 CommandParameter="{Binding .}">
+                                                 BackgroundColor="Transparent">
                                     </ImageButton>
                                 </StackLayout>
                                 <Label Text="{Binding name}" 
@@ -330,7 +329,6 @@
                     </StackLayout>
 
 
-
                 </Grid>
             </DataTemplate>
 
@@ -362,7 +360,22 @@
                 </Frame>
             </DataTemplate>
 
-            
+            <Style TargetType="Grid">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                        Value="#181818" />
+
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
 
             <!--<Style TargetType="StackLayout">
                 

@@ -85,7 +85,7 @@
                                    Margin="0,10"/>
                             <CollectionView ItemsSource="{Binding toppings}"
                                             HeightRequest="100"
-                                            SelectionMode="Multiple"
+                                            SelectionMode="Single"
                                             SelectionChanged="SelectToppings"
                                        >
                                 <CollectionView.ItemsLayout>
@@ -98,31 +98,50 @@
                                     <DataTemplate>
                                         <Frame CornerRadius="10"
                                                WidthRequest="100"
-                                               BackgroundColor="#202123">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="0.5*"/>
-                                                    <RowDefinition Height="0.8*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="0.8*"/>
-                                                    <ColumnDefinition Width="0.5*"/>
-                                                </Grid.ColumnDefinitions>
+                                               BackgroundColor="#202123"
+                                                   Grid.ColumnSpan="2"
+                                                   Grid.Row="1">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                    <RowDefinition Height="1.9*"/>
+                                                    <RowDefinition Height="3.8*"/>
+                                                        <RowDefinition Height="3.8*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.8*"/>
+                                                        <ColumnDefinition Width="0.1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                                                   Grid.Row="1"
+                                                                   Grid.ColumnSpan="2"/>
                                                 <Label Text="{Binding price, Converter={StaticResource Price}}"
                                                        Style="{StaticResource PriceLabel}"
-                                                       Grid.Row="0"
-                                                       Grid.ColumnSpan="2"/>
-                                                <Label Text="{Binding name}"
-                                                       Style="{StaticResource CommonLabel}"
-                                                       VerticalTextAlignment="Center"
                                                        Grid.Row="1"
                                                        Grid.ColumnSpan="2"/>
-                                                <!-- Somehow change this-->
-                                                <BoxView BackgroundColor="Blue"
+                                                    <Label Text="{Binding name}"
+                                                       Style="{StaticResource CommonLabel}"
+                                                       VerticalTextAlignment="Center"
+                                                       VerticalOptions="FillAndExpand"
+                                                       Grid.Row="2"
+                                                       Grid.ColumnSpan="2"/>
+                                                    <!-- Somehow change this-->
+
+                                                <Frame   BackgroundColor="Blue"
+                                                         CornerRadius="20"
+                                                         IsVisible="{Binding selected}"
                                                          Grid.Row="0"
-                                                         Grid.Column="1"/>
+                                                         Scale="3"
+                                                         Padding="0"
+                                                         Grid.Column="1">
+                                                    <Label Text="{Binding Amount}"
+                                                           VerticalTextAlignment="Center"
+                                                           VerticalOptions="CenterAndExpand"
+                                                           FontSize="5"
+                                                           HorizontalTextAlignment="Center"/>
+                                                </Frame>
                                             </Grid>
-                                        </Frame>
+                                            </Frame>
+
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
@@ -133,12 +152,44 @@
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <StackLayout Orientation="Horizontal" Padding="10">
+                                        <Grid Padding="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.3*"/>
+                                                <ColumnDefinition Width="0.3*"/>
+                                                <ColumnDefinition Width="0.3*"/>
+                                            </Grid.ColumnDefinitions>
                                             <Label Text="{Binding name}" 
                                                    Style="{StaticResource CommonLabel}"
-                                                   HorizontalOptions="FillAndExpand"/>
-                                            <Label Text="{Binding price, Converter={StaticResource Price}}" Style="{StaticResource PriceLabel}"/>
-                                        </StackLayout>
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="{Binding width}"
+                                                   Grid.Column="0"/>
+                                            <StackLayout Orientation="Horizontal"
+                                                         Grid.Column="1">
+                                                <ImageButton Aspect="AspectFit"
+                                                             Source="minus.png"
+                                                             Scale="0.3"
+                                                             ClassId="{Binding uid}"
+                                                             Clicked="DecreaseToppingCount"
+                                                             BackgroundColor="Transparent"/>
+                                                <Label Text="{Binding Amount}"
+                                                       Style="{StaticResource CommonLabel}"
+                                                       VerticalTextAlignment="Center"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       HorizontalTextAlignment="Center"
+                                                       VerticalOptions="FillAndExpand"/>
+                                                <ImageButton Aspect="AspectFit"
+                                                             Source="plus.png"
+                                                             Scale="0.3"
+                                                             Clicked="IncreaseToppingCount"
+                                                             ClassId="{Binding uid}"
+                                                             BackgroundColor="Transparent"/>
+                                            </StackLayout>
+                                            <Label Text="{Binding price, Converter={StaticResource Price}}" 
+                                                   Style="{StaticResource PriceLabel}"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   VerticalTextAlignment="Center"
+                                                   Grid.Column="2"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>

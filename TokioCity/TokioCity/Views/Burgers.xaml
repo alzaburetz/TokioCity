@@ -59,7 +59,7 @@
                         </CollectionView.ItemsLayout>
 
                     </CollectionView>
-                    <StackLayout BackgroundColor="#202123"
+                    <!--<StackLayout BackgroundColor="#202123"
                                  Margin="0,30,0,0">
                         <StackLayout Padding="30,10,10,10"
                                      Orientation="Horizontal">
@@ -75,7 +75,7 @@
                                 <ListItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
                         </CollectionView>
-                    </StackLayout>
+                    </StackLayout>-->
                     
                 </StackLayout>
             </ScrollView>

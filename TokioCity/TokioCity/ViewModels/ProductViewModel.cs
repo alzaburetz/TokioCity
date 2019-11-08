@@ -19,6 +19,8 @@ namespace TokioCity.ViewModels
 
         public Command LoadToppingsComand { get; set; }
         public Command AddToppingCommand { get; set; }
+        public Command RemoveToppingCommand { get; set; }
+        public Command IncreaseTopping { get; set; }
 
         public ObservableCollection<AppItem> toppings { get; set; }
         public ObservableCollection<AppItem> selectedToppings { get; set; }
@@ -26,11 +28,14 @@ namespace TokioCity.ViewModels
         public string prodIndex { get; set; }
         public int amount { get; set; }
 
+        public int width { get; set; }
+
         public ProductViewModel()
         {
             product = new AppItem();
             toppings = new ObservableCollection<AppItem>();
             selectedToppings = new ObservableCollection<AppItem>();
+            width = App.screenWidth / 4;
             LoadProductCommand = new Command((index) =>
             {
                 product = DataBase.GetProduct<AppItem>("Items", index as string);
@@ -48,13 +53,18 @@ namespace TokioCity.ViewModels
                     toppings.Add(topping);
                 }
             });
-            AddToppingCommand = new Command((items) =>
+            AddToppingCommand = new Command((item) =>
             {
-                selectedToppings.Clear();
-                foreach (var item in items as List<AppItem>)
-                {
-                    selectedToppings.Add(item);
-                }
+                (item as AppItem).Amount = 1;
+                selectedToppings.Add(item as AppItem);
+            });
+            RemoveToppingCommand = new Command((item) =>
+            {
+                selectedToppings.Remove(item as AppItem);
+            });
+            IncreaseTopping = new Command(() =>
+            {
+                Console.WriteLine("1");
             });
         }
 
