@@ -55,9 +55,8 @@ namespace TokioCity.Views
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await CaloriesCard.TranslateTo(0, -220, 3000);
+                await CaloriesCard.TranslateTo(0, 500, 3000);
             });
-
             CaloriesCard.IsVisible = true;
             
         }

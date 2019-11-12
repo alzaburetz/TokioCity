@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using LiteDB;
 
 namespace TokioCity.Models
 {
     public class MyProduct: INotifyPropertyChanged
     {
+        [BsonIndex]
         public int Id { get; set; }
         private string _name;
         public string Name

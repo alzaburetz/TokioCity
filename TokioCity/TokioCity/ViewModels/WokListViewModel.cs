@@ -47,8 +47,10 @@ namespace TokioCity.ViewModels
             });
             RemoveMyWok = new Command((Id) =>
             {
-                var typ = Id.GetType();
-                DataBase.RemoveItem<MyProduct>("Woks", Query.Where("Id", x => x.AsInt32 == (int)Id));
+                DataBase.RemoveItem<MyProduct>("Woks", Query.Where("_id", x => x == (int)Id));
+                var list = MyWoks.GetList();
+                var wokToRemove = list.Find(x => (x as MyProduct).Id == (int)Id);
+                MyWoks.Remove((MyProduct)wokToRemove);
             });
         }
     }

@@ -16,7 +16,22 @@ namespace TokioCity.Views
     public partial class Woks : ContentPage
     {
         public WoksViewModel viewModel;
-        private bool createNew;
+        private bool _wokCreated;
+        public bool WokCreated
+        {
+            get
+            {
+                return _wokCreated;
+            }
+            set
+            {
+                _wokCreated = value;
+                if (value == true)
+                {
+                    MainContent.Children.Clear();
+                }
+            }
+        }
         public Woks()
         {
             BindingContext = viewModel = new WoksViewModel();

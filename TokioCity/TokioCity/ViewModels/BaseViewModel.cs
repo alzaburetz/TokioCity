@@ -14,6 +14,22 @@ namespace TokioCity.ViewModels
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public IDataBase DataBase => DependencyService.Get<IDataBase>();
+        private Command _addtofavorite;
+        public Command AddFavorite
+        {
+            get
+            {
+                return _addtofavorite;
+            }
+            set
+            {
+                _addtofavorite = new Command((item) =>
+                {
+                    var t = item.GetType();
+                    DataBase.WriteAll<AppItem>("Favorite", new List<AppItem>() { (AppItem)item as AppItem });
+                });
+            }
+        }
 
         bool isBusy = false;
         public bool IsBusy
@@ -41,6 +57,7 @@ namespace TokioCity.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+        
         
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

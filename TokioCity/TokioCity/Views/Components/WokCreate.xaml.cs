@@ -134,6 +134,7 @@ namespace TokioCity.Views.Components
                 }
             }
             viewModel.CreateWok.Execute(wok);
+            
         }
     }
 }

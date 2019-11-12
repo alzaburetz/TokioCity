@@ -36,6 +36,7 @@ namespace TokioCity.ViewModels
 
         public Command LoadSubcatsCommand { get; set; }
         public Command CreateWok { get; set; }
+        
 
         public int CalculateFullPrice()
         {

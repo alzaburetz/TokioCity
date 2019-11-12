@@ -91,12 +91,13 @@ namespace TokioCity.Services
         public void WriteItem<T>(string collection, T item)
         {
             var col = database.GetCollection<T>(collection).IncludeAll(5);
+            col.EnsureIndex("Id");
             var count =  col.Insert(item);
         }
 
-        public void RemoveItem<T>(string collection, Query query)
+        public void  RemoveItem<T>(string collection, Query query)
         {
-            database.GetCollection<T>(collection).Delete(query);
+            var removed = database.GetCollection<T>(collection).Delete(query);
         }
         public DataBaseService()
         {
