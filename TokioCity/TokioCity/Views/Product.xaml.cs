@@ -112,5 +112,10 @@ namespace TokioCity.Views
         {
             CaloriesCard.IsVisible = false;
         }
+
+        private void OpenCart(object sender, EventArgs e)
+        {
+
+        }
     }
 }

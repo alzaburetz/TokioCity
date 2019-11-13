@@ -39,7 +39,7 @@
 
                 <ScrollView Grid.Row="0" Grid.RowSpan="2">
                     <StackLayout>
-                        <image:CachedImage Source="{Binding product.image, Converter={StaticResource ImageUrl}}"
+                        <image:CachedImage Source="{Binding product.image, Converter={StaticResource Image}}"
                                        x:Name="Img"
                                        HorizontalOptions="FillAndExpand"
                                        VerticalOptions="FillAndExpand"
@@ -237,6 +237,9 @@
                                            FontSize="Medium"
                                            HorizontalOptions="FillAndExpand"
                                            HorizontalTextAlignment="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddToCart}"/>
+                                </Label.GestureRecognizers>
                             </Label>
 
                         </StackLayout>
@@ -248,14 +251,20 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="scrim.png" Grid.ColumnSpan="3" Aspect="AspectFill"/>
+                    <Image Source="scrim.png" Grid.ColumnSpan="3" Aspect="AspectFill">
+                        
+                    </Image>
                     <Image Source="back.png" Grid.Column="0" Margin="20">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="GoBack"/>
                         </Image.GestureRecognizers>
 
                     </Image>
-                    <Image Source="cart.png" Grid.Column="2" Margin="15"></Image>
+                    <Image Source="cart.png" Grid.Column="2" Margin="15">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenCart"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </Grid>
 
 

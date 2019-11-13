@@ -34,7 +34,7 @@ namespace TokioCity.Views
             try
             {
                 var item = ((AppItem)args.CurrentSelection[0] as AppItem);
-                await Navigation.PushModalAsync(new Product(item));
+                
             }
             catch { }
             var Collection = (CollectionView)sender;

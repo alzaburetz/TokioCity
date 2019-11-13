@@ -44,6 +44,10 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IconOverride="back.png"/>
+    </Shell.BackButtonBehavior>
+
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <StackLayout HeightRequest="50"
@@ -72,15 +76,19 @@
 
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <Tab Title="КАТЕГОРИИ">
+        <Tab Title="КАТЕГОРИИ" Route="categories">
             <ShellContent>
                 <local:CategoriesTabs/>
             </ShellContent>
         </Tab>
-
+        <Tab Title="КОРЗИНА" Route="cart">
+            <ShellContent>
+                <local:Cart/>
+            </ShellContent>
+        </Tab>
 
 
     </FlyoutItem>
 
-    
+
 </Shell>
