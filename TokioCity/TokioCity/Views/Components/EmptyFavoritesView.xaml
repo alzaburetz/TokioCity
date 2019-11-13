@@ -18,7 +18,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
   <ContentView.Content>
-      <StackLayout>
+      <StackLayout Margin="30">
             <Frame CornerRadius="10"
                    BackgroundColor="#202123">
                 <StackLayout BackgroundColor="#202123">

@@ -95,6 +95,11 @@ namespace TokioCity.Services
             var count =  col.Insert(item);
         }
 
+        public void UpdateItem<T>(string collection, Query query, T item)
+        {
+            database.GetCollection<T>(collection).Update(item);
+        }
+
         public void  RemoveItem<T>(string collection, Query query)
         {
             var removed = database.GetCollection<T>(collection).Delete(query);

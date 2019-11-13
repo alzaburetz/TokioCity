@@ -31,9 +31,21 @@ namespace TokioCity.ViewModels
             burgers = new ObservableCollection<AppItem>();
             toppings = new ObservableCollection<AppItem>();
             height = App.screenHeight / 2;
-            AddToFavorite = new Command(() =>
+            AddToFavorite = new Command((item) =>
             {
-                Console.WriteLine("Pressed!");
+                var check = DataBase.GetProduct<AppItem>("Favorite", (item as AppItem).uid);
+                if (check == null)
+                {
+                    DataBase.WriteItem<AppItem>("Favorite", (AppItem)item as AppItem);
+                    (item as AppItem).Favorite = true;
+                    DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
+                }
+                else
+                {
+                    DataBase.RemoveItem<AppItem>("Favorite", Query.Where("uid", x => x.AsString == check.uid));
+                    (item as AppItem).Favorite = false;
+                    DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
+                }
             });
             LoadBurgers = new Command(() =>
             {

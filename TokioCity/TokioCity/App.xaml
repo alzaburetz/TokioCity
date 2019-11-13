@@ -85,6 +85,7 @@
             <converters:CategoryColorConverter x:Key="CategoryColor"/>
             <converters:CategoryConverter x:Key="Category"/>
             <converters:ToUpperConverter x:Key="ToUpper"/>
+            <converters:InFavorite x:Key="InFavorite"/>
             <!--<converters:WidthConverter x:Key="Width"/>
             <converters:HeightConverter x:Key="Height"/>-->
             <Style TargetType="ContentPage">

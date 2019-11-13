@@ -104,6 +104,20 @@ namespace TokioCity.Models
             }
         }
         private int _price;
+
+        private bool _favorite;
+        public bool Favorite
+        {
+            get
+            {
+                return _favorite;
+            }
+            set
+            {
+                _favorite = value;
+                OnPropertyChanged("Favorite");
+            }
+        }
         protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

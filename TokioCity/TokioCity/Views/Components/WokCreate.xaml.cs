@@ -16,16 +16,12 @@ namespace TokioCity.Views.Components
     public partial class WokCreate : ContentView
     {
         public WoksViewModel viewModel;
+        private MyProduct wok { get; set; }
         public WokCreate()
         {
             BindingContext = viewModel = new WoksViewModel();
             viewModel.LoadSubcatsCommand.Execute(null);
             InitializeComponent();
-        }
-
-        protected override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
         }
 
 
@@ -48,6 +44,7 @@ namespace TokioCity.Views.Components
             }
             catch { }
             ((CollectionView)sender).SelectedItem = null;
+            FullPrice.Text = $"{viewModel.fullPrice}.-";
 
         }
 
@@ -70,7 +67,7 @@ namespace TokioCity.Views.Components
             }
             catch { }
             ((CollectionView)sender).SelectedItem = null;
-
+            FullPrice.Text = $"{viewModel.fullPrice}.-";
         }
 
         private void ToppingSelected(object sender, SelectionChangedEventArgs args)
@@ -92,6 +89,7 @@ namespace TokioCity.Views.Components
             }
             catch { }
             ((CollectionView)sender).SelectedItem = null;
+            FullPrice.Text = $"{viewModel.fullPrice}.-";
 
         }
 
@@ -114,6 +112,7 @@ namespace TokioCity.Views.Components
             }
             catch { }
             ((CollectionView)sender).SelectedItem = null;
+            FullPrice.Text = $"{viewModel.fullPrice}.-";
 
         }
 
@@ -134,7 +133,9 @@ namespace TokioCity.Views.Components
                 }
             }
             viewModel.CreateWok.Execute(wok);
-            
+            (this.Parent as StackLayout).Children.Add(new TokioCity.Views.Components.WokList());
+            var page = (this.Parent.Parent.Parent.Parent.Parent as Woks);
+            page.tabs.SelectedItem = page.viewModel.tabs[1];
         }
     }
 }

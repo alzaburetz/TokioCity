@@ -7,6 +7,7 @@
              x:Class="TokioCity.Views.Pasta"
              BackgroundColor="#181818"
              Title="Паста"
+             x:Name="PastaPage"
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:page="clr-namespace:TokioCity.Views">
     <ContentPage.Resources>
@@ -43,88 +44,61 @@
                     </StackLayout>
                     <CollectionView ItemsSource="{Binding products}"
                             SelectionMode="Single"
-                            SelectionChanged="OpenProduct"
-                                    ItemTemplate="{StaticResource ProductGrid}">
+                            SelectionChanged="OpenProduct">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Span="2"
-                                                 Orientation="Vertical"
-                                                 VerticalItemSpacing="10"
-                                                 HorizontalItemSpacing="10"/>
+                                                 Orientation="Vertical"/>
                         </CollectionView.ItemsLayout>
-                        
-                        <!--<CollectionView.ItemTemplate>
+
+                        <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid WidthRequest="410">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"/>
-                                        <RowDefinition Height="70"/>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="100"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.8*"/>
-                                        <ColumnDefinition Width="0.2*"/>
-                                    </Grid.ColumnDefinitions>
+                                <StackLayout BackgroundColor="#181818"
+                                     Padding="5">
                                     <Frame BackgroundColor="#202123"
-                                   CornerRadius="10"
-                                   Grid.Column="0"
-                                   Grid.Row="0"
-                                   Grid.RowSpan="5">
-                                        <StackLayout>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="{Binding price, Converter={StaticResource Price}}" 
-                                                           Style="{StaticResource PriceLabel}" 
-                                                           HorizontalTextAlignment="Start"
-                                                           HorizontalOptions="Start"
-                                                           />
-                                                <StackLayout Padding="10" WidthRequest="70">
-                                                    <Frame CornerRadius="5"
-                                                                   Padding="1"
-                                                                   BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}">
-                                                        <Label Text="{Binding category, Converter={StaticResource Category}}"
-                                                                       TextColor="White"
-                                                                       HorizontalOptions="FillAndExpand"
-                                                                       VerticalTextAlignment="Center"
-                                                                       HorizontalTextAlignment="Center"/>
-                                                    </Frame>
-
-                                                </StackLayout>
-
-                                                <ImageButton Source="heart.png"
-                                                 HeightRequest="20"
-                                                 HorizontalOptions="EndAndExpand"
-                                                 BackgroundColor="Transparent"
-                                                 Command="{Binding AddToFavorite}"
-                                                 CommandParameter="{Binding .}">
-                                                </ImageButton>
+                               CornerRadius="20"
+                                   Padding="15">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="120"/>
+                                                <RowDefinition Height="40"/>
+                                                <RowDefinition Height="40"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="20"/>
+                                            </Grid.ColumnDefinitions>
+                                            <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}" Grid.Row="0" Grid.Column="1"
+                                             BackgroundColor="Transparent"
+                                             Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference PastaPage}}"
+                                             CommandParameter="{Binding}"/>
+                                            <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                                   Aspect="AspectFit"
+                                                   Grid.Row="1"
+                                                   Grid.ColumnSpan="2"
+                                                   VerticalOptions="StartAndExpand"
+                                                   HorizontalOptions="FillAndExpand"/>
+                                            <Label Text="{Binding name}"
+                                       Opacity="0.6"
+                                       Grid.ColumnSpan="2"
+                                       Grid.Row="2"/>
+                                            <StackLayout Orientation="Horizontal"
+                                             Grid.Row="3"
+                                             Grid.ColumnSpan="2">
+                                                <Label Text="{Binding price, Converter={StaticResource Price}}"
+                                                   FontAttributes="Bold"
+                                                       HorizontalOptions="StartAndExpand"
+                                                   />
+                                                <ImageButton Source="addtocart.png"
+                                                             VerticalOptions="EndAndExpand"
+                                                             WidthRequest="30"/>
                                             </StackLayout>
-                                            <Label Text="{Binding name}" Style="{StaticResource CommonLabel}"/>
-                                            <Label Text="{Binding weight1, Converter={StaticResource Weight}}" Style="{StaticResource Counter}"/>
-                                        </StackLayout>
-
+                                        </Grid>
                                     </Frame>
+                                </StackLayout>
 
-                                    <StackLayout 
-                                               Grid.Row="3"
-                                               Grid.Column="0"
-                                               Grid.ColumnSpan="2"
-                                               Grid.RowSpan="2">
-                                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
-                                    </StackLayout>
-
-                                    <StackLayout Padding="270,-10,10,0" 
-                                         Grid.Column="0"
-                                         Grid.Row="4"
-                                         Grid.ColumnSpan="2">
-                                        <ImageButton Source="addtocart.png"
-                                             Scale="0.5"
-                                             BackgroundColor="Transparent"/>
-                                    </StackLayout>
-                                </Grid>
                             </DataTemplate>
-                        </CollectionView.ItemTemplate>-->
+                        </CollectionView.ItemTemplate>
                     </CollectionView>
                     <!--<CollectionView ItemsSource="{Binding subcats}"
                                     SelectionChanged="LoadSubcat"

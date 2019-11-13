@@ -29,6 +29,7 @@ namespace TokioCity.ViewModels
         public int amount { get; set; }
 
         public int width { get; set; }
+        public int height { get; set; }
 
         public ProductViewModel()
         {
@@ -36,6 +37,7 @@ namespace TokioCity.ViewModels
             toppings = new ObservableCollection<AppItem>();
             selectedToppings = new ObservableCollection<AppItem>();
             width = App.screenWidth / 4;
+            height = App.screenHeight;
             LoadProductCommand = new Command((index) =>
             {
                 product = DataBase.GetProduct<AppItem>("Items", index as string);

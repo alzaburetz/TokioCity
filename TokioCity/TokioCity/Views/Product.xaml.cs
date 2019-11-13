@@ -53,10 +53,10 @@ namespace TokioCity.Views
 
         public void OpenCalories(object sender, EventArgs args)
         {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                await CaloriesCard.TranslateTo(0, 500, 3000);
-            });
+            //Device.BeginInvokeOnMainThread(async () =>
+            //{
+            //    await CaloriesCard.TranslateTo(0, 500, 3000);
+            //});
             CaloriesCard.IsVisible = true;
             
         }
@@ -106,6 +106,11 @@ namespace TokioCity.Views
                 viewModel.toppings.First<AppItem>(x => x.uid == imgbtn.ClassId).selected = false;
             }
                 
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            CaloriesCard.IsVisible = false;
         }
     }
 }

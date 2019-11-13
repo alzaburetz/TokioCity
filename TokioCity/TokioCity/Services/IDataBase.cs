@@ -18,5 +18,6 @@ namespace TokioCity.Services
         IEnumerator<T> GetOneItem<T>(string collection, Query query = null);
         void WriteItem<T>(string collection, T item);
         void RemoveItem<T>(string collection, Query query);
+        void UpdateItem<T>(string collection, Query query, T newData);
     }
 }

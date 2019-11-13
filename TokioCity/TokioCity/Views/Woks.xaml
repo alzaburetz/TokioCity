@@ -55,16 +55,11 @@
                         <Label Text="ВОКИ" Style="{StaticResource Title}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" Padding="10,0,0,0" HeightRequest="35">
-                        <CollectionView ItemsLayout="HorizontalList"
+                        <CollectionView x:Name="Tabs"
+                                        ItemsLayout="HorizontalList"
                                         SelectionMode="Single"
                                         SelectionChanged="SelectWokType"
-                                        SelectedItem="">
-                            <CollectionView.ItemsSource>
-                                <x:Array Type="{x:Type x:String}" x:Name="Buttons">
-                                    <x:String>СОБРАТЬ ВОК</x:String>
-                                    <x:String>МОИ ВОКИ</x:String>
-                                </x:Array>
-                            </CollectionView.ItemsSource>
+                                        ItemsSource="{Binding tabs}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Label Text="{Binding}"
@@ -95,7 +90,6 @@
 
                     </StackLayout>
                     <StackLayout x:Name="MainContent">
-                       
                     </StackLayout>
                     
                 </StackLayout>

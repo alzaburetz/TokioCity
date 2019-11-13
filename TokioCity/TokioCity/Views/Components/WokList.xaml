@@ -34,7 +34,7 @@
                             <StackLayout ClassId="{Binding Id}">
                                 <StackLayout Orientation="Horizontal"
                                              HeightRequest="40">
-                                    <Label Text="{Binding Name, Converter={StaticResource ToUpper}}" 
+                                    <Label Text="{Binding Name}" 
                                            Style="{StaticResource Title}"
                                            HorizontalOptions="FillAndExpand"
                                            VerticalTextAlignment="Center"/>

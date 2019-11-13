@@ -17,6 +17,17 @@ namespace TokioCity.Views
     {
         public WoksViewModel viewModel;
         private bool _wokCreated;
+        public CollectionView tabs
+        {
+            get
+            {
+                return Tabs;
+            }
+            set
+            {
+                Tabs = value;
+            }
+        }
         public bool WokCreated
         {
             get
@@ -42,6 +53,7 @@ namespace TokioCity.Views
         {
             base.OnAppearing();
             viewModel.LoadSubcatsCommand.Execute(null);
+            tabs.SelectedItem = viewModel.tabs[0];
         }
 
         private void ProductSelected(object sender, SelectionChangedEventArgs args)

@@ -71,8 +71,21 @@ namespace TokioCity.ViewModels
             });
             AddFavorite = new Command((item) =>
             {
-                var t = item.GetType();
-                DataBase.WriteAll<AppItem>("Favorite", new List<AppItem>() { (AppItem)item as AppItem });
+                
+                var check = DataBase.GetProduct<AppItem>("Favorite", (item as AppItem).uid);
+                if (check == null)
+                {
+                    DataBase.WriteItem<AppItem>("Favorite", (AppItem)item as AppItem);
+                    (item as AppItem).Favorite = true;
+                    DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
+                }
+                else
+                {
+                    DataBase.RemoveItem<AppItem>("Favorite", Query.Where("uid", x => x.AsString == check.uid));
+                    (item as AppItem).Favorite = false;
+                    DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
+                }
+                    
             });
 
             ReloadCategories = new Command(async (categ) =>

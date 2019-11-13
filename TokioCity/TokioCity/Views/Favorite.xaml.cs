@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using TokioCity.ViewModels;
+using TokioCity.Models;
 
 namespace TokioCity.Views
 {
@@ -26,6 +27,18 @@ namespace TokioCity.Views
             base.OnAppearing();
 
             favViewModel.LoadFavorites.Execute(null);
+        }
+
+        private async void OpenProduct(object sender, SelectionChangedEventArgs args)
+        {
+            try
+            {
+                var item = ((AppItem)args.CurrentSelection[0] as AppItem);
+                await Navigation.PushModalAsync(new Product(item));
+            }
+            catch { }
+            var Collection = (CollectionView)sender;
+            Collection.SelectedItem = null;
         }
     }
 }

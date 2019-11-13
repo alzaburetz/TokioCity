@@ -45,7 +45,7 @@ namespace TokioCity.ViewModels
 
             LoadLunchesCommand = new Command(() =>
             {
-                var salads = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(garnishCategory)));
+                var salads = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(saladsCategory)));
                 while (salads.MoveNext())
                 {
                     this.garnish.Add(salads.Current);

@@ -22,6 +22,8 @@ namespace TokioCity.ViewModels
         public ObservableCollection<AppItem> meat { get; set; }
         public ObservableCollection<AppItem> toppings { get; set; }
 
+        public string[] tabs { get; set; }
+
         public int mainCateg = 77;
         public int souceCateg = 229;
         public int meatCateg = 230;
@@ -37,7 +39,7 @@ namespace TokioCity.ViewModels
         public Command LoadSubcatsCommand { get; set; }
         public Command CreateWok { get; set; }
         
-
+        public MyProduct wok { get; set; }
         public int CalculateFullPrice()
         {
            return mainPrice + saucePrice + meatPrice + toppingPrice;
@@ -49,6 +51,9 @@ namespace TokioCity.ViewModels
             sauce = new ObservableCollection<AppItem>();
             meat = new ObservableCollection<AppItem>();
             toppings = new ObservableCollection<AppItem>();
+            wok = new MyProduct();
+            
+            tabs = new string[2] { "СОБРАТЬ ВОК", "МОИ ВОКИ" };
             CreateWok = new Command((product) =>
             {
                 DataBase.WriteItem<MyProduct>("Woks", (MyProduct)product as MyProduct);

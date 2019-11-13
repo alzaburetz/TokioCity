@@ -27,9 +27,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <Grid AbsoluteLayout.LayoutFlags="All" 
-                  AbsoluteLayout.LayoutBounds="1,1,1,1"
+        <RelativeLayout>
+            <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Factor=1}"
+                  RelativeLayout.HeightConstraint="{ConstraintExpression Factor=1}"
                   IsVisible="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1072*"/>
@@ -261,9 +261,11 @@
 
             </Grid>
             <Frame x:Name="CaloriesCard"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                     Property=AnchorY, Factor=0.5, Constant=470}"
+                   IsVisible="False"
+                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
                    BackgroundColor="White"
-                   AbsoluteLayout.LayoutFlags="SizeProportional"
-                   AbsoluteLayout.LayoutBounds="0.5,460,1,0.5"
                    CornerRadius="20">
                 <StackLayout Padding="10">
                     <StackLayout Margin="120, -10, 120, 0"
@@ -274,6 +276,7 @@
                                  Opacity="0.5"/>
                         <StackLayout.GestureRecognizers>
                             <SwipeGestureRecognizer Direction="Down" Swiped="SwipeGestureRecognizer_Swiped"/>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
@@ -330,7 +333,7 @@
                     </StackLayout>
                 </StackLayout>
             </Frame>
-        </AbsoluteLayout>
+        </RelativeLayout>
        
            
         
