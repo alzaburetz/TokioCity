@@ -24,7 +24,9 @@
                             <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
                         <StackLayout Spacing="10" Padding="10" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                            <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+                            <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                           LoadingDelay="0" 
+                                               LoadingPriority="Highest"/>
                             <Label Text="{Binding price, Converter={StaticResource Price}}" Style="{StaticResource PriceLabel}"/>
                             <Label Text="{Binding name}" Style="{StaticResource CommonLabel}"/>
                         </StackLayout>

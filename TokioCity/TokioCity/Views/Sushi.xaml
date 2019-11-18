@@ -118,7 +118,9 @@
                                                Grid.Column="0"
                                                Grid.ColumnSpan="2"
                                                Grid.RowSpan="2">
-                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                           LoadingDelay="0"
+                                           LoadingPriority="Highest"/>
 
 
                     </AbsoluteLayout>
@@ -159,7 +161,9 @@
                        
                     </CollectionView>
                     <CollectionView ItemsSource="{Binding subcats}"
+                                    x:Name="Subcats"
                                     SelectionChanged="LoadSubcat"
+                                    SelectedItem="{Binding SelectedCategory}"
                                     SelectionMode="Single"
                                     HeightRequest="30">
                         <CollectionView.ItemsLayout>
@@ -200,9 +204,6 @@
                         <CollectionView ItemsSource="{Binding Products}"
                                         SelectionMode="Single"
                                         SelectionChanged="OpenProduct">
-                            <CollectionView.EmptyView>
-                                <Label Text="AAAAAAAAAAAAA" Style="{StaticResource Header}"/>
-                            </CollectionView.EmptyView>
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Span="2"
                                                  Orientation="Vertical"/>

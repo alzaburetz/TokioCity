@@ -15,13 +15,8 @@ namespace TokioCity
         public App()
         {
             InitializeComponent();
-            DependencyService.Register<MockDataStore>();
             DependencyService.Register<DataBaseService>();
             MainPage = new AppShell();
-            AddToFavorite = new Command((item) =>
-            {
-                Favorite.AddToFavorite(null, null, (AppItem)item);
-            });
         }
         protected override void OnStart()
         {

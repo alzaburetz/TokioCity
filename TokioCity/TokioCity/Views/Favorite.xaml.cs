@@ -31,14 +31,15 @@ namespace TokioCity.Views
 
         private async void OpenProduct(object sender, SelectionChangedEventArgs args)
         {
-            try
-            {
+            //try
+            //{
                 var item = ((AppItem)args.CurrentSelection[0] as AppItem);
-                
-            }
-            catch { }
-            var Collection = (CollectionView)sender;
-            Collection.SelectedItem = null;
+            var state = Shell.Current.CurrentState;
+            await Shell.Current.Navigation.PushModalAsync(new Product(item));
+            //}
+            //catch { }
+            //var Collection = (CollectionView)sender;
+            //Collection.SelectedItem = null;
         }
     }
 }

@@ -19,9 +19,9 @@ namespace TokioCity.Views.Components
         private MyProduct wok { get; set; }
         public WokCreate()
         {
+            InitializeComponent();
             BindingContext = viewModel = new WoksViewModel();
             viewModel.LoadSubcatsCommand.Execute(null);
-            InitializeComponent();
         }
 
 

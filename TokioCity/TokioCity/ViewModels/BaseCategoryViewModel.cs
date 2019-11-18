@@ -10,6 +10,8 @@ using System.Collections.ObjectModel;
 using TokioCity.Models;
 using TokioCity.Services;
 
+using FFImageLoading.Forms;
+
 namespace TokioCity.ViewModels
 {
     
@@ -25,6 +27,21 @@ namespace TokioCity.ViewModels
         public ObservableCollection<AppItem> products { get; set; }
         public ObservableCollection<AppItem> Products { get; set; }
         public ObservableCollection<AppItem> Toppings { get; set; }
+        private Subcategory selectedCategory;
+        public Subcategory SelectedCategory
+        {
+            get
+            {
+                return selectedCategory;
+            }
+            set
+            {
+                if (selectedCategory != value)
+                {
+                    selectedCategory = value;
+                }
+            }
+        }
         public int width { get; set; }
         public int height { get; set; }
 
@@ -43,6 +60,8 @@ namespace TokioCity.ViewModels
             subcats = new ObservableCollection<Subcategory>();
             Products = new ObservableCollection<AppItem>();
             Toppings = new ObservableCollection<AppItem>();
+            selectedCategory = new Subcategory();
+            SelectedCategory = new Subcategory();
             LoadToppings = new Command(async (toppings) =>
             {
                 Toppings.Clear();
@@ -105,6 +124,7 @@ namespace TokioCity.ViewModels
                             break;
                         }
                     }
+                    this.SelectedCategory = this.subcats[0];
                 }
             });
 
@@ -116,7 +136,7 @@ namespace TokioCity.ViewModels
                 Products.Clear();
                 while (itemsFound.MoveNext())
                 {
-                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(200));
+                    //await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(200));
                     Products.Add(itemsFound.Current);
                 }
                 itemsFound.Dispose();

@@ -19,16 +19,18 @@ namespace TokioCity.Views
         public BaseCategoryViewModel viewModel;
         public Sushi()
         {
+            InitializeComponent();
             products = new ObservableCollection<AppItem>();
             BindingContext = viewModel = new BaseCategoryViewModel(new int[] {47, 74, 92, 102, 204 });
-            InitializeComponent();
         }
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-
             viewModel.LoadProducts.Execute(null);
+            base.OnAppearing();
+            System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(100));
+            Subcats.SelectedItem = viewModel.SelectedCategory;
+
         }
 
         protected async void OpenProduct(object sender, SelectionChangedEventArgs args)

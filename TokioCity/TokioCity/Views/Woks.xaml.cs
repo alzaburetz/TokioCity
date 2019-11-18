@@ -51,9 +51,9 @@ namespace TokioCity.Views
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
             viewModel.LoadSubcatsCommand.Execute(null);
             tabs.SelectedItem = viewModel.tabs[0];
+            base.OnAppearing();
         }
 
         private void ProductSelected(object sender, SelectionChangedEventArgs args)

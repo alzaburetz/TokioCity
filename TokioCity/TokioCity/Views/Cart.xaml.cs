@@ -19,6 +19,11 @@ namespace TokioCity.Views
         public Cart()
         {
             BindingContext = viewModel = new CartViewModel();
+            try
+            {
+                var state = Shell.Current.CurrentState;
+                var a = state;
+            } catch { }
             InitializeComponent();
         }
 

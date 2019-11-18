@@ -14,8 +14,8 @@
                 </StackLayout>
                 <CollectionView ItemsSource="{Binding main}"
                                         SelectionMode="Single"
-                                        SelectionChanged="ProductSelected"
                                         ItemSizingStrategy="MeasureAllItems"
+                                        SelectionChanged="ProductSelected"
                                         ItemTemplate="{StaticResource ProductTopping}"
                                        >
                     <CollectionView.ItemsLayout>

@@ -76,13 +76,13 @@
 
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <Tab Title="КАТЕГОРИИ" Route="categories">
-            <ShellContent>
+        <Tab Title="КАТЕГОРИИ" >
+            <ShellContent Route="categories">
                 <local:CategoriesTabs/>
             </ShellContent>
         </Tab>
-        <Tab Title="КОРЗИНА" Route="cart">
-            <ShellContent>
+        <Tab Title="КОРЗИНА" >
+            <ShellContent Route="cart">
                 <local:Cart/>
             </ShellContent>
         </Tab>

@@ -69,7 +69,7 @@ namespace TokioCity.ViewModels
                 this.main.Clear();
                 while (main.MoveNext())
                 {
-                    await Task.Delay(TimeSpan.FromMilliseconds(100));
+                    //await Task.Delay(TimeSpan.FromMilliseconds(100));
                     this.main.Add(main.Current);
                 }
                 main.Dispose();
@@ -78,7 +78,7 @@ namespace TokioCity.ViewModels
                 this.sauce.Clear();
                 while (sauce.MoveNext())
                 {
-                    await Task.Delay(TimeSpan.FromMilliseconds(100));
+                    //await Task.Delay(TimeSpan.FromMilliseconds(100));
                     this.sauce.Add(sauce.Current);
                 }
                 sauce.Dispose();
@@ -87,7 +87,7 @@ namespace TokioCity.ViewModels
                 this.meat.Clear();
                 while (meat.MoveNext())
                 {
-                    await Task.Delay(TimeSpan.FromMilliseconds(100));
+                    //await Task.Delay(TimeSpan.FromMilliseconds(100));
                     this.meat.Add(meat.Current);
                 }
                 meat.Dispose();
@@ -96,7 +96,7 @@ namespace TokioCity.ViewModels
                 this.toppings.Clear();
                 while (toppings.MoveNext())
                 {
-                    await Task.Delay(TimeSpan.FromMilliseconds(100));
+                    //await Task.Delay(TimeSpan.FromMilliseconds(100));
                     this.toppings.Add(toppings.Current);
                 }
                 toppings.Dispose();

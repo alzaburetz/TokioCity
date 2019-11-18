@@ -17,7 +17,9 @@
             <converters:CategoryConverter x:Key="Category"/>
             <DataTemplate x:Key="ProductItem">
                 <StackLayout Padding="20,0,0,0" WidthRequest="150">
-                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                       LoadingDelay="0"
+                                       LoadingPriority="Highest"/>
                     <Label Text="{Binding price,Converter={StaticResource Price}}" Style="{StaticResource PriceLabel}" HorizontalTextAlignment="Start"/>
                     <Label Text="{Binding name}" Style="{StaticResource CommonLabel}" Opacity="0.5"/>
                 </StackLayout>

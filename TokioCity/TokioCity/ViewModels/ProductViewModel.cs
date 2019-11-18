@@ -43,27 +43,50 @@ namespace TokioCity.ViewModels
             AddToCart = new Command(() =>
             {
                 CartItem item = new CartItem(this.product, this.selectedToppings, amount);
-                var check = DataBase.GetProduct<CartItem>("Cart", this.product.uid);
-                if (check == null)
+                item.Toppings = new List<AppItem>();
+                foreach (var topping in this.selectedToppings)
                 {
-                    DataBase.WriteItem<CartItem>("Cart", item);
+                    item.Toppings.Add(topping);
                 }
-                else
+                var cart = DataBase.GetAllStream<CartItem>("Cart");
+                var ie = cart.GetEnumerator();
+                while (ie.MoveNext())
                 {
-                    if (check.Item == this.product && check.Toppings == this.selectedToppings.GetEnumerator())
+                    if (ie.Current.Item.uid == this.product.uid)
                     {
-                        item.Count += check.Count;
-                        DataBase.UpdateItem<CartItem>("Cart", null, item);
-                    }
-                    else
-                    {
-                        DataBase.WriteItem<CartItem>("Cart", item);
+                        ie.Current.Count++;
+                        DataBase.UpdateItem<CartItem>("Cart", null, ie.Current);
+                        return;
                     }
                 }
+                DataBase.WriteItem<CartItem>("Cart", item);
+                //foreach (CartItem it in cart)
+                //{
+                //    if (it.Item.uid == this.product.uid)
+                //    {
+                //        it.Count++;
+                //        DataBase.UpdateItem<CartItem>("Cart", null, it);
+                //        return;
+                //    }
+                //}
+                //DataBase.WriteItem<CartItem>("Cart", item);
+                //else
+                //{
+                //    if ((check.Item == this.product && check.Toppings == this.selectedToppings.GetEnumerator()) || check.Item.uid == item.Item.uid)
+                //    {
+                //        item.Count += check.Count;
+                //        DataBase.UpdateItem<CartItem>("Cart", null, item);
+                //    }
+                //    else
+                //    {
+                //        DataBase.WriteItem<CartItem>("Cart", item);
+                //    }
+                //}
                    
             });
             LoadProductCommand = new Command((index) =>
             {
+                if (index == null) return;
                 product = DataBase.GetProduct<AppItem>("Items", index as string);
                 if (product.toppings.Count > 1)
                 {
@@ -112,7 +135,7 @@ namespace TokioCity.ViewModels
                 }
                 else
                 {
-                    if (check.Item == this.product && check.Toppings == this.selectedToppings.GetEnumerator())
+                    if ((check.Item == this.product && check.Toppings == this.selectedToppings.GetEnumerator()) || check.Item.uid == item.Item.uid)
                     {
                         item.Count += check.Count;
                         DataBase.UpdateItem<CartItem>("Cart", null, item);

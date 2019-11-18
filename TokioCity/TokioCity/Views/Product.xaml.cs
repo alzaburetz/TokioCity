@@ -24,6 +24,11 @@ namespace TokioCity.Views
             InitializeComponent();
         }
 
+        public Product()
+        {
+            InitializeComponent();
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -34,7 +39,7 @@ namespace TokioCity.Views
 
         public async void GoBack(object sender, EventArgs args)
         {
-            await Navigation.PopModalAsync();
+            await Shell.Current.Navigation.PopModalAsync();
         }
 
         private void Add(object sender, EventArgs args)
@@ -113,9 +118,9 @@ namespace TokioCity.Views
             CaloriesCard.IsVisible = false;
         }
 
-        private void OpenCart(object sender, EventArgs e)
+        private async void OpenCart(object sender, EventArgs e)
         {
-
+            await Shell.Current.GoToAsync("cart");
         }
     }
 }

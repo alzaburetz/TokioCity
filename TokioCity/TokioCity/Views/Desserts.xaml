@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="TokioCity.Views.Desserts"
              BackgroundColor="#181818"
-             Title="Дессерты"
+             Title="Десерты"
              x:Name="Dessert"
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:page="clr-namespace:TokioCity.Views">
