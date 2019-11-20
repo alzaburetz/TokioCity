@@ -17,6 +17,12 @@ namespace TokioCity.Services
        T GetOneOfCategory<T>(string collection, int category);
         IEnumerator<T> GetOneItem<T>(string collection, Query query = null);
         void WriteItem<T>(string collection, T item);
+        /// <summary>
+        /// Удаление айтема по фильтру
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="query"></param>
         void RemoveItem<T>(string collection, Query query);
         void UpdateItem<T>(string collection, Query query, T newData);
     }

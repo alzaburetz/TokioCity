@@ -7,9 +7,21 @@
             xmlns:local="clr-namespace:TokioCity.Views"
              x:Class="TokioCity.Views.CategoriesTabs">
   <!--Pages can be added as references or inline-->
-    <TabbedPage.Title>
-        ТОКИО-CITY
-    </TabbedPage.Title>
+    
+    <Shell.TitleView>
+        <Label Text="ТОКИО-CITY"
+               Style="{StaticResource Title}"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               FontSize="24"
+               FontFamily="{StaticResource RegularFont}"
+               HorizontalOptions="CenterAndExpand"/>
+    </Shell.TitleView>
+    
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem IconImageSource="cart.png" Clicked="GoToCart"/>
+    </TabbedPage.ToolbarItems>
    
     <TabbedPage.Children>
         <local:Favorite IconImageSource="favorite.png"/>

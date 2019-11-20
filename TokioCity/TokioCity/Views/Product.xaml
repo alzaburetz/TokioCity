@@ -238,7 +238,7 @@
                                            HorizontalOptions="FillAndExpand"
                                            HorizontalTextAlignment="End">
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding AddToCart}"/>
+                                    <TapGestureRecognizer Tapped="AddToCart"/>
                                 </Label.GestureRecognizers>
                             </Label>
 

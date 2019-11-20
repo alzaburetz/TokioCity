@@ -10,6 +10,9 @@ using Xamarin.Forms.Xaml;
 using TokioCity.ViewModels;
 using System.Net.Http;
 
+using AndroidSpec = Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+
+
 namespace TokioCity.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -19,6 +22,7 @@ namespace TokioCity.Views
         public CategoriesViewModel viewModel { get; set; }
         public CategoriesTabs()
         {
+            AndroidSpec.TabbedPage.SetOffscreenPageLimit(this, 10);
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://www.tokyo-city.ru");
             BindingContext = viewModel = new CategoriesViewModel(client);
@@ -32,6 +36,12 @@ namespace TokioCity.Views
             base.OnAppearing();
 
             viewModel.LoadCategoriesCommand.Execute(null);
+        }
+
+        private async void GoToCart(object sender, EventArgs args)
+        {
+            Shell.Current.CurrentItem = new Cart();
+            Shell.Current.CurrentItem.FlyoutIcon = "menu.png";
         }
     }
 }

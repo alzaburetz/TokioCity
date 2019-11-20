@@ -23,6 +23,19 @@ namespace TokioCity.Models
                 _name = value;
             }
         }
+        public CartItem ConvertToCartItem(int Count)
+        {
+            var asAppItem = new AppItem();
+            asAppItem.name = this.Name;
+            asAppItem.price = this.Cost;
+            List<AppItem> toppings = new List<AppItem>();
+            foreach (var component in this.Components)
+            {
+                toppings.Add(component);
+            }
+            var item = new CartItem(asAppItem, toppings, Count);
+            return item;
+        }
 
         public ObservableCollection<AppItem> Components { get; set; }
         private int _cost;

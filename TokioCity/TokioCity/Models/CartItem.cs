@@ -11,6 +11,19 @@ namespace TokioCity.Models
         [BsonIndex]
         public int Id { get; set; }
         private int count;
+        private int cost;
+        public int Cost
+        {
+            get
+            {
+                return cost;
+            }
+            set
+            {
+                cost = value;
+                OnPropertyChanged("Cost");
+            }
+        }
         public int Count
         {
             get
@@ -28,7 +41,6 @@ namespace TokioCity.Models
 
         public CartItem()
         {
-
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
@@ -38,6 +50,15 @@ namespace TokioCity.Models
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        public void CalculateCost()
+        {
+            foreach(var topping in this.Toppings)
+            {
+                Cost += topping.price * (int)topping.Amount;
+            }
+            Cost += Item.price;
         }
 
         public CartItem(AppItem _item, IReadOnlyList<AppItem> _toppings, int _count)

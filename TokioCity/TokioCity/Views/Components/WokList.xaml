@@ -104,7 +104,12 @@
                                                Style="{StaticResource PriceLabel}"
                                                HorizontalTextAlignment="Start"/>
                                             <Label Text="Добавить"
-                                               Style="{StaticResource Title}"/>
+                                               Style="{StaticResource Title}">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference woklist}}"
+                                                                          CommandParameter="{Binding}"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
                                         </StackLayout>
                                     </Frame>
                                 </StackLayout>

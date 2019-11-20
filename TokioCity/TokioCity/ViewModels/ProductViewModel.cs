@@ -42,6 +42,11 @@ namespace TokioCity.ViewModels
             amount = 1;
             AddToCart = new Command(() =>
             {
+                List<AppItem> toppings = new List<AppItem>();
+                foreach (var topping in selectedToppings)
+                {
+                    toppings.Add(topping);
+                }
                 CartItem item = new CartItem(this.product, this.selectedToppings, amount);
                 item.Toppings = new List<AppItem>();
                 foreach (var topping in this.selectedToppings)
@@ -52,7 +57,7 @@ namespace TokioCity.ViewModels
                 var ie = cart.GetEnumerator();
                 while (ie.MoveNext())
                 {
-                    if (ie.Current.Item.uid == this.product.uid)
+                    if (ie.Current.Item.uid == this.product.uid && ie.Current.Toppings == toppings)
                     {
                         ie.Current.Count++;
                         DataBase.UpdateItem<CartItem>("Cart", null, ie.Current);
@@ -60,29 +65,6 @@ namespace TokioCity.ViewModels
                     }
                 }
                 DataBase.WriteItem<CartItem>("Cart", item);
-                //foreach (CartItem it in cart)
-                //{
-                //    if (it.Item.uid == this.product.uid)
-                //    {
-                //        it.Count++;
-                //        DataBase.UpdateItem<CartItem>("Cart", null, it);
-                //        return;
-                //    }
-                //}
-                //DataBase.WriteItem<CartItem>("Cart", item);
-                //else
-                //{
-                //    if ((check.Item == this.product && check.Toppings == this.selectedToppings.GetEnumerator()) || check.Item.uid == item.Item.uid)
-                //    {
-                //        item.Count += check.Count;
-                //        DataBase.UpdateItem<CartItem>("Cart", null, item);
-                //    }
-                //    else
-                //    {
-                //        DataBase.WriteItem<CartItem>("Cart", item);
-                //    }
-                //}
-                   
             });
             LoadProductCommand = new Command((index) =>
             {

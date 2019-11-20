@@ -120,7 +120,14 @@ namespace TokioCity.Views
 
         private async void OpenCart(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("cart");
+            await Navigation.PopModalAsync();
+            Shell.Current.CurrentItem = new Cart();
+        }
+
+        private async void AddToCart(object sender, EventArgs args)
+        {
+            await Shell.Current.DisplayAlert("Успешно!", "Товар успешно добавлен в корзину", "ОК");
+            viewModel.AddToCart.Execute(null);
         }
     }
 }

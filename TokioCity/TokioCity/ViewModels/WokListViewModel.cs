@@ -19,6 +19,7 @@ namespace TokioCity.ViewModels
     {
         public Command LoadMyWoks { get; set; }
         public Command RemoveMyWok { get; set; }
+        public Command AddToCart { get; set; }
         public ObservableCollection<MyProduct> MyWoks { get; set; }
         public WokListViewModel()
         {
@@ -51,6 +52,11 @@ namespace TokioCity.ViewModels
                 var list = MyWoks.GetList();
                 var wokToRemove = list.Find(x => (x as MyProduct).Id == (int)Id);
                 MyWoks.Remove((MyProduct)wokToRemove);
+            });
+            AddToCart = new Command((item) =>
+            {
+                CartItem cartitem = (item as MyProduct).ConvertToCartItem(1);
+                DataBase.WriteItem<CartItem>("Cart", cartitem);
             });
         }
     }

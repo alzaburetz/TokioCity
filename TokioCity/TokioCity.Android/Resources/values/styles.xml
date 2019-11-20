@@ -7,8 +7,8 @@
   <style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
     <!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
     <item name="windowNoTitle">true</item>
-    
-    
+
+    <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
 
     <item name="android:colorPressedHighlight">#000</item>
     <!--<item name="android:colorLongPressedHighlight">#000</item>
@@ -36,6 +36,10 @@
     <item name="drawerArrowStyle">@style/WhiteDrawerIconStyle</item>
   </style>
 
+  <color name="dark" >
+    #181818
+  </color>
+
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#202123</item>
   </style>
@@ -47,5 +51,16 @@
   <style name="WhiteDrawerIconStyle" parent="Widget.AppCompat.DrawerArrowToggle">
     <item name="spinBars">true</item>
     <item name="color">#FFF</item>
+  </style>
+  <style name="DarkAlert" parent="@android:style/Theme.Dialog">
+    <item name="android:windowBackground">@color/dark</item>
+    <item name="android:textColor">#FFF</item>
+  </style>
+
+  <!-- Style to replace actionbar overflow icon. set item 'android:actionOverflowButtonStyle' in AppTheme -->
+  <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+    <item name="android:src">@drawable/menu</item>
+    <item name="android:background">?android:attr/actionBarItemBackground</item>
+    <item name="android:contentDescription">"Lala"</item>
   </style>
 </resources>

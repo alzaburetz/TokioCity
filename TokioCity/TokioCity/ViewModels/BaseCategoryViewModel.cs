@@ -74,7 +74,7 @@ namespace TokioCity.ViewModels
                     await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(200));
                 }
             });
-            LoadProducts = new Command(() =>
+            LoadProducts = new Command(async () =>
             {
                 products.Clear();
                 subcats.Clear();
@@ -85,6 +85,7 @@ namespace TokioCity.ViewModels
                     while (data.MoveNext())
                     {
                         products.Add(data.Current);
+                        await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(50));
                     }
                 }
             });
@@ -124,7 +125,10 @@ namespace TokioCity.ViewModels
                             break;
                         }
                     }
-                    this.SelectedCategory = this.subcats[0];
+                    try
+                    {
+                        this.SelectedCategory = this.subcats[0];
+                    } catch { }
                 }
             });
 
