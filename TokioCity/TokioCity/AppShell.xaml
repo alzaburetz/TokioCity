@@ -98,7 +98,7 @@
 
             <ShellContent  Route="categories">
                 <local:CategoriesTabs/>
-            </ShellContent
+            </ShellContent>
         </ShellSection>
     </ShellItem>
 
