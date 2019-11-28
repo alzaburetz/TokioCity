@@ -105,7 +105,7 @@
                                     SelectionMode="Single"
                                     HeightRequest="50">
                         <CollectionView.ItemsLayout>
-                            <ListItemsLayout Orientation="Horizontal"/>
+                            <LinearItemsLayout Orientation="Horizontal"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>

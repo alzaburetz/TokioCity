@@ -155,7 +155,7 @@
                                     ItemTemplate="{StaticResource HorizontalProducts}"
                             HeightRequest="{Binding height}">
                         <CollectionView.ItemsLayout>
-                            <ListItemsLayout Orientation="Horizontal"
+                            <LinearItemsLayout Orientation="Horizontal"
                                      SnapPointsAlignment="Start"
                                      SnapPointsType="Mandatory"
                                              />
@@ -167,7 +167,7 @@
                                     SelectionMode="Single"
                                     HeightRequest="30">
                         <CollectionView.ItemsLayout>
-                            <ListItemsLayout Orientation="Horizontal"/>
+                            <LinearItemsLayout Orientation="Horizontal"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>

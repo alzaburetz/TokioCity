@@ -19,7 +19,7 @@
                                         ItemTemplate="{StaticResource ProductTopping}"
                                        >
                     <CollectionView.ItemsLayout>
-                        <ListItemsLayout Orientation="Horizontal"
+                        <LinearItemsLayout Orientation="Horizontal"
                                                  ItemSpacing="10"
                                                  />
                     </CollectionView.ItemsLayout>
@@ -38,7 +38,7 @@
                                         ItemTemplate="{StaticResource ProductTopping}"
                                        >
                     <CollectionView.ItemsLayout>
-                        <ListItemsLayout Orientation="Horizontal"
+                        <LinearItemsLayout Orientation="Horizontal"
                                                  ItemSpacing="10"
                                                  />
                     </CollectionView.ItemsLayout>
@@ -57,7 +57,7 @@
                                         ItemTemplate="{StaticResource ProductTopping}"
                                        >
                     <CollectionView.ItemsLayout>
-                        <ListItemsLayout Orientation="Horizontal"
+                        <LinearItemsLayout Orientation="Horizontal"
                                                  ItemSpacing="10"
                                                  />
                     </CollectionView.ItemsLayout>
@@ -75,7 +75,7 @@
                                         ItemTemplate="{StaticResource ProductTopping}"
                                        >
                     <CollectionView.ItemsLayout>
-                        <ListItemsLayout Orientation="Horizontal"
+                        <LinearItemsLayout Orientation="Horizontal"
                                                  ItemSpacing="10"
                                                  />
                     </CollectionView.ItemsLayout>

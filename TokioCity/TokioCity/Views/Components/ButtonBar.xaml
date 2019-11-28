@@ -30,7 +30,7 @@
           BackgroundColor="#181818">
             <CollectionView ItemsSource="{Binding buttons}">
                 <CollectionView.ItemsLayout>
-                    <ListItemsLayout Orientation="Horizontal"></ListItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"></LinearItemsLayout>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

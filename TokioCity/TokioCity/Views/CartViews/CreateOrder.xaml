@@ -23,7 +23,7 @@
 
     <ContentPage.Content>
         
-        <StackLayout BackgroundColor="#181818" Padding="20,70,20,0">
+        <StackLayout BackgroundColor="#181818" Padding="10,0,10,0">
             <ScrollView>
                 <StackLayout>
                     <Label Text="ОФОРМЛЕНИЕ ЗАКАЗА"
@@ -37,7 +37,8 @@
                                     SelectionMode="Single"
                                     HeightRequest="30">
                         <CollectionView.ItemsLayout>
-                            <ListItemsLayout ItemSpacing="10"
+                            
+                            <LinearItemsLayout ItemSpacing="10"
                                      Orientation="Horizontal"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>

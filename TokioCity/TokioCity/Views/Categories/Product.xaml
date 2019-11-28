@@ -90,7 +90,7 @@
                                             SelectionChanged="SelectToppings"
                                        >
                                     <CollectionView.ItemsLayout>
-                                        <ListItemsLayout Orientation="Horizontal"
+                                        <LinearItemsLayout Orientation="Horizontal"
                                                  ItemSpacing="10"
                                                  />
                                     </CollectionView.ItemsLayout>
@@ -148,7 +148,7 @@
                                 </CollectionView>
                                 <CollectionView ItemsSource="{Binding selectedToppings}">
                                     <CollectionView.ItemsLayout>
-                                        <ListItemsLayout Orientation="Vertical"
+                                        <LinearItemsLayout Orientation="Vertical"
                                                      ItemSpacing="10"/>
                                     </CollectionView.ItemsLayout>
                                     <CollectionView.ItemTemplate>

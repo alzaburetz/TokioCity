@@ -53,9 +53,9 @@
                     <!--#region Гарниры-->
                     <CollectionView ItemsSource="{Binding garnish}">
                         <CollectionView.ItemsLayout>
-                            <ListItemsLayout Orientation="Horizontal">
+                            <LinearItemsLayout Orientation="Horizontal">
 
-                            </ListItemsLayout>
+                            </LinearItemsLayout>
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>

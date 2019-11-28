@@ -87,11 +87,11 @@
                 <local:CategoriesTabs/>
             </ShellContent>
         </Tab>
-        <!--<Tab Title="КОРЗИНА" >
-            <ShellContent Route="cart">
-                <local:Cart/>
+        <Tab Title="Карта тест" >
+            <ShellContent>
+                <local:MapTest/>
             </ShellContent>
-        </Tab>-->
+        </Tab>
 
 
     </FlyoutItem>
