@@ -25,7 +25,7 @@
                HorizontalOptions="CenterAndExpand"/>
     </Shell.TitleView>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="0,50,0,0">
             <ScrollView>
             <StackLayout>
                 <StackLayout BackgroundColor="#202123" 
@@ -77,11 +77,9 @@
                                Margin="5"
                            Grid.Column="1">
                             </Label>
-                            <StackLayout Orientation="Horizontal"
+                                <StackLayout Orientation="Horizontal"
                                  Grid.Column="2">
-                                <BoxView BackgroundColor="Transparent"
-                                 WidthRequest="80"/>
-                                <ImageButton Source="minus.png"
+                                    <ImageButton Source="minus.png"
                                      BackgroundColor="Transparent"
                                      Command="{Binding ReducePeople}"
                                      Scale="0.3"/>
@@ -232,6 +230,9 @@
                                VerticalTextAlignment="Center"
                                HorizontalTextAlignment="End"
                                Style="{StaticResource CommonLabel}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Label.GestureRecognizers>
                         </Label>
 
                     </StackLayout>

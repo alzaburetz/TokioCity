@@ -40,8 +40,7 @@ namespace TokioCity.Views
 
         private async void GoToCart(object sender, EventArgs args)
         {
-            Shell.Current.CurrentItem = new Cart();
-            Shell.Current.CurrentItem.FlyoutIcon = "menu.png";
+            await Shell.Current.GoToAsync("cart");
         }
     }
 }

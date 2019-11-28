@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TokioCity.Views.CreateOrder"
+             Shell.BackgroundColor="#181818">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="cart.png"/>
+    </ContentPage.ToolbarItems>
+
+    <Shell.TitleView>
+        <Label Text="ТОКИО-CITY"
+               Style="{StaticResource Title}"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               FontSize="24"
+               FontFamily="{StaticResource RegularFont}"
+               HorizontalOptions="CenterAndExpand"/>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        
+        <StackLayout BackgroundColor="#181818" Padding="20,70,20,0">
+            <ScrollView>
+                <StackLayout>
+                    <Label Text="ОФОРМЛЕНИЕ ЗАКАЗА"
+                            Style="{StaticResource Title}"
+                   Margin="0,20"
+                  FontSize="36"/>
+                    <CollectionView x:Name="Tabs"
+                                    ItemsSource="{Binding tabs}"
+                                    SelectionChanged="CollectionView_SelectionChanged"
+                                    SelectedItem="{Binding selectedTab}"
+                                    SelectionMode="Single"
+                                    HeightRequest="30">
+                        <CollectionView.ItemsLayout>
+                            <ListItemsLayout ItemSpacing="10"
+                                     Orientation="Horizontal"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding}"
+                               Style="{StaticResource CommonLabel}"
+                               FontFamily="{StaticResource RegularFont}"
+                               FontSize="Large">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup>
+                                            <VisualState Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="#181818"/>
+                                                    <Setter Property="TextColor" Value="White"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="#181818"/>
+                                                    <Setter Property="TextColor" Value="#007AFF"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </Label>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <StackLayout x:Name="MainContent">
+                        
+                    </StackLayout>
+                    
+                </StackLayout>
+            </ScrollView>
+            <StackLayout VerticalOptions="EndAndExpand">
+
+                <Frame BackgroundColor="#007AFF"
+                           CornerRadius="10"
+                       Margin="-10,0,-10,0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="PriceLabel"
+                               Style="{StaticResource PriceLabel}"
+                               HorizontalTextAlignment="Start"/>
+                        <Label Text="Продолжить"
+                               FontSize="Medium"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="End"
+                               Style="{StaticResource CommonLabel}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Continue"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

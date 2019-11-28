@@ -22,7 +22,7 @@ namespace TokioCity.Views
             InitializeComponent();
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             viewModel.LoadProducts.Execute(null);

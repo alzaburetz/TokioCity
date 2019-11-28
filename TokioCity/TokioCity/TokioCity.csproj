@@ -16,16 +16,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Burgers.xaml">
+    <EmbeddedResource Update="Views\CartViews\OrderSteps\Address.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Cart.xaml">
+    <EmbeddedResource Update="Views\CartViews\OrderSteps\UserData.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Categories.xaml">
+    <EmbeddedResource Update="Views\Categories\Burgers.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CategoriesTabs.xaml">
+    <EmbeddedResource Update="Views\CartViews\Cart.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Categories\CategoriesTabs.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Components\ButtonBar.xaml">
@@ -43,61 +46,64 @@
     <EmbeddedResource Update="Views\Components\WokList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Desserts.xaml">
+    <EmbeddedResource Update="Views\CartViews\CreateOrder.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Drinks.xaml">
+    <EmbeddedResource Update="Views\Categories\Desserts.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Favorite.xaml">
+    <EmbeddedResource Update="Views\Categories\Drinks.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Hots.xaml">
+    <EmbeddedResource Update="Views\Categories\Favorite.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\HotSnacks.xaml">
+    <EmbeddedResource Update="Views\Categories\Hots.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Kids.xaml">
+    <EmbeddedResource Update="Views\Categories\HotSnacks.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Lunches.xaml">
+    <EmbeddedResource Update="Views\Categories\Kids.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Pasta.xaml">
+    <EmbeddedResource Update="Views\Categories\Lunches.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Pies.xaml">
+    <EmbeddedResource Update="Views\Categories\Pasta.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Pizza.xaml">
+    <EmbeddedResource Update="Views\Categories\Pies.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Pizzetta.xaml">
+    <EmbeddedResource Update="Views\Categories\Pizza.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Product.xaml">
+    <EmbeddedResource Update="Views\Categories\Pizzetta.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Recepies.xaml">
+    <EmbeddedResource Update="Views\Categories\Product.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Rolls.xaml">
+    <EmbeddedResource Update="Views\Categories\Recepies.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Salads.xaml">
+    <EmbeddedResource Update="Views\Categories\Rolls.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Sets.xaml">
+    <EmbeddedResource Update="Views\Categories\Salads.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Soups.xaml">
+    <EmbeddedResource Update="Views\Categories\Sets.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Sushi.xaml">
+    <EmbeddedResource Update="Views\Categories\Soups.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Woks.xaml">
+    <EmbeddedResource Update="Views\Categories\Sushi.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Categories\Woks.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

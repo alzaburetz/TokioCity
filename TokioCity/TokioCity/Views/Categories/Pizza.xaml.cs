@@ -48,7 +48,7 @@ namespace TokioCity.Views
             viewModel.LoadProductSubcatd.Execute(item.id);
         }
 
-        private async void ChangedSelectedPizza(object sender, ItemsViewScrolledEventArgs e)
+        private void ChangedSelectedPizza(object sender, ItemsViewScrolledEventArgs e)
         {
             currentItem = e.CenterItemIndex;
         }

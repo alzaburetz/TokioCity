@@ -37,7 +37,7 @@ namespace TokioCity.Views
             viewModel.LoadCart.Execute(null);
         }
 
-        private async void ConfirmDelete(object sender, EventArgs args)
+        private void ConfirmDelete(object sender, EventArgs args)
         {
             var content = ((ImageButton)sender as ImageButton).Parent.Parent.Parent.Parent.Parent as StackLayout;
             //bool animated = await content.Children[0].TranslateTo(-80, 0, 1500);
@@ -65,6 +65,13 @@ namespace TokioCity.Views
                     await content.TranslateTo(0, 0, 1500);
                 })
             });
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            var curr = Shell.Current;
+            string endpoint = $"cart/create?price={viewModel.cartObject.FullCost}";
+            await Shell.Current.GoToAsync(endpoint);
         }
     }
 }

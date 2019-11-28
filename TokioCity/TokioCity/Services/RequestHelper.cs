@@ -36,7 +36,7 @@ namespace TokioCity.Services
                     return default(T);
                 }
             }
-            catch
+            catch (System.Net.Sockets.SocketException e)
             {
                 return default(T);
             }
