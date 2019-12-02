@@ -19,6 +19,7 @@ namespace TokioCity.ViewModels
     {
         public Command LoadProducts { get; set; }
         public Command AddFavorite { get; set; }
+        public Command AddToCart { get; set; }
         public Command LoadToppings { get; set; }
         private Command ReloadCategories { get; set; }
         public Command LoadProductSubcatd { get; set; }
@@ -130,6 +131,24 @@ namespace TokioCity.ViewModels
                         this.SelectedCategory = this.subcats[0];
                     } catch { }
                 }
+            });
+
+            AddToCart = new Command((item) =>
+            {
+                var Item = (AppItem)item as AppItem;
+                var cart = DataBase.GetAllStream<CartItem>("Cart");
+                CartItem cartItem = new CartItem(Item, new List<AppItem>(), 1);
+                var ie = cart.GetEnumerator();
+                while (ie.MoveNext())
+                {
+                    if (ie.Current.Item != null && ie.Current.Item.uid == Item.uid)
+                    {
+                        ie.Current.Count++;
+                        DataBase.UpdateItem<CartItem>("Cart", null, ie.Current);
+                        return;
+                    }
+                }
+                DataBase.WriteItem<CartItem>("Cart", cartItem);
             });
 
             LoadProductSubcatd = new Command(async (categ) =>

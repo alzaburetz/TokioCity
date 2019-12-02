@@ -37,6 +37,7 @@ namespace TokioCity.Views
             viewModel.LoadCart.Execute(null);
         }
 
+
         private void ConfirmDelete(object sender, EventArgs args)
         {
             var content = ((ImageButton)sender as ImageButton).Parent.Parent.Parent.Parent.Parent as StackLayout;

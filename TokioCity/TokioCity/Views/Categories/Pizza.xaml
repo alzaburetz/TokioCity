@@ -245,8 +245,12 @@
                                                        HorizontalOptions="StartAndExpand"
                                                    />
                                                     <ImageButton Source="addtocart.png"
-                                                             VerticalOptions="EndAndExpand"
-                                                             WidthRequest="30"/>
+                                                                 BackgroundColor="Transparent"
+                                             
+                                                                 Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference Pizz}}"
+                                                                 CommandParameter="{Binding}"
+                                                                 VerticalOptions="EndAndExpand"
+                                                                 WidthRequest="30"/>
                                                 </StackLayout>
                                             </Grid>
                                         </Frame>

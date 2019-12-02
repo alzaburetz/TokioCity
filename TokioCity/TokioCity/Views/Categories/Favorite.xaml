@@ -87,6 +87,9 @@
                                                    />
                                         <ImageButton Source="addtocart.png"
                                                              VerticalOptions="EndAndExpand"
+                                                     BackgroundColor="Transparent"
+                                                    Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference Fav}}"
+                                             CommandParameter="{Binding}"
                                                              WidthRequest="30"/>
                                     </StackLayout>
                                 </Grid>

@@ -123,8 +123,10 @@
                                                  Orientation="Horizontal"
                                            >
 
-                    <Image
-                                           Source="addtocart.png"/>
+                    <ImageButton BackgroundColor="Transparent"
+                                           Source="addtocart.png"
+                                             Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference Burger}}"
+                                             CommandParameter="{Binding}"/>
                 </StackLayout>
 
 
@@ -189,6 +191,7 @@
             </ScrollView>
             <StackLayout HeightRequest="75" Padding="10">
                 <Frame BackgroundColor="#007AFF" 
+                       IsVisible="false"
                        Padding="10,0,10,0" 
                        HorizontalOptions="FillAndExpand" 
                        VerticalOptions="FillAndExpand">

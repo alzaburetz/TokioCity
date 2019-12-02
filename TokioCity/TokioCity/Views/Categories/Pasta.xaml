@@ -91,7 +91,9 @@
                                                    />
                                                 <ImageButton Source="addtocart.png"
                                                              VerticalOptions="EndAndExpand"
-                                                             WidthRequest="30"/>
+                                                             WidthRequest="30"
+                                                             Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference PastaPage}}"
+                                                             CommandParameter="{Binding}"/>
                                             </StackLayout>
                                         </Grid>
                                     </Frame>

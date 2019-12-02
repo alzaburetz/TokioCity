@@ -110,7 +110,9 @@
                                                  Orientation="Horizontal"
                                            >
 
-                        <Image
+                        <ImageButton BackgroundColor="Transparent"
+                                             Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference Soup}}"
+                                             CommandParameter="{Binding}"
                                            Source="addtocart.png"/>
                     </StackLayout>
 
