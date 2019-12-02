@@ -20,5 +20,21 @@ namespace TokioCity.Views.CartViews.OrderSteps
             BindingContext = viewModel = new AddressViewModel();
             InitializeComponent();
         }
+
+        private void OpenMap(object sender, EventArgs args)
+        {
+            Content.Children.Clear();
+            Content.Children.Add(new Takeout());
+            ((Label)sender as Label).Opacity = 1;
+            Addr.Opacity = 0.5f;
+        }
+
+        private void OpenAddr(object sender, EventArgs args)
+        {
+            Content.Children.Clear();
+            Content.Children.Add(new Delivery());
+            ((Label)sender as Label).Opacity = 1;
+            Self.Opacity = 0.5f;
+        }
     }
 }

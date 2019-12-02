@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 
 using TokioCity.ViewModels;
 using TokioCity.Models;
+using TokioCity.Services;
 
 namespace TokioCity.Views
 {
@@ -16,6 +17,7 @@ namespace TokioCity.Views
     public partial class Burgers : ContentPage
     {
         public BurgersViewModel viewModel;
+        public int counter { get; set; }
         public Burgers()
         {
             BindingContext = viewModel = new BurgersViewModel();
@@ -45,6 +47,12 @@ namespace TokioCity.Views
         private void AddToFavorite(object sender, EventArgs args)
         {
             viewModel.AddToFavorite.Execute(null);
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<IToolbarItemBadgeService>().SetBadge(this, Cart, counter.ToString(), Color.Red, Color.White);
+            counter++;
         }
     }
 }

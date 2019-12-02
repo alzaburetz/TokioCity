@@ -28,6 +28,7 @@ namespace TokioCity.ViewModels
         public ObservableCollection<AppItem> products { get; set; }
         public ObservableCollection<AppItem> Products { get; set; }
         public ObservableCollection<AppItem> Toppings { get; set; }
+        public ToolbarItem cart { get; set; }
         private Subcategory selectedCategory;
         public Subcategory SelectedCategory
         {
@@ -92,7 +93,7 @@ namespace TokioCity.ViewModels
             });
             AddFavorite = new Command((item) =>
             {
-                
+              
                 var check = DataBase.GetProduct<AppItem>("Favorite", (item as AppItem).uid);
                 if (check == null)
                 {

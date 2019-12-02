@@ -20,7 +20,8 @@
     
 
     <TabbedPage.ToolbarItems>
-        <ToolbarItem IconImageSource="cart.png" Clicked="GoToCart"/>
+        <ToolbarItem IconImageSource="cart.png" Clicked="GoToCart"
+                     x:Name="MenuItem1" Order="Primary" Priority="0"/>
     </TabbedPage.ToolbarItems>
    
     <TabbedPage.Children>

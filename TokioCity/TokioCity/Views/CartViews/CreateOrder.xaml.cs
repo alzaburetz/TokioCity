@@ -47,7 +47,16 @@ namespace TokioCity.Views
 
         private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            var selection = e.CurrentSelection[0];
+            if (((string)selection as string).ToLower() == "доставка")
+            {
+                MainContent.Children.Clear();
+                MainContent.Children.Add(new Address());
+            } else if (((string)selection as string).ToLower() == "личное")
+            {
+                MainContent.Children.Clear();
+                MainContent.Children.Add(new UserData());
+            }
         }
 
         private void Continue(object sender, EventArgs args)

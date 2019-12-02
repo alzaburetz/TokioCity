@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:component="clr-namespace:TokioCity.Views.CartViews.OrderSteps"
              x:Class="TokioCity.Views.CartViews.OrderSteps.Address">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -15,74 +16,40 @@
     </ContentView.Resources>
   <ContentView.Content>
       <StackLayout>
-            <StackLayout Orientation="Horizontal"
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal"
                          HeightRequest="50">
-                <Label x:Name="Addr"
+                        <Label x:Name="Addr"
                        Text="По адресу"
                        Style="{StaticResource CommonLabel}"
                        HorizontalOptions="CenterAndExpand"
                        HorizontalTextAlignment="Center"
-                       VerticalOptions="Center"/>
-                <Label x:Name="Self"
+                       VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OpenAddr"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label x:Name="Self"
                        Text="Самовывоз"
+                       
                        Opacity="0.5"
                        Style="{StaticResource CommonLabel}"
                        HorizontalOptions="CenterAndExpand"
                        HorizontalTextAlignment="Center"
-                       VerticalOptions="Center"/>
-            </StackLayout>
-            <Frame CornerRadius="10"
-                   BackgroundColor="#202123"
-                 Padding="10">
-                <StackLayout>
-                    <StackLayout>
-                        <Label Text="Город"
-                                       Style="{StaticResource CommonLabel}"
-                                       Opacity="0.5"
-                                       />
-                        <Entry Keyboard="Text"/>
+                       VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OpenMap"/>
+                            </Label.GestureRecognizers>
+                        </Label>
                     </StackLayout>
-                    <StackLayout>
-                        <Label Text="Улица"
-                                       Style="{StaticResource CommonLabel}"
-                                       Opacity="0.5"
-                                       />
-                        <Entry Keyboard="Text"/>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="Дом"
-                                       Style="{StaticResource CommonLabel}"
-                                       Opacity="0.5"
-                                       />
-                        <Entry Keyboard="Numeric"/>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="Корпус"
-                                       Style="{StaticResource CommonLabel}"
-                                       Opacity="0.5"
-                                       />
-                        <Entry Keyboard="Numeric"/>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="Квартира"
-                                       Style="{StaticResource CommonLabel}"
-                                       Opacity="0.5"
-                                       />
-                        <Entry Keyboard="Numeric"/>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="Комментарий"
-                                       Style="{StaticResource CommonLabel}"
-                                       Opacity="0.5"
-                                       />
-                        <Entry Keyboard="Text"/>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal">
-                        <Switch></Switch>
+                    <StackLayout x:Name="Content" HeightRequest="500">
+                        <component:Delivery/>
                     </StackLayout>
                 </StackLayout>
-            </Frame>
+            </ScrollView>
+            
+            
       </StackLayout>
   </ContentView.Content>
 </ContentView>
