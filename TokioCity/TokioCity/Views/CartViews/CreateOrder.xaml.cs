@@ -52,22 +52,37 @@ namespace TokioCity.Views
             {
                 MainContent.Children.Clear();
                 MainContent.Children.Add(new Address());
+                Btn.Text = "Продолжить";
             } else if (((string)selection as string).ToLower() == "личное")
             {
                 MainContent.Children.Clear();
                 MainContent.Children.Add(new UserData());
+                Btn.Text = "Продолжить";
+            }
+            else
+            {
+                MainContent.Children.Clear();
+                MainContent.Children.Add(new Payment());
+                Btn.Text = "Оформить";
             }
         }
 
         private void Continue(object sender, EventArgs args)
         {
             var selection = viewModel.tabs.IndexOf(viewModel.selectedTab)+1;
-            if (selection < 2)
+            if (selection < 3)
             Tabs.SelectedItem = viewModel.tabs[selection];
             if (selection == 1)
             {
                 MainContent.Children.Clear();
                 MainContent.Children.Add(new Address());
+                Btn.Text = "Продолжить";
+            }
+            if (selection == 2)
+            {
+                MainContent.Children.Clear();
+                MainContent.Children.Add(new Payment());
+                Btn.Text = "Оформить";
             }
         }
 

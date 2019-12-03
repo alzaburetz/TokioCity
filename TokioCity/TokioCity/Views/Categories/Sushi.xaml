@@ -46,7 +46,9 @@
                         <ColumnDefinition Width="5.5*"/>
                         <ColumnDefinition Width="3.0*"/>
                     </Grid.ColumnDefinitions>
+                    
                     <Frame BackgroundColor="#202123"
+                           IsClippedToBounds="False"
                                    CornerRadius="10"
                                    Grid.Column="0"
                                    Grid.Row="0"
@@ -111,15 +113,17 @@
                         </Grid>
                     </Frame>
 
-                    <AbsoluteLayout
+                    <AbsoluteLayout 
                                         Margin="20,0,0,20"
-                                               Grid.Row="3"
-                                               FlowDirection="LeftToRight"
+                                               Grid.Row="1"
+                                               FlowDirection="RightToLeft"
                                                Grid.Column="0"
                                                Grid.ColumnSpan="2"
-                                               Grid.RowSpan="2">
+                                               Grid.RowSpan="4">
                         <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
                                            LoadingDelay="0"
+                                           FlowDirection="RightToLeft"
+                                           Aspect="AspectFill"
                                            LoadingPriority="Highest"/>
 
 
@@ -167,7 +171,8 @@
                     </CollectionView>
                     <CollectionView ItemsSource="{Binding subcats}"
                                     x:Name="Subcats"
-                                    SelectionChanged="LoadSubcat"
+                                    SelectionChangedCommand="{Binding LoadProductSubcat}"
+                                    RemainingItemsThreshold="10"
                                     SelectedItem="{Binding SelectedCategory}"
                                     SelectionMode="Single"
                                     HeightRequest="30">

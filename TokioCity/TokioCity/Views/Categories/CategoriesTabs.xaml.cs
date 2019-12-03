@@ -20,6 +20,15 @@ namespace TokioCity.Views
     {
         
         public CategoriesViewModel viewModel { get; set; }
+        public static int ProductCounter { get; set; }
+        public ToolbarItem Cart
+        {
+            get
+            {
+                return MenuItem1;
+            }
+            
+        }
         public CategoriesTabs()
         {
             AndroidSpec.TabbedPage.SetOffscreenPageLimit(this, 10);
@@ -28,6 +37,7 @@ namespace TokioCity.Views
             BindingContext = viewModel = new CategoriesViewModel(client);
             BarBackgroundColor = Color.FromHex("#181818");
             BarTextColor = Color.White;
+            
             InitializeComponent();
         }
 

@@ -82,7 +82,8 @@
                         <Label x:Name="PriceLabel"
                                Style="{StaticResource PriceLabel}"
                                HorizontalTextAlignment="Start"/>
-                        <Label Text="Продолжить"
+                        <Label x:Name="Btn"
+                               Text="Продолжить"
                                FontSize="Medium"
                                VerticalTextAlignment="Center"
                                HorizontalTextAlignment="End"

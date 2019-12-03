@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TokioCity.Views.CartViews.OrderSteps.Delivery">
+  <ContentView.Content>
+      <StackLayout>
+            <Frame CornerRadius="10"
+                   BackgroundColor="#202123"
+                 Padding="10">
+                <StackLayout>
+                    <StackLayout>
+                        <Label Text="Город"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry Keyboard="Text"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Улица"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry Keyboard="Text"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Дом"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry Keyboard="Numeric"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Корпус"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry Keyboard="Numeric"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Квартира"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry Keyboard="Numeric"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Комментарий"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry Keyboard="Text"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Switch></Switch>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

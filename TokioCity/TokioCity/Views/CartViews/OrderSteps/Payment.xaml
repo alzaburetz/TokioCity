@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="MainPage"
+             x:Class="TokioCity.Views.CartViews.OrderSteps.Payment">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" BasedOn="{StaticResource CommonLabel}">
+                
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+  <ContentView.Content>
+      <StackLayout>
+            <StackLayout x:Name="Test" BackgroundColor="White">
+            </StackLayout>
+            <Frame CornerRadius="10"
+                   BackgroundColor="#202123">
+                <StackLayout>
+                    <Label Text="Наличными курьеру"/>
+                    <Label Text="Банковской картой"/>
+                    <Label Text="Apple Pay"/>
+
+                </StackLayout>
+            </Frame>
+      </StackLayout>
+  </ContentView.Content>
+</ContentView>

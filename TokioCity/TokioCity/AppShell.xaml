@@ -47,7 +47,10 @@
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IconOverride="back.png"/>
     </Shell.BackButtonBehavior>
-    
+
+    <Shell.FlyoutIcon>
+        <FileImageSource File="menu.png"/>
+    </Shell.FlyoutIcon>
     
 
     <Shell.FlyoutHeaderTemplate>
@@ -82,14 +85,14 @@
 
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <Tab Title="КАТЕГОРИИ" >
+        <Tab Title="КАТАЛОГ" >
             <ShellContent Route="categories">
                 <local:CategoriesTabs/>
             </ShellContent>
         </Tab>
-        <Tab Title="Карта тест" >
+        <Tab Title="ПРОФИЛЬ">
             <ShellContent>
-                <local:MapTest/>
+                <local:Profile/>
             </ShellContent>
         </Tab>
 

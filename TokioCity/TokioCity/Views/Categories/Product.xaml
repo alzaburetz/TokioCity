@@ -85,7 +85,7 @@
                                    
                                    Margin="0,10"/>
                                 <CollectionView ItemsSource="{Binding toppings}"
-                                            HeightRequest="100"
+                                            HeightRequest="230"
                                             SelectionMode="Single"
                                             SelectionChanged="SelectToppings"
                                        >
@@ -104,7 +104,8 @@
                                                    Grid.Row="1">
                                                 <Grid>
                                                     <Grid.RowDefinitions>
-                                                        <RowDefinition Height="1.9*"/>
+                                                        <RowDefinition Height="1.3*"/>
+                                                        <RowDefinition Height="Auto"/>
                                                         <RowDefinition Height="3.8*"/>
                                                         <RowDefinition Height="3.8*"/>
                                                     </Grid.RowDefinitions>
@@ -113,17 +114,18 @@
                                                         <ColumnDefinition Width="0.1*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
-                                                                   Grid.Row="1"
-                                                                   Grid.ColumnSpan="2"/>
+                                                                       Grid.Row="1"
+                                                                       LoadingPriority="Highest"
+                                                                       Grid.ColumnSpan="2"/>
                                                     <Label Text="{Binding price, Converter={StaticResource Price}}"
                                                        Style="{StaticResource PriceLabel}"
-                                                       Grid.Row="1"
+                                                       Grid.Row="2"
                                                        Grid.ColumnSpan="2"/>
                                                     <Label Text="{Binding name}"
                                                        Style="{StaticResource CommonLabel}"
                                                        VerticalTextAlignment="Center"
                                                        VerticalOptions="FillAndExpand"
-                                                       Grid.Row="2"
+                                                       Grid.Row="3"
                                                        Grid.ColumnSpan="2"/>
                                                     <!-- Somehow change this-->
 

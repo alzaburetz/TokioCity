@@ -51,8 +51,7 @@ namespace TokioCity.Views
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IToolbarItemBadgeService>().SetBadge(this, Cart, counter.ToString(), Color.Red, Color.White);
-            counter++;
+            
         }
     }
 }

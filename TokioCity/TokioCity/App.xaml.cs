@@ -12,10 +12,12 @@ namespace TokioCity
         public Command AddToFavorite { get; set; }
         public Command RemoveFromFavorite { get; set; }
         public static int screenHeight, screenWidth;
+        public static int ProductCounter { get; set; }
         public App()
         {
             InitializeComponent();
             DependencyService.Register<DataBaseService>();
+
             MainPage = new AppShell();
         }
         protected override void OnStart()

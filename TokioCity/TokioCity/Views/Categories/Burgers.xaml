@@ -105,14 +105,18 @@
                     </Grid>
                 </Frame>
 
-                <AbsoluteLayout
+                <AbsoluteLayout 
                                         Margin="20,0,0,20"
-                                               Grid.Row="3"
-                                               FlowDirection="LeftToRight"
+                                               Grid.Row="1"
+                                               FlowDirection="RightToLeft"
                                                Grid.Column="0"
                                                Grid.ColumnSpan="2"
-                                               Grid.RowSpan="2">
-                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+                                               Grid.RowSpan="4">
+                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                           LoadingDelay="0"
+                                           FlowDirection="RightToLeft"
+                                           Aspect="AspectFill"
+                                           LoadingPriority="Highest"/>
 
 
                 </AbsoluteLayout>
@@ -192,7 +196,7 @@
                     
                 </StackLayout>
             </ScrollView>
-            <StackLayout HeightRequest="75" Padding="10">
+            <!--<StackLayout HeightRequest="75" Padding="10">
                 <Frame BackgroundColor="#007AFF" 
                        IsVisible="false"
                        Padding="10,0,10,0" 
@@ -210,13 +214,13 @@
                                VerticalTextAlignment="Center"
                                FontSize="Medium">
                             <Label.GestureRecognizers>
-                                <!--Добавить добавление в корзину-->
+                                --><!--Добавить добавление в корзину--><!--
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
 
                 </Frame>
-            </StackLayout>
+            </StackLayout>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
