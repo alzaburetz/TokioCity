@@ -16,42 +16,48 @@
                                        Style="{StaticResource CommonLabel}"
                                        Opacity="0.5"
                                        />
-                        <Entry Keyboard="Text"/>
+                        <Entry x:Name="City"
+                               Keyboard="Text"/>
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Улица"
                                        Style="{StaticResource CommonLabel}"
                                        Opacity="0.5"
                                        />
-                        <Entry Keyboard="Text"/>
+                        <Entry x:Name="Street"
+                               Keyboard="Text"/>
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Дом"
                                        Style="{StaticResource CommonLabel}"
                                        Opacity="0.5"
                                        />
-                        <Entry Keyboard="Numeric"/>
+                        <Entry x:Name="House"
+                               Keyboard="Numeric"/>
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Корпус"
                                        Style="{StaticResource CommonLabel}"
                                        Opacity="0.5"
                                        />
-                        <Entry Keyboard="Numeric"/>
+                        <Entry x:Name="Building"
+                               Keyboard="Numeric"/>
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Квартира"
                                        Style="{StaticResource CommonLabel}"
                                        Opacity="0.5"
                                        />
-                        <Entry Keyboard="Numeric"/>
+                        <Entry x:Name="Flat"
+                               Keyboard="Numeric"/>
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Комментарий"
                                        Style="{StaticResource CommonLabel}"
                                        Opacity="0.5"
                                        />
-                        <Entry Keyboard="Text"/>
+                        <Entry x:Name="Comment"
+                               Keyboard="Text"/>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">

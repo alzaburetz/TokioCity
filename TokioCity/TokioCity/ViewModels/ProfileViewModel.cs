@@ -13,11 +13,22 @@ namespace TokioCity.ViewModels
     public class ProfileViewModel: BaseViewModel
     {
         public ObservableCollection<Offer> Offers { get; set; }
+        public ObservableCollection<string> tabs { get; set; }
+
+        public string SelectedItem { get; set; }
         public Command LoadOffers { get; set; }
 
         public ProfileViewModel(System.Net.Http.HttpClient client)
         {
             Offers = new ObservableCollection<Offer>();
+            tabs = new ObservableCollection<string>()
+            {
+                "БОНУСЫ",
+                "ЛИЧНОЕ",
+                "ЗАКАЗЫ",
+                "АДРЕСА ДОСТАВКИ"
+            };
+            SelectedItem = tabs[0];
 
             LoadOffers = new Command(async () =>
             {

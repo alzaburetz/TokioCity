@@ -92,14 +92,16 @@
                         </Grid>
                     </Frame>
 
-                    <AbsoluteLayout
-                                        Margin="20,0,0,20"
-                                               Grid.Row="3"
-                                               FlowDirection="LeftToRight"
+                    <AbsoluteLayout        
+                                        Margin="20,20,20,20"
+                                               Grid.Row="1"
+                                               FlowDirection="RightToLeft"
                                                Grid.Column="0"
                                                Grid.ColumnSpan="2"
-                                               Grid.RowSpan="2">
-                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+                                               Grid.RowSpan="4">
+                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                           VerticalOptions="EndAndExpand"
+                                           Aspect="AspectFit"/>
 
 
                     </AbsoluteLayout>

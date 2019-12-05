@@ -15,6 +15,10 @@ namespace TokioCity.Views.CartViews.OrderSteps
     public partial class Address : ContentView
     {
         AddressViewModel viewModel;
+        public StackLayout ContentPublic
+        {
+            get => Content;
+        }
         public Address()
         {
             BindingContext = viewModel = new AddressViewModel();

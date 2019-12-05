@@ -44,7 +44,6 @@
                         </Label>
                     </StackLayout>
                     <StackLayout x:Name="Content" HeightRequest="500">
-                        <component:Delivery/>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

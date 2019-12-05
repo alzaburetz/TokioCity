@@ -58,7 +58,7 @@
             <Style TargetType="Label" x:Key="Title">
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="FontFamily" Value="{StaticResource BoldFont}"/>
-                <Setter Property="FontSize" Value="36"/>
+                <Setter Property="FontSize" Value="32"/>
             </Style>
             <Style TargetType="Label" x:Key="CommonLabel">
                 <Setter Property="TextColor" Value="White"/>

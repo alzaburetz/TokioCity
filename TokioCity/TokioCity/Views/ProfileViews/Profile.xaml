@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:ctrls="clr-namespace:TokioCity.Controls"
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="TokioCity.Views.Profile">
     <ContentPage.ToolbarItems>
@@ -23,12 +24,59 @@
     </Shell.TitleView>
     <ContentPage.Content>
         <StackLayout BackgroundColor="#181818">
-            <ScrollView Padding="10">
-                <StackLayout>
-                    <Label Text="ПРОФИЛЬ"
+            <Label Text="ПРОФИЛЬ"
                            Padding="15"
                            Style="{StaticResource Title}"/>
-                    <CollectionView ItemsSource="{Binding Offers}">
+            <CollectionView ItemsSource="{Binding tabs}"
+                                    SelectedItem="{Binding SelectedItem}"
+                                    SelectionChanged="TabsPressed"
+                                    HeightRequest="50"
+                                    SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                               ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding}"
+                                       Padding="15,0,0,0"
+                                       Style="{StaticResource CommonLabel}"
+                                       FontSize="Large"
+                                       FontFamily="{StaticResource RegularFont}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup>
+                                    <VisualState Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#181818"/>
+                                            <Setter Property="Opacity" Value="0.5"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#181818"/>
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Label>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.1043*"/>
+
+                </Grid.RowDefinitions>
+                <ScrollView Padding="10"
+                            Grid.RowSpan="2">
+                    <StackLayout>
+                        
+                        <!--<CollectionView ItemsSource="{Binding Offers}"
+                                    SelectedItem="{Binding SelectedItem}"
+                                    SelectionMode="Single"
+                                    SelectionChanged="TabsPressed">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" 
                                            ItemSpacing="10"/>
@@ -44,10 +92,27 @@
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-                </CollectionView>
+                </CollectionView>-->
+                        <StackLayout x:Name="MainContent">
+
+                        </StackLayout>
+                    </StackLayout>
+
+                </ScrollView>
+                <StackLayout Grid.Row="1">
+                    <Frame BackgroundColor="#007AFF"
+                           CornerRadius="10"
+                           VerticalOptions="FillAndExpand"
+                           HorizontalOptions="FillAndExpand"
+                           Margin="10,0,10,0">
+                        <StackLayout Orientation="Horizontal"
+                                     x:Name="Bottom">
+                            
+                        </StackLayout>
+                    </Frame>
                 </StackLayout>
-                
-            </ScrollView>
+            </Grid>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

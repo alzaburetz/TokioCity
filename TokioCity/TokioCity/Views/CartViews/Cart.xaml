@@ -24,6 +24,9 @@
                FontFamily="{StaticResource RegularFont}"
                HorizontalOptions="CenterAndExpand"/>
     </Shell.TitleView>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IconOverride="backtopbar.png"/>
+    </Shell.BackButtonBehavior>
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>

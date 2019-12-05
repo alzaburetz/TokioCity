@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:ctrls="clr-namespace:TokioCity.Controls"
+             xmlns:mask="clr-namespace:TokioCity.Behaviors"
+             x:Class="TokioCity.Views.ProfileViews.ProfileComponents.UserData">
+  <ContentView.Content>
+        <StackLayout>
+            <Frame BackgroundColor="#202123"
+                           CornerRadius="10"
+                           Padding="10">
+                <StackLayout>
+                    <StackLayout>
+                        <Label Text="Представтесь, пожалуйста *"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry TextColor="White"
+                               
+                                       Keyboard="Text"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Дата рождения *"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <DatePicker TextColor="White">
+                            <DatePicker.Format>
+                                dd.MM.yyyy
+                            </DatePicker.Format>
+                        </DatePicker>
+
+
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="E-mail *"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry TextColor="White"
+                                       Keyboard="Email"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Teлефон *"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry TextColor="White"
+                               Text="+7"
+                                       Keyboard="Telephone">
+                            <Entry.Behaviors>
+                                <mask:MaskedBehavior Mask="+7 (XXX) XXX XX XX"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Пол *"
+                                       WidthRequest="100"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       HorizontalOptions="FillAndExpand"
+                                       />
+                        <StackLayout FlowDirection="RightToLeft"
+                                             Orientation="Horizontal"
+                                             Spacing="20"
+                                             HeightRequest="50"
+                                             Padding="5">
+                            <Image Source="woman"
+                                           HeightRequest="50"
+                                           Opacity="0.5"
+                                           Aspect="AspectFill"/>
+                            <Image Source="man"
+                                           HeightRequest="50"
+                                           Aspect="AspectFill"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Инстаграм"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry TextColor="White"
+                                       Keyboard="Default"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="VK"
+                                       Style="{StaticResource CommonLabel}"
+                                       Opacity="0.5"
+                                       />
+                        <Entry TextColor="White"
+                                       Keyboard="Default"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <ctrls:DottedFrame CornerRadius="30">
+                <StackLayout HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand"
+                             Padding="0">
+                    <Image Source="capture"
+                           Aspect="AspectFit"
+                           Margin="150,50,150,10">
+                        
+                    </Image>
+                    <Label Text="Сканировать дисконтную карту"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="100,0,100,40"
+                           Opacity="0.5"
+                           Style="{StaticResource CommonLabel}"/>
+                </StackLayout>
+            </ctrls:DottedFrame>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

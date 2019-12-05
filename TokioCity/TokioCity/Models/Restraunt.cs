@@ -8,6 +8,8 @@ namespace TokioCity.Models
     [Serializable]
     public class Restraunt: INotifyPropertyChanged
     {
+        [LiteDB.BsonIndex]
+        public int ID { get; set; }
         public int id { get; set; }
         public string name { get; set; }
         public string address { get; set; }

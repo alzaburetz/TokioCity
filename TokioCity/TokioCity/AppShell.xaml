@@ -95,7 +95,11 @@
                 <local:Profile/>
             </ShellContent>
         </Tab>
-
+        <Tab Title="РЕСТОРАНЫ">
+            <ShellContent>
+                <local:RestrauntsList/>
+            </ShellContent>
+        </Tab>
 
     </FlyoutItem>
     <ShellItem>

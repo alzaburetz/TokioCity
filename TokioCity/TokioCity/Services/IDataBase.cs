@@ -16,6 +16,7 @@ namespace TokioCity.Services
        int GetRecordCount<T>(string collection);
        T GetOneOfCategory<T>(string collection, int category);
         IEnumerator<T> GetOneItem<T>(string collection, Query query = null);
+        T GetItem<T>(string collection, Query query);
         void WriteItem<T>(string collection, T item);
         /// <summary>
         /// Удаление айтема по фильтру

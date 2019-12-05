@@ -45,7 +45,7 @@ namespace TokioCity.Views
            
         }
 
-        private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selection = e.CurrentSelection[0];
             if (((string)selection as string).ToLower() == "доставка")
@@ -67,7 +67,7 @@ namespace TokioCity.Views
             }
         }
 
-        private void Continue(object sender, EventArgs args)
+        private async void Continue(object sender, EventArgs args)
         {
             var selection = viewModel.tabs.IndexOf(viewModel.selectedTab)+1;
             if (selection < 3)
@@ -84,6 +84,11 @@ namespace TokioCity.Views
                 MainContent.Children.Add(new Payment());
                 Btn.Text = "Оформить";
             }
+            if (selection == 3)
+            {
+                viewModel.CreateOrder.Execute(null);
+                await DisplayAlert("Заказ оформлен", "Ваш заказ оформлен", "ОК");
+            }
         }
 
         protected override bool OnBackButtonPressed()
@@ -93,6 +98,8 @@ namespace TokioCity.Views
             else
                 return SwitchSelectedItem();
         }
+
+
 
         private bool SwitchSelectedItem()
         {
