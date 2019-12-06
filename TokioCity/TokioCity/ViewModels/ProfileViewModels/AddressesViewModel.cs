@@ -35,7 +35,7 @@ namespace TokioCity.ViewModels.ProfileViewModels
             {
                 FormattedAdresses.Remove(addr.ToString());
                 var addrObj = Addresses.First<Address>(x => x.FormatAddress() == addr.ToString());
-                DataBase.RemoveItem<Address>("Addresses", Query.Where("_id", x => x.AsInt32 == addrObj.Id);
+                DataBase.RemoveItem<Address>("Addresses", Query.Where("_id", x => x.AsInt32 == addrObj.Id));
             });
         }
     }

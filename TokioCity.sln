@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokioCity.Android", "TokioCity\TokioCity.Android\TokioCity.Android.csproj", "{48BC6669-0F39-479B-A63D-02B1D81C7012}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokioCity", "TokioCity\TokioCity\TokioCity.csproj", "{7A0D1D2A-2206-44C7-BB6C-99800F7F429C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokioCity", "TokioCity\TokioCity\TokioCity.csproj", "{7A0D1D2A-2206-44C7-BB6C-99800F7F429C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokioCity.Tests", "TokioCity.Tests\TokioCity.Tests.csproj", "{75017C05-5599-4272-8E81-8D1D0E597562}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{7A0D1D2A-2206-44C7-BB6C-99800F7F429C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A0D1D2A-2206-44C7-BB6C-99800F7F429C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A0D1D2A-2206-44C7-BB6C-99800F7F429C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{75017C05-5599-4272-8E81-8D1D0E597562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75017C05-5599-4272-8E81-8D1D0E597562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75017C05-5599-4272-8E81-8D1D0E597562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75017C05-5599-4272-8E81-8D1D0E597562}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
