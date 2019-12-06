@@ -12,6 +12,7 @@ namespace TokioCity.ViewModels
         public ObservableCollection<AppItem> favorites { get; set; }
         public Command LoadFavorites { get; set; }
         public Command RemoveFavorite { get; set; }
+        public Command AddToCart { get; set; }
 
         public FavoriteViewModel()
         {
@@ -36,6 +37,25 @@ namespace TokioCity.ViewModels
                 (item as AppItem).Favorite = false;
                 DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
             });
+
+            AddToCart = new Command((item) =>
+            {
+                var Item = (AppItem)item as AppItem;
+                var cart = DataBase.GetAllStream<CartItem>("Cart");
+                CartItem cartItem = new CartItem(Item, new System.Collections.Generic.List<AppItem>(), 1);
+                var ie = cart.GetEnumerator();
+                while (ie.MoveNext())
+                {
+                    if (ie.Current.Item != null && ie.Current.Item.uid == Item.uid)
+                    {
+                        ie.Current.Count++;
+                        DataBase.UpdateItem<CartItem>("Cart", null, ie.Current);
+                        return;
+                    }
+                }
+                DataBase.WriteItem<CartItem>("Cart", cartItem);
+            });
+
         }
     }
 }

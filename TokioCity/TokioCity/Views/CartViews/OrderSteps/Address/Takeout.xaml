@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="TokioCity.Views.CartViews.OrderSteps.Takeout">
+  <ContentView.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout x:Name="Map" HeightRequest="300"/>
+                <StackLayout BindableLayout.ItemsSource="{Binding .}" Orientation="Vertical">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="#202123">
+                                <StackLayout>
+                                    <Label Text="{Binding Path=Distance,
+                                                          StringFormat='{0:F0} м'}" Style="{StaticResource CommonLabel}"
+                                           FontSize="21"
+                                           FontFamily="{StaticResource RegularFont}">
+                                        
+                                    </Label>
+                                    <Label Text="{Binding name}" Style="{StaticResource CommonLabel}"/>
+                                    <Label Text="{Binding worktime}" Style="{StaticResource CommonLabel}"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+        
+  </ContentView.Content>
+</ContentView>

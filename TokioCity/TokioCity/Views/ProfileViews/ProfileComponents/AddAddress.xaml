@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TokioCity.Views.ProfileViews.ProfileComponents.AddAddress">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="White"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="BackgroundColor" Value="#202123"/>
+                <Setter Property="Margin" Value="30,5,30,10"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <RelativeLayout BackgroundColor="#202123">
+            <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Factor=1}"
+                  RelativeLayout.HeightConstraint="{ConstraintExpression Factor=1}"
+                  IsVisible="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1072*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.1372*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="1">
+                    <Label Text="НОВЫЙ АДРЕС"
+                           Style="{StaticResource Title}"
+                           Margin="20,20,20,60"/>
+                    <Entry x:Name="City" Placeholder="Город" Keyboard="Text"/>
+                    <Entry x:Name="Street" Placeholder="Улица" Keyboard="Text"/>
+                    <Entry x:Name="House" Placeholder="Дом" Keyboard="Numeric"/>
+                    <Entry x:Name="Building" Placeholder="Корпус" Keyboard="Numeric"/>
+                    <Entry x:Name="Flat" Placeholder="Квартира" Keyboard="Numeric"/>
+                    <Entry x:Name="Comment" Placeholder="Комментарий" Keyboard="Text"/>
+
+                </StackLayout>
+                <StackLayout Grid.Row="2">
+                    <Frame Margin="10,0,10,0"
+                           BackgroundColor="#007AFF"
+                           VerticalOptions="FillAndExpand"
+                           Padding="10"
+                           CornerRadius="10">
+                        <Label Text="Добавить адрес"
+                               Style="{StaticResource CommonLabel}"
+                               FontSize="Large"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddAddressClick"/>
+                            </Label.GestureRecognizers>
+                            
+                        </Label>
+                    </Frame>
+                </StackLayout>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="scrim.png" Grid.ColumnSpan="3" Aspect="AspectFill">
+
+                    </Image>
+                    <Image Source="back.png" Grid.Column="0" Margin="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GoBack"/>
+                        </Image.GestureRecognizers>
+
+                    </Image>
+                </Grid>
+
+            </Grid>
+            
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

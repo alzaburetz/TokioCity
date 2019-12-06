@@ -104,6 +104,11 @@ namespace TokioCity.Services
         {
             var removed = database.GetCollection<T>(collection).Delete(query);
         }
+
+        public T GetItem<T>(string collection, Query query)
+        {
+            return database.GetCollection<T>(collection).FindOne(query);
+        }
         public DataBaseService()
         {
             DataBasePath = Path

@@ -23,7 +23,7 @@
             <CollectionView ItemsSource="{Binding MyWoks}"
                             >
                 <CollectionView.ItemsLayout>
-                    <ListItemsLayout ItemSpacing="20"
+                    <LinearItemsLayout ItemSpacing="20"
                                      Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>

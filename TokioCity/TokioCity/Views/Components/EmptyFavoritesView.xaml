@@ -11,14 +11,14 @@
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="Opacity" Value="0.7"/>
-                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="FontSize" Value="Default"/>
                 <Setter Property="LineHeight" Value="1.2"/>
                 <Setter Property="Margin" Value="5"/>
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
   <ContentView.Content>
-      <StackLayout Margin="30">
+      <StackLayout Margin="0">
             <Frame CornerRadius="10"
                    BackgroundColor="#202123">
                 <StackLayout BackgroundColor="#202123">

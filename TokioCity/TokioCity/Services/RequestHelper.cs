@@ -9,6 +9,10 @@ namespace TokioCity.Services
     public static class RequestHelper
     {
         private static string version = "1.8";
+        private static HttpClient clientStatic = new HttpClient()
+        {
+            BaseAddress = new Uri("https://www.tokyo-city.ru")
+        };
         public async static Task<T> GetData<T>(HttpClient client, string endpoint)
         {
             var request = await client.GetAsync(endpoint + version);
@@ -36,7 +40,7 @@ namespace TokioCity.Services
                     return default(T);
                 }
             }
-            catch
+            catch (System.Net.Sockets.SocketException e)
             {
                 return default(T);
             }

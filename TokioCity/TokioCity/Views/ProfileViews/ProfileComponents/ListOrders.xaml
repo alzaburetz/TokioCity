@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="TokioCity.Views.ProfileViews.ProfileComponents.ListOrders">
+  <ContentView.Content>
+      <StackLayout BindableLayout.ItemsSource="{Binding Orders}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="#202123"
+                           CornerRadius="15">
+                        <StackLayout>
+                            <StackLayout BindableLayout.ItemsSource="{Binding items}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid HeightRequest="100"
+                                          Padding="0,10,0,10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.75*"/>
+                                                <RowDefinition Height="0.25*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.3*"/>
+                                                <ColumnDefinition Width="0.7*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <image:CachedImage Grid.RowSpan="2" 
+                                                           Source="{Binding Item.image, Converter={StaticResource Image}}"/>
+                                            <Label Text="{Binding Item.name}"
+                                               Style="{StaticResource CommonLabel}"
+                                               FontSize="Medium"
+                                               LineHeight="1.35"
+                                               Opacity="0.7"
+                                               Margin="10"
+                                               Grid.Row="0"
+                                               Grid.Column="1"/>
+                                            <StackLayout Grid.Column="1" 
+                                                     Grid.Row="1">
+                                                <Label Text="{Binding Cost, Converter={StaticResource Price}}"
+                                                   HorizontalTextAlignment="Start"
+                                                   Margin="10,0,0,0"
+                                                   Style="{StaticResource PriceLabel}"/>
+                                            </StackLayout>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                            <Frame CornerRadius="5"
+                                   Padding="15"
+                                   BackgroundColor="#007AFF">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding FullCost, Converter={StaticResource Price}}"
+                                           Style="{StaticResource PriceLabel}"
+                                           HorizontalTextAlignment="Start"/>
+                                    <Label Text="Заказать снова"
+                                           VerticalOptions="FillAndExpand"
+                                           VerticalTextAlignment="Center"
+                                           FontSize="Medium"
+                                           Style="{StaticResource CommonLabel}"
+                                           HorizontalTextAlignment="End"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                        
+                    </Frame>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+      </StackLayout>
+        <!--<StackLayout>
+            <CollectionView ItemsSource="{Binding Orders}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#202123"
+                               CornerRadius="15">
+                            <StackLayout BindableLayout.ItemsSource="{Binding items}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding Item.name}"
+                                               Style="{StaticResource CommonLabel}"/>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>-->
+  </ContentView.Content>
+</ContentView>

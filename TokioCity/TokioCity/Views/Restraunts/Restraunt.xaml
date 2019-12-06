@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Shell.BackgroundColor="#181818"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="TokioCity.Views.Restraunts.Restraunt">
+    
+    
+    
+    <ContentPage.Content>
+        <RelativeLayout>
+            <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Factor=1}"
+                  RelativeLayout.HeightConstraint="{ConstraintExpression Factor=1}"
+                  IsVisible="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1072*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.1072*"/>
+                </Grid.RowDefinitions>
+                <ScrollView Grid.Row="0" Grid.RowSpan="3">
+                    <StackLayout BackgroundColor="#202123"
+                                 VerticalOptions="FillAndExpand">
+                        <CarouselView ItemsSource="{Binding Restraunt.photos}"
+                                      HeightRequest="350">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <image:CachedImage Source="{Binding .,Converter={StaticResource Image}}"
+                                                       Aspect="AspectFill"/>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+
+                        <Label Text="{Binding Restraunt.name, Converter={StaticResource ToUpper}}"
+                               Style="{StaticResource Title}"
+                               Padding="20"
+                               FontFamily="{StaticResource RegularFont}"/>
+                        <Label Text="{Binding Restraunt.worktime}"
+                               Padding="20,0,0,0"
+                               Style="{StaticResource CommonLabel}"
+                               Opacity="0.5"/>
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout Grid.Row="2"
+                             Padding="15,-10,15,15">
+                    <Frame BackgroundColor="#007AFF"
+                           CornerRadius="10"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand">
+                        <Label Text="Позвонить" 
+                               VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Medium"
+                               Style="{StaticResource CommonLabel}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Call"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Frame>
+                </StackLayout>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="scrim.png" Grid.ColumnSpan="3" Aspect="AspectFill">
+
+                    </Image>
+                    <Image Source="back.png" Grid.Column="0" Margin="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GoBack"/>
+                        </Image.GestureRecognizers>
+
+                    </Image>
+                </Grid>
+            </Grid>
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

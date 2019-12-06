@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+            xmlns:local="clr-namespace:TokioCity.Views"
+             x:Class="TokioCity.Views.CategoriesTabs">
+  <!--Pages can be added as references or inline-->
+    
+    <Shell.TitleView>
+        <Label Text="ТОКИО-CITY"
+               Style="{StaticResource Title}"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               FontSize="24"
+               FontFamily="{StaticResource RegularFont}"
+               HorizontalOptions="CenterAndExpand"/>
+    </Shell.TitleView>
+    
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem IconImageSource="cart.png" Clicked="GoToCart"
+                     x:Name="MenuItem1" Order="Primary" Priority="0"/>
+    </TabbedPage.ToolbarItems>
+   
+    <TabbedPage.Children>
+        <local:Favorite IconImageSource="favorite.png"/>
+        <local:Lunches IconImageSource="lunch.png"/>
+        <local:Pasta IconImageSource="pasta.png"/>
+        <local:Sushi IconImageSource="sushi.png"/>
+        <local:Woks IconImageSource="wok.png"/>
+        <local:Burgers IconImageSource="burger.png"/>
+        <local:Rolls IconImageSource="rolls.png"/>
+        <local:Sets IconImageSource="set.png"/>
+        <local:Pizza IconImageSource="pizza.png"/>
+        <local:Desserts IconImageSource="dessert.png"/>
+        <local:Kids IconImageSource="kids.png"/>
+        <local:Pizzetta IconImageSource="pizzetta.png"/>
+        <local:Soups IconImageSource="soup.png"/>
+        <local:Hots IconImageSource="hot.png"/>
+        <local:Salads IconImageSource="salad.png"/>
+        <local:Drinks IconImageSource="drink.png"/>
+        <local:Pies IconImageSource="pies.png"/>
+        <local:HotSnacks IconImageSource="snack.png"/>
+    </TabbedPage.Children>
+</TabbedPage>

@@ -47,7 +47,10 @@
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IconOverride="back.png"/>
     </Shell.BackButtonBehavior>
-    
+
+    <Shell.FlyoutIcon>
+        <FileImageSource File="menu.png"/>
+    </Shell.FlyoutIcon>
     
 
     <Shell.FlyoutHeaderTemplate>
@@ -75,22 +78,28 @@
             </StackLayout>
         </DataTemplate>
     </Shell.ItemTemplate>
+    
+    
 
     
 
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <Tab Title="КАТЕГОРИИ" >
+        <Tab Title="КАТАЛОГ" >
             <ShellContent Route="categories">
                 <local:CategoriesTabs/>
             </ShellContent>
         </Tab>
-        <!--<Tab Title="КОРЗИНА" >
-            <ShellContent Route="cart">
-                <local:Cart/>
+        <Tab Title="ПРОФИЛЬ">
+            <ShellContent>
+                <local:Profile/>
             </ShellContent>
-        </Tab>-->
-
+        </Tab>
+        <Tab Title="РЕСТОРАНЫ">
+            <ShellContent>
+                <local:RestrauntsList/>
+            </ShellContent>
+        </Tab>
 
     </FlyoutItem>
     <ShellItem>
@@ -98,7 +107,7 @@
 
             <ShellContent  Route="categories">
                 <local:CategoriesTabs/>
-            </ShellContent
+            </ShellContent>
         </ShellSection>
     </ShellItem>
 

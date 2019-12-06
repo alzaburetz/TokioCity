@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using LiteDB;
@@ -19,6 +20,7 @@ namespace TokioCity.ViewModels
     {
         public Command LoadProducts { get; set; }
         public Command AddFavorite { get; set; }
+        public Command AddToCart { get; set; }
         public Command LoadToppings { get; set; }
         private Command ReloadCategories { get; set; }
         public Command LoadProductSubcatd { get; set; }
@@ -27,21 +29,10 @@ namespace TokioCity.ViewModels
         public ObservableCollection<AppItem> products { get; set; }
         public ObservableCollection<AppItem> Products { get; set; }
         public ObservableCollection<AppItem> Toppings { get; set; }
+        
+        public ToolbarItem cart { get; set; }
         private Subcategory selectedCategory;
-        public Subcategory SelectedCategory
-        {
-            get
-            {
-                return selectedCategory;
-            }
-            set
-            {
-                if (selectedCategory != value)
-                {
-                    selectedCategory = value;
-                }
-            }
-        }
+        public Subcategory SelectedCategory { get; set; }
         public int width { get; set; }
         public int height { get; set; }
 
@@ -55,7 +46,7 @@ namespace TokioCity.ViewModels
         public BaseCategoryViewModel(int[] category)
         {
             width = App.screenWidth / 4;
-            height = App.screenHeight / 2;
+            height = (App.screenHeight / 2);
             products = new ObservableCollection<AppItem>();
             subcats = new ObservableCollection<Subcategory>();
             Products = new ObservableCollection<AppItem>();
@@ -91,7 +82,7 @@ namespace TokioCity.ViewModels
             });
             AddFavorite = new Command((item) =>
             {
-                
+              
                 var check = DataBase.GetProduct<AppItem>("Favorite", (item as AppItem).uid);
                 if (check == null)
                 {
@@ -128,9 +119,22 @@ namespace TokioCity.ViewModels
                     try
                     {
                         this.SelectedCategory = this.subcats[0];
+                        LoadProductSubcatd.Execute(SelectedCategory.id);
                     } catch { }
                 }
             });
+
+            AddToCart = new Command(async (item) =>
+            {
+                var Item = (AppItem)item as AppItem;
+                await Task.Run(()=>
+                {
+                    AddToCartMethod(Item);
+                });
+                
+            });
+
+
 
             LoadProductSubcatd = new Command(async (categ) =>
             {
@@ -153,6 +157,24 @@ namespace TokioCity.ViewModels
                 var item = param.GetType();
             });
 
+        }
+
+        private void AddToCartMethod(AppItem Item)
+        {
+
+            var cart = DataBase.GetAllStream<CartItem>("Cart");
+            CartItem cartItem = new CartItem(Item, new List<AppItem>(), 1);
+            var ie = cart.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                if (ie.Current.Item != null && ie.Current.Item.uid == Item.uid)
+                {
+                    ie.Current.Count++;
+                    DataBase.UpdateItem<CartItem>("Cart", null, ie.Current);
+                    return;
+                }
+            }
+            DataBase.WriteItem<CartItem>("Cart", cartItem);
         }
     }
 }

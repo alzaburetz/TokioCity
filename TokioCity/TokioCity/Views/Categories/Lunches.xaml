@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:components="clr-namespace:TokioCity.Views.Components"
+             x:Class="TokioCity.Views.Lunches"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:TokioCity.Services.Converters"
+             Title="Ланчи"
+             BackgroundColor="#181818">
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="pf-bold.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
+                <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <Style TargetType="Label" x:Key="Title">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFont}"/>
+                <Setter Property="FontSize" Value="36"/>
+            </Style>
+            <Style TargetType="Label" x:Key="CommonLabel">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <Style TargetType="Label" x:Key="PriceLabel">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="HorizontalTextAlignment" Value="End"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Opacity" Value="1"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{StaticResource RegularFont}"/>
+            </Style>
+            <converters:ImageUrlConverter x:Key="Image"/>
+            <converters:PriceConverter x:Key="Price"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>-->
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Padding="30">
+                    <Label Text="ЛАНЧИ" Style="{StaticResource Title}"/>
+                    <components:LunchesCard/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="ГАРНИРЫ" Style="{StaticResource Title}" Opacity="0.7" FontSize="28"/>
+                        <Label Text="{Binding Path=garnish.Count}" Style="{StaticResource CommonLabel}"/>
+                    </StackLayout>
+                    <!--#region Гарниры-->
+                    <CollectionView ItemsSource="{Binding garnish}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal">
+
+                            </LinearItemsLayout>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="0,0,50,50"
+                                             WidthRequest="120">
+                                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"/>
+                                    <Label Text="{Binding name}" Style="{StaticResource CommonLabel}"/>
+                                    <Label Text="{Binding price, Converter={StaticResource Price}}" Style="{StaticResource CommonLabel}"/>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <!--#endregion-->
+                </StackLayout>
+
+            </ScrollView>
+            <StackLayout HeightRequest="120" Padding="10">
+                <Frame BackgroundColor="#007AFF" 
+                       Padding="10,0,10,0" 
+                       HorizontalOptions="FillAndExpand" 
+                       VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="FullPrice" 
+                               Text="1523.-" 
+                               Style="{StaticResource PriceLabel}" 
+                               HorizontalOptions="Start"/>
+                        <Label Text="Оформить" 
+                               Style="{StaticResource CommonLabel}" 
+                               HorizontalOptions="FillAndExpand" 
+                               HorizontalTextAlignment="End" 
+                               VerticalTextAlignment="Center"
+                               FontSize="Medium">
+                            <Label.GestureRecognizers>
+                                <!--Добавить добавление в корзину-->
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    
+                </Frame>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

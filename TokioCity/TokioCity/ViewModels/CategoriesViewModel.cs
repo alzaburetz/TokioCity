@@ -55,7 +55,7 @@ namespace TokioCity.ViewModels
 
             LoadCategoriesCommand = new Command(async () =>
             {
-                data = await RequestHelper.GetData<List<Category>>(client, "data/app_categs.php?version=");
+                data = await RequestHelper.GetData<List<Category>>(client, "data/app_categs_full20.php?version=");
                 CatList.Clear();
                 DataBase.RemoveAll<Category>("Categories");
                 DataBase.WriteAll<Category>("Categories", data);
@@ -72,27 +72,7 @@ namespace TokioCity.ViewModels
 
             LoadItemsCommand = new Command(async () =>
             {
-                var hash = await RequestHelper.GetData<string>(client, "/data/app_items.php?hash=1&version=");
-                if (!Application.Current.Properties.ContainsKey("Hash"))
-                {
-                    items = await RequestHelper.GetData<List<AppItem>>(client, "/data/app_items.php?version=");
-                    if (items != null)
-                    {
-                        DataBase.WriteAll("Items", items);
-                    }
-                    Application.Current.Properties.Add("Hash", hash);
-                }
-                else if (hash != Application.Current.Properties["Hash"].ToString())
-                {
-                    items = await RequestHelper.GetData<List<AppItem>>(client, "/data/app_items.php?version=");
-                    if (items != null)
-                    {
-                        DataBase.WriteAll("Items", items);
-                    }
-                    Application.Current.Properties["Hash"] = hash;
-                }
-                items.Clear();
-                LoadCategoryItemsCommand.Execute(null);
+                await Task.Run(() => LoadItemsMethod(client));
             });
 
             LoadCategoryItemsCommand = new Command(async () =>
@@ -123,6 +103,31 @@ namespace TokioCity.ViewModels
             {
                 MainProduct = DataBase.GetOneOfCategory<AppItem>("Items", CurrentCategory);
             });
+        }
+
+        private async void LoadItemsMethod(HttpClient client)
+        {
+            var hash = await RequestHelper.GetData<string>(client, "/data/app_items.php?hash=1&version=");
+            if (!Application.Current.Properties.ContainsKey("Hash"))
+            {
+                items = await RequestHelper.GetData<List<AppItem>>(client, "/data/app_items_full20.php?version=");
+                if (items != null)
+                {
+                    DataBase.WriteAll("Items", items);
+                }
+                Application.Current.Properties.Add("Hash", hash);
+            }
+            else if (hash != Application.Current.Properties["Hash"].ToString())
+            {
+                items = await RequestHelper.GetData<List<AppItem>>(client, "/data/app_items_full20.php?version=");
+                if (items != null)
+                {
+                    DataBase.WriteAll("Items", items);
+                }
+                Application.Current.Properties["Hash"] = hash;
+            }
+            items.Clear();
+            LoadCategoryItemsCommand.Execute(null);
         }
     }
 }

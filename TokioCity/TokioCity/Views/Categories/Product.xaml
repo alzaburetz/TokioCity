@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:TokioCity.Services.Converters"
+             x:Class="TokioCity.Views.Product"
+             BackgroundColor="#25262A">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ToUpperConverter x:Key="ToUpper"/>
+            <converters:PriceConverter x:Key="Price"/>
+            <converters:ImageUrlConverter x:Key="ImageUrl"/>
+            <converters:WeightConverter x:Key="Weight"/>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="pf-bold.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
+                <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
+            </OnPlatform>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <RelativeLayout>
+            <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Factor=1}"
+                  RelativeLayout.HeightConstraint="{ConstraintExpression Factor=1}"
+                  IsVisible="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1072*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.1072*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollView Grid.Row="0" Grid.RowSpan="2">
+                    <StackLayout>
+                        <image:CachedImage Source="{Binding product.image, Converter={StaticResource Image}}"
+                                       x:Name="Img"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="FillAndExpand"
+                                       HeightRequest="300"
+                                       Aspect="AspectFill"/>
+                        <StackLayout Padding="20">
+                            <Label Text="{Binding product.name, Converter={StaticResource ToUpper}}"
+                           FontSize="Large"
+                               
+                           FontFamily="{StaticResource RegularFont}"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="FillAndExpand"
+                           TextColor="White"/>
+
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding product.price, Converter={StaticResource Price}}"
+                                   FontSize="Large"
+                                   FontFamily="{StaticResource RegularFont}"
+                                   WidthRequest="70"/>
+                                <ImageButton Source="calories.png"
+                                         BackgroundColor="Transparent"
+                                         WidthRequest="150"
+                                         Clicked="OpenCalories"/>
+                                <Label x:Name="Mass"
+                                    Text="{Binding product.weight1, Converter={StaticResource Weight}}"
+                                    FontSize="Body"
+                                    TextColor="#55545A"
+                                    HorizontalOptions="CenterAndExpand"
+                           />
+                            </StackLayout>
+
+                            <Label Text="{Binding product.ingredients_rus}"
+                           TextColor="White"
+                           LineHeight="1.2"/>
+
+                            <BoxView HeightRequest="30"></BoxView>
+
+                            <StackLayout x:Name="Toppings">
+                                <Label Text="Добавьте топпинги"
+                                   Style="{StaticResource Header}"
+                                   FontFamily="{StaticResource RegularFont}"
+                                   
+                                   Margin="0,10"/>
+                                <CollectionView ItemsSource="{Binding toppings}"
+                                            HeightRequest="230"
+                                            SelectionMode="Single"
+                                            SelectionChanged="SelectToppings"
+                                       >
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal"
+                                                 ItemSpacing="10"
+                                                 />
+                                    </CollectionView.ItemsLayout>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame CornerRadius="10"
+                                               WidthRequest="100"
+                                               BackgroundColor="#202123"
+                                                   Grid.ColumnSpan="2"
+                                                   Grid.Row="1">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="1.3*"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="3.8*"/>
+                                                        <RowDefinition Height="3.8*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.8*"/>
+                                                        <ColumnDefinition Width="0.1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                                                       Grid.Row="1"
+                                                                       LoadingPriority="Highest"
+                                                                       Grid.ColumnSpan="2"/>
+                                                    <Label Text="{Binding price, Converter={StaticResource Price}}"
+                                                       Style="{StaticResource PriceLabel}"
+                                                       Grid.Row="2"
+                                                       Grid.ColumnSpan="2"/>
+                                                    <Label Text="{Binding name}"
+                                                       Style="{StaticResource CommonLabel}"
+                                                       VerticalTextAlignment="Center"
+                                                       VerticalOptions="FillAndExpand"
+                                                       Grid.Row="3"
+                                                       Grid.ColumnSpan="2"/>
+                                                    <!-- Somehow change this-->
+
+                                                    <Frame   BackgroundColor="Blue"
+                                                         CornerRadius="20"
+                                                         IsVisible="{Binding selected}"
+                                                         Grid.Row="0"
+                                                         Scale="3"
+                                                         Padding="0"
+                                                         Grid.Column="1">
+                                                        <Label Text="{Binding Amount}"
+                                                           VerticalTextAlignment="Center"
+                                                           VerticalOptions="CenterAndExpand"
+                                                           FontSize="5"
+                                                           HorizontalTextAlignment="Center"/>
+                                                    </Frame>
+                                                </Grid>
+                                            </Frame>
+
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <CollectionView ItemsSource="{Binding selectedToppings}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical"
+                                                     ItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Padding="10">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.3*"/>
+                                                    <ColumnDefinition Width="0.3*"/>
+                                                    <ColumnDefinition Width="0.3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding name}" 
+                                                   Style="{StaticResource CommonLabel}"
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="{Binding width}"
+                                                   Grid.Column="0"/>
+                                                <StackLayout Orientation="Horizontal"
+                                                         Grid.Column="1">
+                                                    <ImageButton Aspect="AspectFit"
+                                                             Source="minus.png"
+                                                             Scale="0.3"
+                                                             ClassId="{Binding uid}"
+                                                             Clicked="DecreaseToppingCount"
+                                                             BackgroundColor="Transparent"/>
+                                                    <Label Text="{Binding Amount}"
+                                                       Style="{StaticResource CommonLabel}"
+                                                       VerticalTextAlignment="Center"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       HorizontalTextAlignment="Center"
+                                                       VerticalOptions="FillAndExpand"/>
+                                                    <ImageButton Aspect="AspectFit"
+                                                             Source="plus.png"
+                                                             Scale="0.3"
+                                                             Clicked="IncreaseToppingCount"
+                                                             ClassId="{Binding uid}"
+                                                             BackgroundColor="Transparent"/>
+                                                </StackLayout>
+                                                <Label Text="{Binding price, Converter={StaticResource Price}}" 
+                                                   Style="{StaticResource PriceLabel}"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   VerticalTextAlignment="Center"
+                                                   Grid.Column="2"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <Frame BackgroundColor="#007AFF"
+                   Margin="10,0,10,5"
+                   Grid.Row="2"
+                               HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal"
+                                         Padding="-5">
+                        <StackLayout WidthRequest="130"
+                                             Orientation="Horizontal">
+                            <ImageButton Source="minus.png"
+                                                 WidthRequest="15"
+                                                 HeightRequest="25"
+                                                 BackgroundColor="Transparent"
+                                                 HorizontalOptions="StartAndExpand"
+                                                 VerticalOptions="CenterAndExpand"
+                                                 Clicked="Reduce"/>
+
+                            <Label Text="{Binding amount}"
+                                           HorizontalOptions="FillAndExpand"
+                                           VerticalTextAlignment="Center"
+                                           FontSize="Medium"
+                                           HorizontalTextAlignment="Center"
+                                           x:Name="Amount"/>
+
+                            <ImageButton Source="plus.png"
+                                           WidthRequest="15"
+                                           HeightRequest="25"
+                                           HorizontalOptions="EndAndExpand"
+                                           VerticalOptions="CenterAndExpand"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="Add">
+
+                            </ImageButton>
+                        </StackLayout>
+                        <StackLayout WidthRequest="180">
+                            <Label Text="Добавить"
+                                           FontSize="Medium"
+                                           HorizontalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="AddToCart"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="scrim.png" Grid.ColumnSpan="3" Aspect="AspectFill">
+                        
+                    </Image>
+                    <Image Source="back.png" Grid.Column="0" Margin="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GoBack"/>
+                        </Image.GestureRecognizers>
+
+                    </Image>
+                    <Image Source="cart.png" Grid.Column="2" Margin="15">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenCart"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+
+            </Grid>
+            <Frame x:Name="CaloriesCard"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                     Property=AnchorY, Factor=0.5, Constant=470}"
+                   IsVisible="False"
+                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                   BackgroundColor="White"
+                   CornerRadius="20">
+                <StackLayout Padding="10">
+                    <StackLayout Margin="120, -10, 120, 0"
+                                 Padding="0,0,0,20">
+                        <BoxView WidthRequest="100"
+                                 HeightRequest="5"
+                                 BackgroundColor="Gray"
+                                 Opacity="0.5"/>
+                        <StackLayout.GestureRecognizers>
+                            <SwipeGestureRecognizer Direction="Down" Swiped="SwipeGestureRecognizer_Swiped"/>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="БЕЛКИ" 
+                               Style="{StaticResource Header}" 
+                               TextColor="Black"
+                               Opacity="1"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding product.protein}"
+                               TextColor="Black"
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="End"
+                               Style="{StaticResource Header}"
+                               Opacity="1"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="ЖИРЫ" 
+                               Style="{StaticResource Header}" 
+                               TextColor="Black"
+                               Opacity="1"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding product.fat}"
+                               TextColor="Black"
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="End"
+                               Style="{StaticResource Header}"
+                               Opacity="1"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="УГЛЕВОДЫ" 
+                               Style="{StaticResource Header}" 
+                               TextColor="Black"
+                               Opacity="1"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding product.carbohydrates}"
+                               TextColor="Black"
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="End"
+                               Style="{StaticResource Header}"
+                               Opacity="1"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="КАЛОРИЙНОСТЬ" 
+                               Style="{StaticResource Header}" 
+                               TextColor="Black"
+                               Opacity="1"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding product.calories}"
+                               TextColor="Black"
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="End"
+                               Style="{StaticResource Header}"
+                               Opacity="1"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </RelativeLayout>
+       
+           
+        
+        
+        <!--</StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>

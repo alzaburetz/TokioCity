@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:component="clr-namespace:TokioCity.Views.CartViews.OrderSteps"
+             x:Class="TokioCity.Views.CartViews.OrderSteps.Address">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="White"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+  <ContentView.Content>
+      <StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                         HeightRequest="50">
+                        <Label x:Name="Addr"
+                       Text="По адресу"
+                       Style="{StaticResource CommonLabel}"
+                       HorizontalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OpenAddr"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label x:Name="Self"
+                       Text="Самовывоз"
+                       
+                       Opacity="0.5"
+                       Style="{StaticResource CommonLabel}"
+                       HorizontalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OpenMap"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <StackLayout x:Name="Content" HeightRequest="500">
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            
+            
+      </StackLayout>
+  </ContentView.Content>
+</ContentView>

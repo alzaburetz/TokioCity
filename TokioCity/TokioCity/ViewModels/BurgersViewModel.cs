@@ -23,6 +23,7 @@ namespace TokioCity.ViewModels
         public Command AddToFavorite { get; set; }
         public Command LoadBurgers { get; set; }
         public Command LoadToppings { get; set; }
+        public Command AddToCart { get; set; }
 
         public int height { get; set; }
 
@@ -58,6 +59,25 @@ namespace TokioCity.ViewModels
                 burgers.Dispose();
                 LoadToppings.Execute(null);
             });
+
+            AddToCart = new Command((item) =>
+            {
+                var Item = (AppItem)item as AppItem;
+                var cart = DataBase.GetAllStream<CartItem>("Cart");
+                CartItem cartItem = new CartItem(Item, new List<AppItem>(), 1);
+                var ie = cart.GetEnumerator();
+                while (ie.MoveNext())
+                {
+                    if (ie.Current.Item != null && ie.Current.Item.uid == Item.uid)
+                    {
+                        ie.Current.Count++;
+                        DataBase.UpdateItem<CartItem>("Cart", null, ie.Current);
+                        return;
+                    }
+                }
+                DataBase.WriteItem<CartItem>("Cart", cartItem);
+            });
+
 
             LoadToppings = new Command(() =>
             {
