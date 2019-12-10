@@ -94,6 +94,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\pf-regular.ttf" />
     <AndroidAsset Include="Assets\pf-bold.ttf" />
+    <AndroidAsset Include="Assets\SFProDisplay-Medium.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -249,6 +250,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\checkmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\checkmarked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

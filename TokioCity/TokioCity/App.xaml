@@ -55,6 +55,9 @@
             <OnPlatform x:TypeArguments="x:String" x:Key="RegularFont">
                 <On Platform="Android" Value="pf-regular.ttf#Pf Din Text Comp Pro"/>
             </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CommonLabelFont">
+                <On Platform="Android" Value="SFProDisplay-Medium#San Francisco Pro Display Medium"/>
+            </OnPlatform>
             <Style TargetType="Label" x:Key="Title">
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="FontFamily" Value="{StaticResource BoldFont}"/>
@@ -62,6 +65,7 @@
             </Style>
             <Style TargetType="Label" x:Key="CommonLabel">
                 <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="{StaticResource CommonLabelFont}"/>
                 <Setter Property="FontSize" Value="14"/>
             </Style>
             <Style TargetType="Label" x:Key="PriceLabel">

@@ -59,6 +59,7 @@ namespace TokioCity.ViewModels
                 List<string> ids = (List<string>)toppings as List<string>;
                 foreach (var id in ids)
                 {
+                    
                     var query = Query.Where("uid", x => x.AsString == id.ToString());
                     var item = DataBase.GetProduct<AppItem>("Items", id.ToString());
                     Toppings.Add(item);

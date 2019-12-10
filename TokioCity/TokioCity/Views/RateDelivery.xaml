@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="RatingPage"
+             xmlns:converter="clr-namespace:TokioCity.Services.Converters"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:rate="clr-namespace:SkiaRate;assembly=SkiaRate.Forms"
+             x:Class="TokioCity.Views.RateDelivery">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="none"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:CheckedConverter x:Key="Checked"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Shell.TitleView>
+        <Label Text="ТОКИО-CITY"
+               Style="{StaticResource Title}"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               FontSize="24"
+               FontFamily="{StaticResource RegularFont}"
+               HorizontalOptions="CenterAndExpand"/>
+    </Shell.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#181818" Spacing="10">
+            <Label Text="СЛУЖБА ПОДДЕРЖКИ"
+                   Style="{StaticResource Title}"
+                   Margin="20"/>
+            <Frame CornerRadius="15"
+                   Margin="10"
+                   Padding="15"
+                   BackgroundColor="#202123">
+                <StackLayout Spacing="20">
+                    <Label Text="ОЦЕНИТЕ ЗАКАЗ И ДОСТАВКУ"
+                       Style="{StaticResource CommonLabel}"
+                       FontSize="Medium"
+                       FontFamily="{StaticResource RegularFont}"
+                       Opacity="0.5"/>
+                    <rate:RatingView 
+                        x:Name="Rating"
+                        ColorOn="#FAF273" 
+                        HeightRequest="30"
+                        Count="5" 
+                        PropertyChanged="RatingView_PropertyChanged"
+                        OutlineOffColor="#C4C4C4"
+                       />
+                </StackLayout>
+            </Frame>
+            <Label Text="ЧТО НЕ ПОНРАВИЛОСЬ?"
+                   Margin="25,0,0,0"
+                       Style="{StaticResource CommonLabel}"
+                       FontSize="Medium"
+                       FontFamily="{StaticResource RegularFont}"
+                       Opacity="0.5"/>
+            <Frame Margin="15,0,15,0"
+                   CornerRadius="15"
+                   BackgroundColor="#202123">
+                <StackLayout BindableLayout.ItemsSource="{Binding Selectable}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HeightRequest="50">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.92*"/>
+                                    <ColumnDefinition Width="0.08*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding member}" 
+                                       Style="{StaticResource CommonLabel}"
+                                       VerticalTextAlignment="Center"/>
+                                <Image Source="{Binding isSelected, Converter={StaticResource Checked}}"
+                                       Aspect="AspectFit"
+                                       Grid.Column="1"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.Select, Source={x:Reference RatingPage}}" CommandParameter="{Binding member}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                
+            </Frame>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
