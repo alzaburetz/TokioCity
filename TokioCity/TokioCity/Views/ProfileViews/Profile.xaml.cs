@@ -17,6 +17,7 @@ namespace TokioCity.Views
     public partial class Profile : ContentPage
     {
         ProfileViewModel viewModel { get; set; }
+        Type subPage;
         public Profile()
         {
             var client = new HttpClient();
@@ -29,7 +30,6 @@ namespace TokioCity.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            viewModel.LoadOffers.Execute(null);
         }
 
         private void TabsPressed(object sender, SelectionChangedEventArgs args)
@@ -39,11 +39,14 @@ namespace TokioCity.Views
             {
                 MainContent.Children.Clear();
                 (Bottom.Parent.Parent as StackLayout).IsVisible = false;
+                subPage = typeof(Offers);
+                MainContent.Children.Add(new Offers());
             }
             if (tab.ToString() == "ЛИЧНОЕ")
             {
                 MainContent.Children.Clear();
                 MainContent.Children.Add(new UserData());
+                subPage = typeof(UserData);
                 (Bottom.Parent.Parent as StackLayout).IsVisible = true;
                 Bottom.Children.Clear();
                 Bottom.Children.Add(new Label()
@@ -61,12 +64,14 @@ namespace TokioCity.Views
             {
                 MainContent.Children.Clear();
                 MainContent.Children.Add(new ListOrders());
+                subPage = typeof(ListOrders);
                 (Bottom.Parent.Parent as StackLayout).IsVisible = false;
             }
             if (tab.ToString() == "АДРЕСА ДОСТАВКИ")
             {
                 MainContent.Children.Clear();
                 MainContent.Children.Add(new Addresses());
+                subPage = typeof(Addresses);
                 (Bottom.Parent.Parent as StackLayout).IsVisible = false;
             }
 
