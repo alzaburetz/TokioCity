@@ -9,7 +9,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <Style TargetType="Label" BasedOn="{StaticResource CommonLabel}">
-                
+
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -20,9 +20,6 @@
             <Frame CornerRadius="10"
                    BackgroundColor="#202123">
                 <StackLayout>
-                    <Label Text="Наличными курьеру"/>
-                    <Label Text="Банковской картой"/>
-                    <Label Text="Apple Pay"/>
 
                 </StackLayout>
             </Frame>

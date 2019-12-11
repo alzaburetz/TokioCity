@@ -6,7 +6,6 @@
              mc:Ignorable="d"
              x:Name="RatingPage"
              xmlns:converter="clr-namespace:TokioCity.Services.Converters"
-             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:rate="clr-namespace:SkiaRate;assembly=SkiaRate.Forms"
              x:Class="TokioCity.Views.RateDelivery">
 
@@ -17,6 +16,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:CheckedConverter x:Key="Checked"/>
+            <converter:CheckedConverterText x:Key="CheckedText"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -31,21 +31,28 @@
     </Shell.TitleView>
     
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#181818" Spacing="10">
-            <Label Text="СЛУЖБА ПОДДЕРЖКИ"
+        <Grid BackgroundColor="#181818">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.15*"/>
+            </Grid.RowDefinitions>
+            <ScrollView>
+
+                <StackLayout BackgroundColor="#181818" Spacing="10">
+                    <Label Text="СЛУЖБА ПОДДЕРЖКИ"
                    Style="{StaticResource Title}"
                    Margin="20"/>
-            <Frame CornerRadius="15"
+                    <Frame CornerRadius="15"
                    Margin="10"
                    Padding="15"
                    BackgroundColor="#202123">
-                <StackLayout Spacing="20">
-                    <Label Text="ОЦЕНИТЕ ЗАКАЗ И ДОСТАВКУ"
+                        <StackLayout Spacing="20">
+                            <Label Text="ОЦЕНИТЕ ЗАКАЗ И ДОСТАВКУ"
                        Style="{StaticResource CommonLabel}"
                        FontSize="Medium"
                        FontFamily="{StaticResource RegularFont}"
                        Opacity="0.5"/>
-                    <rate:RatingView 
+                            <rate:RatingView 
                         x:Name="Rating"
                         ColorOn="#FAF273" 
                         HeightRequest="30"
@@ -53,42 +60,62 @@
                         PropertyChanged="RatingView_PropertyChanged"
                         OutlineOffColor="#C4C4C4"
                        />
-                </StackLayout>
-            </Frame>
-            <Label Text="ЧТО НЕ ПОНРАВИЛОСЬ?"
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="ЧТО НЕ ПОНРАВИЛОСЬ?"
                    Margin="25,0,0,0"
                        Style="{StaticResource CommonLabel}"
                        FontSize="Medium"
                        FontFamily="{StaticResource RegularFont}"
                        Opacity="0.5"/>
-            <Frame Margin="15,0,15,0"
+                    <Frame Margin="15,0,15,0"
                    CornerRadius="15"
                    BackgroundColor="#202123">
-                <StackLayout BindableLayout.ItemsSource="{Binding Selectable}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Grid HeightRequest="50">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.92*"/>
-                                    <ColumnDefinition Width="0.08*"/>
-                                </Grid.ColumnDefinitions>
+                        <StackLayout BindableLayout.ItemsSource="{Binding Selectable}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HeightRequest="50">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.92*"/>
+                                            <ColumnDefinition Width="0.08*"/>
+                                        </Grid.ColumnDefinitions>
 
-                                <Label Text="{Binding member}" 
+                                        <Label Text="{Binding member}" 
                                        Style="{StaticResource CommonLabel}"
+                                       Opacity="{Binding isSelected, Converter={StaticResource CheckedText}}"
                                        VerticalTextAlignment="Center"/>
-                                <Image Source="{Binding isSelected, Converter={StaticResource Checked}}"
+                                        <Image Source="{Binding isSelected, Converter={StaticResource Checked}}"
                                        Aspect="AspectFit"
                                        Grid.Column="1"/>
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.Select, Source={x:Reference RatingPage}}" CommandParameter="{Binding member}"/>
-                                </Grid.GestureRecognizers>
-                            </Grid>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-                
-            </Frame>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.Select, Source={x:Reference RatingPage}}" CommandParameter="{Binding member}"/>
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Grid.Row="1"
+                         BackgroundColor="#181818">
+                <Frame BackgroundColor="#007AFF"
+                       CornerRadius="15"
+                       VerticalOptions="FillAndExpand"
+                       Margin="10">
+                    <Label Text="Оставить отзыв"
+                           VerticalOptions="FillAndExpand"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Medium"
+                           Style="{StaticResource CommonLabel}">
+                        
+                    </Label>
+                </Frame>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

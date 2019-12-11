@@ -43,7 +43,7 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-                    <StackLayout x:Name="Content" HeightRequest="500">
+                    <StackLayout x:Name="MainContent" HeightRequest="500">
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

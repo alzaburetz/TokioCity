@@ -25,8 +25,12 @@ namespace TokioCity.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            try
+            {
+                favViewModel.LoadFavorites.Execute(null);
 
-            favViewModel.LoadFavorites.Execute(null);
+            }
+            catch { }
         }
 
         private async void OpenProduct(object sender, SelectionChangedEventArgs args)

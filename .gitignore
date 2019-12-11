@@ -191,3 +191,4 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 .vscode/settings.json
+*.apk

@@ -58,7 +58,7 @@ namespace TokioCity.ViewModels
             {
                 DataBase.WriteItem<MyProduct>("Woks", (MyProduct)product as MyProduct);
             });
-            LoadSubcatsCommand = new Command(async () =>
+            LoadSubcatsCommand = new Command(() =>
             {
                 fullPrice = 0;
                 mainPrice = 0;
