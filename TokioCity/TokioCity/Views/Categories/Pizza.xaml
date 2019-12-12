@@ -150,7 +150,7 @@
                         <Label Text="ПИЦЦА" Style="{StaticResource Title}"/>
 
                     </StackLayout>
-                    <CollectionView ItemsSource="{Binding products}"
+                    <CollectionView x:Name="Products"
                             SelectionMode="Single"
                             SelectionChanged="OpenProduct"
                             HeightRequest="{Binding height}"
@@ -388,6 +388,10 @@
                 </StackLayout>
             </ScrollView>
 
+            <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,0,0">
+                <ActivityIndicator IsVisible="{Binding IsBusy}"
+                                           IsEnabled="{Binding IsBusy}"/>
+            </AbsoluteLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

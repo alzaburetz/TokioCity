@@ -21,6 +21,11 @@ namespace TokioCity.Models
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string alert { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        [LiteDB.BsonField("subcategories")]
         public List<Subcategory> subcategories;
+        public Category()
+        {
+            subcategories = new List<Subcategory>();
+        }
     }
 }

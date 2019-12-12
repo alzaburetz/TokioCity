@@ -67,7 +67,7 @@ namespace TokioCity.Services
         public void WriteAll<T>(string collection, List<T> items)
         {
             RemoveAll<T>(collection);
-            var Items = database.GetCollection<T>(collection).IncludeAll(3);
+            var Items = database.GetCollection<T>(collection).IncludeAll(4);
             Items.Delete(Query.All());
             Items.InsertBulk(items);
         }
@@ -107,7 +107,7 @@ namespace TokioCity.Services
 
         public T GetItem<T>(string collection, Query query)
         {
-            return database.GetCollection<T>(collection).FindOne(query);
+            return database.GetCollection<T>(collection).IncludeAll(4).FindOne(query);
         }
         public DataBaseService()
         {

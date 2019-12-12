@@ -16,6 +16,7 @@ namespace TokioCity.Views
     public partial class Pizza : ContentPage
     {
         BaseCategoryViewModel viewModel;
+        DataTemplate template { get; set; }
         int currentItem;
         public Pizza()
         {
@@ -25,8 +26,9 @@ namespace TokioCity.Views
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
             viewModel.LoadProducts.Execute(null);
+            base.OnAppearing();
+            Products.ItemsSource = viewModel.products;
         }
 
         protected async void OpenProduct(object sender, SelectionChangedEventArgs args)

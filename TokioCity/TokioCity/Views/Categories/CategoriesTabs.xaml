@@ -43,5 +43,6 @@
         <local:Drinks IconImageSource="drink.png"/>
         <local:Pies IconImageSource="pies.png"/>
         <local:HotSnacks IconImageSource="snack.png"/>
+        <local:Test Title="Test"/>
     </TabbedPage.Children>
 </TabbedPage>

@@ -12,6 +12,7 @@ using TokioCity.Models;
 using TokioCity.Services;
 
 using FFImageLoading.Forms;
+using System.Linq;
 
 namespace TokioCity.ViewModels
 {
@@ -68,6 +69,7 @@ namespace TokioCity.ViewModels
             });
             LoadProducts = new Command(async () =>
             {
+                IsBusy = true;
                 products.Clear();
                 subcats.Clear();
                 ReloadCategories.Execute(category[0]);
@@ -77,9 +79,9 @@ namespace TokioCity.ViewModels
                     while (data.MoveNext())
                     {
                         products.Add(data.Current);
-                        await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(50));
                     }
                 }
+                IsBusy = false;
             });
             AddFavorite = new Command((item) =>
             {
@@ -100,29 +102,14 @@ namespace TokioCity.ViewModels
                     
             });
 
-            ReloadCategories = new Command(async (categ) =>
+            ReloadCategories = new Command((categ) =>
             {
-                using (System.Net.Http.HttpClient client = new System.Net.Http.HttpClient())
+                var subcats = DataBase.GetItem<Category>("Categories", LiteDB.Query.Where("id", x => x.AsInt32 == (int)categ));
+                foreach (var cat in subcats.subcategories)
                 {
-                    client.BaseAddress = new Uri("https://www.tokyo-city.ru");
-                    var req = await RequestHelper.GetData<List<Category>>(client, "/data/app_categs.php?version=");
-                    foreach (Category cat in req)
-                    {
-                        if (cat.subcategories != null && cat.id == (int)categ)
-                        {
-                            foreach (Subcategory sub in cat.subcategories)
-                            {
-                                this.subcats.Add(sub);
-                            }
-                            break;
-                        }
-                    }
-                    try
-                    {
-                        this.SelectedCategory = this.subcats[0];
-                        LoadProductSubcatd.Execute(SelectedCategory.id);
-                    } catch { }
+                    this.subcats.Add(cat);
                 }
+
             });
 
             AddToCart = new Command(async (item) =>
