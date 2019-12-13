@@ -96,17 +96,31 @@ namespace TokioCity.Tests
             var json = await response.Content.ReadAsStringAsync();
             var categs = JsonConvert.DeserializeObject<List<Category>>(json, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             Assert.NotNull(categs);
-            database.WriteAll<Category>("Categories", categs);
-            Assert.That(database.GetRecordCount<Category>("Categories") > 0);
-            Assert.That(database.GetItem<Category>("Categories", LiteDB.Query.Where("id", x => x.AsInt32 == 49)).subcategories.Count > 0);
+            var categs_simple = new List<CategorySimplified>();
+            foreach (var cat in categs)
+            {
+                categs_simple.Add(new CategorySimplified(cat));
+            }
+            Assert.That(categs[0].image.Length > 0);
+            Assert.That(categs_simple[0].image.Length > 0);
+            database.WriteAll<CategorySimplified>("Categories", categs_simple);
+            Assert.That(database.GetRecordCount<CategorySimplified>("Categories") > 0);
+            //Assert.That(database.GetItem<CategorySimplified>("Categories", LiteDB.Query.Where("category_id", x => x.AsInt32 == 49)).subcats.Count > 0);
         }
 
         [Test]
         public void LoadSingleCategoryNotNull()
         {
-            var category = database.GetItem<Category>("Categories", LiteDB.Query.Where("id", x => x.AsInt32 == 211));
+            var category = database.GetItem<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id",211));
             Assert.NotNull(category);
-            Assert.That(category.subcategories.Count > 0);
+            Assert.That(category.subcats.Count > 0);
+        }
+
+        [Test]
+        public void LoadImageCategoryNotNull()
+        {
+            var category = database.GetItem<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id", 1804));
+            Assert.That(category.image.Length > 10);
         }
     }
 }

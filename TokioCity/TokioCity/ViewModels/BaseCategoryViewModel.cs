@@ -26,14 +26,15 @@ namespace TokioCity.ViewModels
         private Command ReloadCategories { get; set; }
         public Command LoadProductSubcatd { get; set; }
         public Command ItemTapped { get; set; }
-        public ObservableCollection<Subcategory> subcats { get; set; }
+        public ObservableCollection<SubcategorySimplified> subcats { get; set; }
+        public CategorySimplified category { get; set; }
         public ObservableCollection<AppItem> products { get; set; }
         public ObservableCollection<AppItem> Products { get; set; }
         public ObservableCollection<AppItem> Toppings { get; set; }
         
         public ToolbarItem cart { get; set; }
-        private Subcategory selectedCategory;
-        public Subcategory SelectedCategory { get; set; }
+        private SubcategorySimplified selectedCategory;
+        public SubcategorySimplified SelectedCategory { get; set; }
         public int width { get; set; }
         public int height { get; set; }
 
@@ -49,11 +50,11 @@ namespace TokioCity.ViewModels
             width = App.screenWidth / 4;
             height = (App.screenHeight / 2);
             products = new ObservableCollection<AppItem>();
-            subcats = new ObservableCollection<Subcategory>();
+            subcats = new ObservableCollection<SubcategorySimplified>();
             Products = new ObservableCollection<AppItem>();
             Toppings = new ObservableCollection<AppItem>();
-            selectedCategory = new Subcategory();
-            SelectedCategory = new Subcategory();
+            selectedCategory = new SubcategorySimplified();
+            SelectedCategory = new SubcategorySimplified();
             LoadToppings = new Command(async (toppings) =>
             {
                 Toppings.Clear();
@@ -67,21 +68,24 @@ namespace TokioCity.ViewModels
                     await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(200));
                 }
             });
-            LoadProducts = new Command(async () =>
+            LoadProducts = new Command(() =>
             {
-                IsBusy = true;
-                products.Clear();
-                subcats.Clear();
-                ReloadCategories.Execute(category[0]);
-                foreach(var cat in category)
+                Task.Run(async () =>
                 {
-                    var data = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(cat)));
-                    while (data.MoveNext())
+                    products.Clear();
+                    subcats.Clear();
+                    ReloadCategories.Execute(category[0]);
+                    this.category = DataBase.GetItem<CategorySimplified>("Categories", Query.EQ("cat_id", category[0]));
+                    foreach (var cat in category)
                     {
-                        products.Add(data.Current);
+                        var data = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(cat)));
+                        while (data.MoveNext())
+                        {
+                            products.Add(data.Current);
+                            await Task.Delay(50);
+                        }
                     }
-                }
-                IsBusy = false;
+                });
             });
             AddFavorite = new Command((item) =>
             {
@@ -104,10 +108,10 @@ namespace TokioCity.ViewModels
 
             ReloadCategories = new Command((categ) =>
             {
-                var subcats = DataBase.GetItem<Category>("Categories", LiteDB.Query.Where("id", x => x.AsInt32 == (int)categ));
-                foreach (var cat in subcats.subcategories)
+                var subcats = DataBase.GetItem<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id",(int)categ));
+                foreach (var cat in subcats.subcats)
                 {
-                    this.subcats.Add(cat);
+                    this.subcats.Add(new SubcategorySimplified(cat.subcat_id, cat.name));
                 }
 
             });

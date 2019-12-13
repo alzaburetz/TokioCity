@@ -57,8 +57,13 @@ namespace TokioCity.ViewModels
             {
                 data = await RequestHelper.GetData<List<Category>>(client, "data/app_categs_full20.php?version=");
                 CatList.Clear();
-                DataBase.WriteAll<Category>("Categories", data);
-                var count = DataBase.GetRecordCount<Category>("Categories");
+                var categories = new List<CategorySimplified>();
+                foreach (var category in data)
+                {
+                    categories.Add(new CategorySimplified(category));
+                }
+                DataBase.WriteAll<CategorySimplified>("Categories", categories);
+                var count = DataBase.GetRecordCount<CategorySimplified>("Categories");
                 if (data != null)
                     foreach (Category category in data)
                     {

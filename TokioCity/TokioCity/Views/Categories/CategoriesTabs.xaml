@@ -25,7 +25,7 @@
     </TabbedPage.ToolbarItems>
    
     <TabbedPage.Children>
-        <local:Favorite IconImageSource="favorite.png"/>
+        <!--<local:Favorite IconImageSource="favorite.png"/>
         <local:Lunches IconImageSource="lunch.png"/>
         <local:Pasta IconImageSource="pasta.png"/>
         <local:Sushi IconImageSource="sushi.png"/>
@@ -43,6 +43,6 @@
         <local:Drinks IconImageSource="drink.png"/>
         <local:Pies IconImageSource="pies.png"/>
         <local:HotSnacks IconImageSource="snack.png"/>
-        <local:Test Title="Test"/>
+        <local:Test Title="Test"/>-->
     </TabbedPage.Children>
 </TabbedPage>

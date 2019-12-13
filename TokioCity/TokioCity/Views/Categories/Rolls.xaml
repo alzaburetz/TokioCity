@@ -96,9 +96,6 @@
                         <CollectionView ItemsSource="{Binding Products}"
                                         SelectionMode="Single"
                                         SelectionChanged="OpenProduct">
-                            <!--<CollectionView.EmptyView>
-                                <Label Text="AAAAAAAAAAAAA" Style="{StaticResource Header}"/>
-                            </CollectionView.EmptyView>-->
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Span="2"
                                                  Orientation="Vertical"/>

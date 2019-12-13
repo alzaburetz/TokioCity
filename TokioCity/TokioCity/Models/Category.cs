@@ -8,6 +8,7 @@ namespace TokioCity.Models
     [Serializable]
     public class Category
     {
+        [LiteDB.BsonId]
         public int Id { get; set; }
         public int id { get; set; }
         public string name { get; set; }

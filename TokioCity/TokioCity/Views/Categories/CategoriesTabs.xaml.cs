@@ -11,6 +11,7 @@ using TokioCity.ViewModels;
 using System.Net.Http;
 
 using AndroidSpec = Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using TokioCity.Views.Categories;
 
 
 namespace TokioCity.Views
@@ -37,15 +38,23 @@ namespace TokioCity.Views
             BindingContext = viewModel = new CategoriesViewModel(client);
             BarBackgroundColor = Color.FromHex("#181818");
             BarTextColor = Color.White;
-            
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
             viewModel.LoadCategoriesCommand.Execute(null);
+            await Task.Delay(1000);
+            Children.Clear();
+            Children.Add(new Favorite() { IconImageSource = "favorite" });
+            Children.Add(new Lunches() { IconImageSource = "lunch" });
+            Children.Add(new Pasta() { IconImageSource = "pasta" });
+            Children.Add(new CategoryPage(new int[] { 2227, 2228, 2230, 2231, 2232 }, "Суши") { IconImageSource = "sushi" });
+            Children.Add(new Woks() { IconImageSource = "wok" });
+            Children.Add(new CategoryPage(new int[] { 48, 36, 61, 62 }, "Роллы") { Title = "Роллы", IconImageSource = "roll" });
+            Children.Add(new CategoryPage(new int[] { 1804 }, "Детское меню") { Title = "Детское меню", IconImageSource = "kids" });
         }
 
         private async void GoToCart(object sender, EventArgs args)

@@ -22,7 +22,7 @@
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidKeyStore>false</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Projects\Xamarin\TokioCity\TokioCity\store.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>testtest</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>store</AndroidSigningKeyAlias>
