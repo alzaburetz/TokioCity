@@ -37,12 +37,12 @@
         <local:Desserts IconImageSource="dessert.png"/>
         <local:Kids IconImageSource="kids.png"/>
         <local:Pizzetta IconImageSource="pizzetta.png"/>
-        <local:Soups IconImageSource="soup.png"/>
-        <local:Hots IconImageSource="hot.png"/>
-        <local:Salads IconImageSource="salad.png"/>
-        <local:Drinks IconImageSource="drink.png"/>
+        <local:Soups />
+        <local:Hots />
+        <local:Salads />
+        <local:Drinks />
         <local:Pies IconImageSource="pies.png"/>
-        <local:HotSnacks IconImageSource="snack.png"/>
+        <local:HotSnacks />
         <local:Test Title="Test"/>-->
     </TabbedPage.Children>
 </TabbedPage>

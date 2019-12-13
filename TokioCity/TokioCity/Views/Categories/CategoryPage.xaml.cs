@@ -31,11 +31,17 @@ namespace TokioCity.Views.Categories
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await Task.Delay(500);
+            await Task.Delay(300);
             viewModel.LoadProducts.Execute(null);
             //await Task.Delay(1000);
             //IconImageSource = new FFImageLoading.Forms.DataUrlImageSource($"https://www.tokyo-city.ru{viewModel.category.image}");
             
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            viewModel.ClearProducts.Execute(null);
         }
 
         protected async void OpenProduct(object sender, SelectionChangedEventArgs args)

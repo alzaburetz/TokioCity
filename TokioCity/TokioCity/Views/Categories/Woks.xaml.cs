@@ -49,11 +49,12 @@ namespace TokioCity.Views
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
+            base.OnAppearing();
+            await Task.Delay(100);
             viewModel.LoadSubcatsCommand.Execute(null);
             tabs.SelectedItem = viewModel.tabs[0];
-            base.OnAppearing();
         }
 
         private void ProductSelected(object sender, SelectionChangedEventArgs args)

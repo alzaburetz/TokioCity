@@ -20,6 +20,7 @@ namespace TokioCity.ViewModels
     public class BaseCategoryViewModel: BaseViewModel
     {
         public Command LoadProducts { get; set; }
+        public Command ClearProducts { get; set; }
         public Command AddFavorite { get; set; }
         public Command AddToCart { get; set; }
         public Command LoadToppings { get; set; }
@@ -55,6 +56,11 @@ namespace TokioCity.ViewModels
             Toppings = new ObservableCollection<AppItem>();
             selectedCategory = new SubcategorySimplified();
             SelectedCategory = new SubcategorySimplified();
+            ClearProducts = new Command(() =>
+            {
+                    products.Clear();
+                    Products.Clear();
+            });
             LoadToppings = new Command(async (toppings) =>
             {
                 Toppings.Clear();
@@ -68,11 +74,8 @@ namespace TokioCity.ViewModels
                     await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(200));
                 }
             });
-            LoadProducts = new Command(() =>
+            LoadProducts = new Command(async () =>
             {
-                Task.Run(async () =>
-                {
-                    products.Clear();
                     subcats.Clear();
                     ReloadCategories.Execute(category[0]);
                     this.category = DataBase.GetItem<CategorySimplified>("Categories", Query.EQ("cat_id", category[0]));
@@ -82,10 +85,10 @@ namespace TokioCity.ViewModels
                         while (data.MoveNext())
                         {
                             products.Add(data.Current);
-                            await Task.Delay(50);
+                            await Task.Delay(10);
                         }
                     }
-                });
+                   
             });
             AddFavorite = new Command((item) =>
             {
