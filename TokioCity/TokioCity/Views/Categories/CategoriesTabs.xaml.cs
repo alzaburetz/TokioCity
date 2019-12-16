@@ -39,54 +39,54 @@ namespace TokioCity.Views
             BarBackgroundColor = Color.FromHex("#181818");
             BarTextColor = Color.White;
             InitializeComponent();
+            
+            Children.Add(new Favorite() { IconImageSource = "favorite" });
+            
+            Children.Add(new Lunches() { IconImageSource = "lunch" });
+            
+            Children.Add(new Pasta() { IconImageSource = "pasta" });
+            
+            Children.Add(new CategoryPage(new int[] { 2227, 2228, 2230, 2231, 2232 }, "Суши") { IconImageSource = "sushi" });
+            
+            Children.Add(new Woks() { IconImageSource = "wok" });
+            
+            Children.Add(new Burgers() { IconImageSource = "burger" });
+            
+            Children.Add(new CategoryPage(new int[] { 48, 36, 61, 62 }, "Роллы") { Title = "Роллы", IconImageSource = "roll" });
+            
+            Children.Add(new CategoryPage(new int[] { 205 }, "Сеты") { IconImageSource = "set" });
+            
+            Children.Add(new CategoryPage(new int[] { 211, 213, 2495, 220, 214 }, "Пицца") { IconImageSource = "pizza" });
+            
+            Children.Add(new CategoryPage(new int[] { 2284 }, "Десерты") { IconImageSource = "dessert.png" });
+            
+            Children.Add(new CategoryPage(new int[] { 1804 }, "Детское меню") { Title = "Детское меню", IconImageSource = "kids" });
+            
+            Children.Add(new CategoryPage(new int[] { 1553 }, "Пиццета") { IconImageSource = "pizzetta" });
+            
+            Children.Add(new CategoryPage(new int[] { 2243 }, "Супы") { IconImageSource = "soup.png" });
+            
+            Children.Add(new CategoryPage(new int[] { 2259 }, "Горячие блюда") { IconImageSource = "hot.png" });
+            
+            Children.Add(new CategoryPage(new int[] { 2240 }, "Салаты") { IconImageSource = "salad.png" });
+            
+            Children.Add(new CategoryPage(new int[] { 233, 289 }, "Напитки") { IconImageSource = "drink.png" });
+            
+            Children.Add(new CategoryPage(new int[] { 859, 858, 374, 1419 }, "Пироги, торты") { IconImageSource = "pies.png" });
+            
+            Children.Add(new CategoryPage(new int[] { 52 }, "Горячие закуски") { IconImageSource = "snack.png" });
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             viewModel.LoadCategoriesCommand.Execute(null);
-            await Task.Delay(50);
-            Children.Add(new Favorite() { IconImageSource = "favorite" });
-            await Task.Delay(50);
-            Children.Add(new Lunches() { IconImageSource = "lunch" });
-            await Task.Delay(50);
-            Children.Add(new Pasta() { IconImageSource = "pasta" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 2227, 2228, 2230, 2231, 2232 }, "Суши") { IconImageSource = "sushi" });
-            await Task.Delay(50);
-            Children.Add(new Woks() { IconImageSource = "wok" });
-            await Task.Delay(50);
-            Children.Add(new Burgers() { IconImageSource = "burger" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 48, 36, 61, 62 }, "Роллы") { Title = "Роллы", IconImageSource = "roll" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 205 }, "Сеты") { IconImageSource = "set" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 211, 213, 2495, 220, 214 }, "Пицца") { IconImageSource = "pizza" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 2284 }, "Десерты") { IconImageSource = "dessert.png" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 1804 }, "Детское меню") { Title = "Детское меню", IconImageSource = "kids" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 1553 }, "Пиццета") { IconImageSource = "pizzetta" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 2243}, "Супы") { IconImageSource = "soup.png"});
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 2259 }, "Горячия блюда") { IconImageSource = "hot.png" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 2240 }, "Салаты") { IconImageSource = "salad.png"});
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 233, 289 }, "Напитки") { IconImageSource = "drink.png" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 859, 858, 374, 1419 }, "Пироги, торты") { IconImageSource = "pies.png" });
-            await Task.Delay(50);
-            Children.Add(new CategoryPage(new int[] { 52 }, "Горячие закуски") { IconImageSource = "snack.png" });
+            
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            Children.Clear();
         }
 
         private async void GoToCart(object sender, EventArgs args)

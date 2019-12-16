@@ -30,14 +30,10 @@ namespace TokioCity.Views.Categories
 
         protected override async void OnAppearing()
         {
-            base.OnAppearing();
             await Task.Delay(300);
+            base.OnAppearing();
             viewModel.LoadProducts.Execute(null);
             MainProducts.ItemsSource = viewModel.products;
-            
-            //await Task.Delay(1000);
-            //IconImageSource = new FFImageLoading.Forms.DataUrlImageSource($"https://www.tokyo-city.ru{viewModel.category.image}");
-            
         }
 
         protected override void OnDisappearing()

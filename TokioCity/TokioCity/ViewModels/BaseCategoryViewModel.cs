@@ -55,8 +55,8 @@ namespace TokioCity.ViewModels
             });
             LoadProducts = new Command(async () =>
             {
-                
-                    subcats.Clear();
+                products.Clear();
+                subcats.Clear();
                 try
                 {
                     ReloadCategories.Execute(category[0]);

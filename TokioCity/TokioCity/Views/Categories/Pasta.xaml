@@ -35,7 +35,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout CompressedLayout.IsHeadless="True">
             <ScrollView>
                 <StackLayout>
                     <StackLayout Padding="30,30,30,0">
@@ -43,11 +43,12 @@
 
                     </StackLayout>
                     <CollectionView ItemsSource="{Binding products}"
+                                    ItemsUpdatingScrollMode="KeepScrollOffset"
                             SelectionMode="Single"
                             SelectionChanged="OpenProduct">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Span="2"
-                                                 Orientation="Vertical"/>
+                                             Orientation="Vertical"/>
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>

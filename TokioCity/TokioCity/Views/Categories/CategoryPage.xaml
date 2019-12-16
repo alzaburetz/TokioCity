@@ -81,7 +81,7 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                                                    <Label Text="{Binding price, Converter={StaticResource Price}}" 
+                                                    <Label Text="{Binding price, StringFormat='{0} .-'}" 
                                                            Style="{StaticResource PriceLabel}" 
                                                            HorizontalTextAlignment="Start"
                                                            HorizontalOptions="Start"/>
@@ -114,7 +114,7 @@
                                                WidthRequest="100"
                                                VerticalOptions="Start"/>
                                                 <Label Grid.Row="2" 
-                                               Text="{Binding weight1, Converter={StaticResource Weight}}" 
+                                               Text="{Binding weight1, StringFormat='{0} г'}" 
                                                Style="{StaticResource Counter}"/>
                                             </Grid>
                                         </Grid>
@@ -126,7 +126,7 @@
                                         Grid.Column="0"
                                         Grid.ColumnSpan="2"
                                         Grid.RowSpan="3">
-                                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                        <image:CachedImage Source="{Binding image, StringFormat='https://www.tokyo-city.ru/{0}'}"
                                            LoadingDelay="0"
                                            FlowDirection="RightToLeft"
                                            Aspect="AspectFill"
@@ -215,7 +215,7 @@
                                                          BackgroundColor="Transparent"
                                              Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
                                              CommandParameter="{Binding}"/>
-                                            <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                            <image:CachedImage Source="{Binding image, StringFormat='https://www.tokyo-city.ru/{0}'}"
                                                    Aspect="AspectFit"
                                                    Grid.Row="1"
                                                    Grid.ColumnSpan="2"
@@ -228,7 +228,8 @@
                                             <StackLayout Orientation="Horizontal"
                                              Grid.Row="3"
                                              Grid.ColumnSpan="2">
-                                                <Label Text="{Binding price, Converter={StaticResource Price}}"
+                                                <Label Text="{Binding price, StringFormat='{0} .-'}"
+                                                       
                                                    FontAttributes="Bold"
                                                        HorizontalOptions="StartAndExpand"
                                                    />
