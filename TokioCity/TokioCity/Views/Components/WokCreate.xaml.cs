@@ -9,10 +9,9 @@ using Xamarin.Forms.Xaml;
 using TokioCity.ViewModels;
 using TokioCity.Models;
 
-
 namespace TokioCity.Views.Components
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WokCreate : ContentView
     {
         public WoksViewModel viewModel;

@@ -48,13 +48,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <ScrollView>
-                <StackLayout>
-                    <StackLayout Padding="20,20,0,0">
+        <StackLayout CompressedLayout.IsHeadless="true">
+            <ScrollView >
+                <StackLayout CompressedLayout.IsHeadless="true">
+                    <StackLayout Padding="20,20,0,0" CompressedLayout.IsHeadless="true">
                         <Label Text="ВОКИ" Style="{StaticResource Title}"/>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal" Padding="10,0,0,0" HeightRequest="35">
+                    <StackLayout Orientation="Horizontal" Padding="10,0,0,0" HeightRequest="35"
+                                 CompressedLayout.IsHeadless="true">
                         <CollectionView x:Name="Tabs"
                                         ItemsLayout="HorizontalList"
                                         SelectionMode="Single"

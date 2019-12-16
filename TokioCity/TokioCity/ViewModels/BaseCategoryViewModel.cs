@@ -38,14 +38,6 @@ namespace TokioCity.ViewModels
         public SubcategorySimplified SelectedCategory { get; set; }
         public int width { get; set; }
         public int height { get; set; }
-
-        public BaseCategoryViewModel()
-        {
-            AddFavorite = new Command((item) =>
-            {
-                DataBase.WriteAll<AppItem>("Favorite", new List<AppItem>() { (AppItem)item as AppItem });
-            });
-        }
         public BaseCategoryViewModel(int[] category)
         {
             width = App.screenWidth / 4;
@@ -61,24 +53,15 @@ namespace TokioCity.ViewModels
                     products.Clear();
                     Products.Clear();
             });
-            LoadToppings = new Command(async (toppings) =>
-            {
-                Toppings.Clear();
-                List<string> ids = (List<string>)toppings as List<string>;
-                foreach (var id in ids)
-                {
-                    
-                    var query = Query.Where("uid", x => x.AsString == id.ToString());
-                    var item = DataBase.GetProduct<AppItem>("Items", id.ToString());
-                    Toppings.Add(item);
-                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(200));
-                }
-            });
             LoadProducts = new Command(async () =>
             {
+                
                     subcats.Clear();
+                try
+                {
                     ReloadCategories.Execute(category[0]);
-                    this.category = DataBase.GetItem<CategorySimplified>("Categories", Query.EQ("cat_id", category[0]));
+                } catch(IndexOutOfRangeException e) { }
+                this.category = DataBase.GetItem<CategorySimplified>("Categories", Query.EQ("cat_id", category[0]));
                     foreach (var cat in category)
                     {
                         var data = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(cat)));
@@ -87,8 +70,8 @@ namespace TokioCity.ViewModels
                             products.Add(data.Current);
                             await Task.Delay(10);
                         }
-                    }
-                   
+                }
+
             });
             AddFavorite = new Command((item) =>
             {
@@ -111,11 +94,16 @@ namespace TokioCity.ViewModels
 
             ReloadCategories = new Command((categ) =>
             {
-                var subcats = DataBase.GetItem<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id",(int)categ));
-                foreach (var cat in subcats.subcats)
+                try
                 {
-                    this.subcats.Add(new SubcategorySimplified(cat.subcat_id, cat.name));
-                }
+                    var subcats = DataBase.GetItem<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id", (int)categ));
+                    foreach (var cat in subcats.subcats)
+                    {
+                        this.subcats.Add(new SubcategorySimplified(cat.subcat_id, cat.name));
+                    }
+                    this.SelectedCategory = this.subcats[0];
+                } catch (ArgumentOutOfRangeException e) { }
+                
 
             });
 
@@ -128,8 +116,6 @@ namespace TokioCity.ViewModels
                 });
                 
             });
-
-
 
             LoadProductSubcatd = new Command(async (categ) =>
             {
@@ -144,14 +130,6 @@ namespace TokioCity.ViewModels
                 }
                 itemsFound.Dispose();
             });
-
-            
-
-            ItemTapped = new Command((param) =>
-            {
-                var item = param.GetType();
-            });
-
         }
 
         private void AddToCartMethod(AppItem Item)

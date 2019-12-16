@@ -33,6 +33,8 @@ namespace TokioCity.Views.Categories
             base.OnAppearing();
             await Task.Delay(300);
             viewModel.LoadProducts.Execute(null);
+            MainProducts.ItemsSource = viewModel.products;
+            
             //await Task.Delay(1000);
             //IconImageSource = new FFImageLoading.Forms.DataUrlImageSource($"https://www.tokyo-city.ru{viewModel.category.image}");
             
@@ -58,8 +60,8 @@ namespace TokioCity.Views.Categories
 
         protected void LoadSubcat(object sender, SelectionChangedEventArgs args)
         {
-            var item = (Subcategory)args.CurrentSelection[0] as Subcategory;
-            viewModel.LoadProductSubcatd.Execute(item.id);
+            var item = (SubcategorySimplified)args.CurrentSelection[0] as SubcategorySimplified;
+            viewModel.LoadProductSubcatd.Execute(item.subcat_id);
         }
     }
 }

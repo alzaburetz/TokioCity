@@ -10,7 +10,6 @@ using System.Net.Http;
 
 using LiteDB;
 using System.IO;
-using CarouselView.FormsPlugin.Abstractions;
 using System.Threading.Tasks;
 
 namespace TokioCity.ViewModels

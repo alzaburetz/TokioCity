@@ -30,7 +30,9 @@ namespace TokioCity.Views
         }
         protected async override void OnAppearing()
         {
+            
             base.OnAppearing();
+            await Task.Delay(500);
             viewModel.LoadRestraunts.Execute(null);
             if (mapContent.Children.Count == 0)
             {

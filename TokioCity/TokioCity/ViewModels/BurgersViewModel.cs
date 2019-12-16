@@ -11,7 +11,6 @@ using System.Windows.Input;
 
 using LiteDB;
 using System.IO;
-using CarouselView.FormsPlugin.Abstractions;
 using System.Threading.Tasks;
 
 namespace TokioCity.ViewModels

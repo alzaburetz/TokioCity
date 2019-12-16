@@ -10,7 +10,6 @@ using System.Net.Http;
 
 using LiteDB;
 using System.IO;
-using CarouselView.FormsPlugin.Abstractions;
 using System.Threading.Tasks; 
 
 namespace TokioCity.ViewModels
@@ -49,7 +48,7 @@ namespace TokioCity.ViewModels
             RemoveMyWok = new Command((Id) =>
             {
                 DataBase.RemoveItem<MyProduct>("Woks", Query.Where("_id", x => x == (int)Id));
-                var list = MyWoks.GetList();
+                var list = new List<MyProduct>(MyWoks);
                 var wokToRemove = list.Find(x => (x as MyProduct).Id == (int)Id);
                 MyWoks.Remove((MyProduct)wokToRemove);
             });

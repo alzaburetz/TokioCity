@@ -10,7 +10,6 @@ using System.Net.Http;
 
 using LiteDB;
 using System.IO;
-using CarouselView.FormsPlugin.Abstractions;
 using System.Threading.Tasks;
 
 namespace TokioCity.ViewModels
@@ -45,7 +44,10 @@ namespace TokioCity.ViewModels
             LoadSubcat = new Command(async (subcat) =>
             {
                 var items = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains((int)subcat)));
+                if (Products == null)
+                    Products = new ObservableCollection<AppItem>();
                 Products.Clear(); 
+                if (items != null)
                 while (items.MoveNext())
                 {
                     await Task.Delay(TimeSpan.FromMilliseconds(200));

@@ -106,7 +106,7 @@
                 </Frame>
 
                 <AbsoluteLayout 
-                                        Margin="20,0,0,20"
+                                        Margin="20,0,80,20"
                                                Grid.Row="1"
                                                FlowDirection="RightToLeft"
                                                Grid.Column="0"
