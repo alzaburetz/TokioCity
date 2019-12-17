@@ -46,15 +46,18 @@ namespace TokioCity.Views
         public Woks()
         {
             BindingContext = viewModel = new WoksViewModel();
+            MessagingCenter.Subscribe<Object>(this, "Wok", async (obj) =>
+            {
+                await Task.Delay(100);
+                viewModel.LoadSubcatsCommand.Execute(null);
+                tabs.SelectedItem = viewModel.tabs[0];
+            });
             InitializeComponent();
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await Task.Delay(100);
-            viewModel.LoadSubcatsCommand.Execute(null);
-            tabs.SelectedItem = viewModel.tabs[0];
         }
 
         private void ProductSelected(object sender, SelectionChangedEventArgs args)

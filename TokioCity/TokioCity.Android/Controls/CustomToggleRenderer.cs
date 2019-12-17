@@ -18,6 +18,7 @@ using Xamarin.Forms;
 [assembly: ExportRenderer(typeof(RadioButton), typeof(RadioButtonRenderer))]
 namespace TokioCity.Droid
 {
+#pragma warning disable CS0618 // 'ViewRenderer<CustomRadioButton, RadioButton>.ViewRenderer()" является устаревшим: 'This constructor is obsolete as of version 2.5. Please use ViewRenderer(Context) instead.'
     public class RadioButtonRenderer : ViewRenderer<CustomRadioButton, RadioButton>
     {
         protected override void OnElementChanged(ElementChangedEventArgs<CustomRadioButton> e)
@@ -49,4 +50,5 @@ namespace TokioCity.Droid
             }
         }
     }   
+#pragma warning restore CS0618 // 'ViewRenderer<CustomRadioButton, RadioButton>.ViewRenderer()" является устаревшим: 'This constructor is obsolete as of version 2.5. Please use ViewRenderer(Context) instead.'
 }

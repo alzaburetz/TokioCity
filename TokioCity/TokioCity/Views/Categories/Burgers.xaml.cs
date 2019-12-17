@@ -27,8 +27,8 @@ namespace TokioCity.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             viewModel.LoadBurgers.Execute(null);
+
         }
 
         private async void SelectBurger(object sender, SelectionChangedEventArgs args)

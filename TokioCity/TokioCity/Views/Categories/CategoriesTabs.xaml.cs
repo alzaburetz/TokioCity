@@ -30,6 +30,29 @@ namespace TokioCity.Views
             }
             
         }
+
+        protected override void OnCurrentPageChanged()
+        {
+            base.OnCurrentPageChanged();
+            int index = Children.IndexOf(CurrentPage);
+            if (index == 0)
+            {
+                MessagingCenter.Send<Object>(this, "Favorite");
+            }
+            else if (index == 1)
+            {
+                MessagingCenter.Send<Object>(this, "Lunches");
+
+            }
+            else if (index == 2)
+            {
+                MessagingCenter.Send<Object>(this, "Pasta");
+            }
+            else if (index == 4)
+            {
+                MessagingCenter.Send<Object>(this, "Wok");
+            }
+        }
         public CategoriesTabs()
         {
             AndroidSpec.TabbedPage.SetOffscreenPageLimit(this, 10);
@@ -56,7 +79,7 @@ namespace TokioCity.Views
             
             Children.Add(new CategoryPage(new int[] { 205 }, "Сеты") { IconImageSource = "set" });
             
-            Children.Add(new CategoryPage(new int[] { 211, 213, 2495, 220, 214 }, "Пицца") { IconImageSource = "pizza" });
+            Children.Add(new CategoryPage(new int[] { 211, 213, 2495, 220 }, "Пицца") { IconImageSource = "pizza" });
             
             Children.Add(new CategoryPage(new int[] { 2284 }, "Десерты") { IconImageSource = "dessert.png" });
             

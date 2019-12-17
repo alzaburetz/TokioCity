@@ -33,7 +33,7 @@
                  Style="{StaticResource Title}"
                  Margin="30,0,0,0"/>
                     <CollectionView 
-                                    x:Name="MainProducts"
+                            x:Name="MainProducts"
                             SelectionMode="Single"
                             Margin="20,0,0,0"
                             HeightRequest="{Binding height}"
@@ -59,10 +59,10 @@
                                         <ColumnDefinition Width="3.0*"/>
                                     </Grid.ColumnDefinitions>
                                     <Frame BackgroundColor="#202123"
-                                   CornerRadius="10"
-                                   Grid.Column="0"
-                                   Grid.Row="0"
-                                   Grid.RowSpan="5">
+                                           CornerRadius="10"
+                                           Grid.Column="0"
+                                           Grid.Row="0"
+                                           Grid.RowSpan="5">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="0.7*"/>
@@ -77,94 +77,89 @@
                                                     <RowDefinition Height="*"/>
                                                     <RowDefinition Height="0.5*"/>
                                                 </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                                                <StackLayout Orientation="Horizontal" Grid.Row="0">
                                                     <Label Text="{Binding price, StringFormat='{0} .-'}" 
                                                            Style="{StaticResource PriceLabel}" 
                                                            HorizontalTextAlignment="Start"
                                                            HorizontalOptions="Start"/>
-                                                    <StackLayout Padding="10" WidthRequest="70">
-                                                        <Frame CornerRadius="5"
+                                                    <Frame CornerRadius="5"
                                                            Padding="2"
-                                                           Margin="-7"
+                                                           Margin="0"
+                                                           WidthRequest="100"
                                                            BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}">
-                                                            <Label Text="{Binding category, Converter={StaticResource Category}}"
-                                                                       TextColor="White"
-                                                                       VerticalTextAlignment="Center"
-                                                                       HorizontalTextAlignment="Center"/>
-                                                        </Frame>
-                                                    </StackLayout>
+                                                        <Label Text="{Binding category, Converter={StaticResource Category}}"
+                                                               TextColor="White"
+                                                               VerticalTextAlignment="Center"
+                                                               HorizontalTextAlignment="Center"/>
+                                                    </Frame>
                                                     <ImageButton 
                                                         x:DataType="{x:Null}"
                                                         Source="{Binding Favorite, Converter={StaticResource InFavorite}}"
-                                                 ClassId="{Binding uid}"
-                                                 HeightRequest="20"
-                                                 Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
-                                                 CommandParameter="{Binding}"
-                                                 HorizontalOptions="EndAndExpand"
-                                                 BackgroundColor="Transparent">
+                                                        ClassId="{Binding uid}"
+                                                        HeightRequest="20"
+                                                        Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
+                                                        CommandParameter="{Binding}"
+                                                        HorizontalOptions="EndAndExpand"
+                                                        BackgroundColor="Transparent">
                                                     </ImageButton>
                                                 </StackLayout>
                                                 <Label Text="{Binding name}" 
-                                               Grid.Row="1"
-                                               Style="{StaticResource CommonLabel}"
-                                               HorizontalOptions="Fill"
-                                               WidthRequest="100"
-                                               VerticalOptions="Start"/>
+                                                       Grid.Row="1"
+                                                       Style="{StaticResource CommonLabel}"
+                                                       WidthRequest="100"
+                                                       VerticalOptions="Start"/>
                                                 <Label Grid.Row="2" 
-                                               Text="{Binding weight1, StringFormat='{0} г'}" 
-                                               Style="{StaticResource Counter}"/>
+                                                       Text="{Binding weight1, StringFormat='{0} г'}" 
+                                                       Style="{StaticResource Counter}"/>
                                             </Grid>
                                         </Grid>
                                     </Frame>
-                                    <AbsoluteLayout 
-                                        Margin="20,0,100,20"
-                                        Grid.Row="2"
-                                        FlowDirection="RightToLeft"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        Grid.RowSpan="3">
-                                        <image:CachedImage Source="{Binding image, StringFormat='https://www.tokyo-city.ru/{0}'}"
-                                           LoadingDelay="0"
-                                           FlowDirection="RightToLeft"
-                                           Aspect="AspectFill"
-                                           LoadingPriority="Highest"/>
-                                    </AbsoluteLayout>
-                                    <StackLayout FlowDirection="LeftToRight"
-                                         Grid.Column="1"
-                                         Grid.Row="4"
-                                         Orientation="Horizontal">
-                                        <ImageButton BackgroundColor="Transparent"
-                                                     x:DataType="{x:Null}"
-                                             Command="{Binding Path=BindingContext.AddToCart}"
-                                             CommandParameter="{Binding}"
-                                             Source="addtocart.png"/>
-                                    </StackLayout>
+                                    <image:CachedImage Source="{Binding image, StringFormat='https://www.tokyo-city.ru/{0}'}"
+                                                       DownsampleToViewSize="True"
+                                                       DownsampleUseDipUnits="True"
+                                                       DownsampleHeight="50"
+                                                       Finish="CachedImage_Finish"
+                                                       CacheDuration="90"
+                                                       RetryDelay="0"
+                                                       LoadingDelay="0"
+                                                       Margin="20,0,100,20"
+                                                       CacheType="All"
+                                                       FadeAnimationEnabled="False"
+                                                       Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       Grid.RowSpan="3"
+                                                       FlowDirection="RightToLeft"
+                                                       Aspect="AspectFit"
+                                                       LoadingPriority="Highest"/>
+                                    <ImageButton BackgroundColor="Transparent"
+                                                 x:DataType="{x:Null}"
+                                                 Command="{Binding Path=BindingContext.AddToCart}" 
+                                                 FlowDirection="LeftToRight"
+                                                 Grid.Column="1"
+                                                 Grid.Row="4"
+                                                 CommandParameter="{Binding}"
+                                                 Source="addtocart.png"/>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
 
                     </CollectionView>
                     <CollectionView ItemsSource="{Binding subcats}"
-                            HeightRequest="30"
-                            Margin="30,0,0,0"
-                            SelectionMode="Single"
-                            SelectionChanged="LoadSubcat">
+                                    HeightRequest="30"
+                                    Margin="30,0,0,0"
+                                    SelectionMode="Single"
+                                    SelectionChanged="LoadSubcat">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal"
-                                       ItemSpacing="10">
-
-                            </LinearItemsLayout>
-
+                                               ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:SubcategorySimplified">
                                 <Label Text="{Binding name, Converter={StaticResource ToUpper}}"
-                               BackgroundColor="Red"
-                                Style="{StaticResource Button}"
-                                           Margin="10">
+                                       BackgroundColor="Red"
+                                       Style="{StaticResource Button}"
+                                       Margin="10">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup>
                                             <VisualState Name="Normal">
@@ -187,7 +182,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                     <CollectionView ItemsSource="{Binding Products}"
-                          SelectionChanged="OpenProduct">
+                                    SelectionChanged="OpenProduct">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
                                      Span="2"/>
@@ -197,8 +192,8 @@
                                 <StackLayout BackgroundColor="#181818"
                                      Padding="5">
                                     <Frame BackgroundColor="#202123"
-                               CornerRadius="20"
-                                   Padding="15">
+                                           CornerRadius="20"
+                                           Padding="15">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="20"/>
@@ -211,28 +206,28 @@
                                                 <ColumnDefinition Width="20"/>
                                             </Grid.ColumnDefinitions>
                                             <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}" Grid.Row="0" Grid.Column="1"
-                                             x:DataType="{x:Null}"
+                                                         x:DataType="{x:Null}"
                                                          BackgroundColor="Transparent"
-                                             Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
-                                             CommandParameter="{Binding}"/>
+                                                         Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
+                                                         CommandParameter="{Binding}"/>
                                             <image:CachedImage Source="{Binding image, StringFormat='https://www.tokyo-city.ru/{0}'}"
                                                    Aspect="AspectFit"
+                                                   CacheType="All"
                                                    Grid.Row="1"
                                                    Grid.ColumnSpan="2"
+                                                   CacheDuration="90"
                                                    VerticalOptions="StartAndExpand"
                                                    HorizontalOptions="FillAndExpand"/>
                                             <Label Text="{Binding name}"
-                                       Opacity="0.6"
-                                       Grid.ColumnSpan="2"
-                                       Grid.Row="2"/>
+                                                   Opacity="0.6"
+                                                   Grid.ColumnSpan="2"
+                                                   Grid.Row="2"/>
                                             <StackLayout Orientation="Horizontal"
-                                             Grid.Row="3"
-                                             Grid.ColumnSpan="2">
+                                                         Grid.Row="3"
+                                                         Grid.ColumnSpan="2">
                                                 <Label Text="{Binding price, StringFormat='{0} .-'}"
-                                                       
-                                                   FontAttributes="Bold"
-                                                       HorizontalOptions="StartAndExpand"
-                                                   />
+                                                       FontAttributes="Bold"
+                                                       HorizontalOptions="StartAndExpand"/>
                                                 <ImageButton Source="addtocart.png"
                                                              x:DataType="{x:Null}"
                                                              VerticalOptions="EndAndExpand"

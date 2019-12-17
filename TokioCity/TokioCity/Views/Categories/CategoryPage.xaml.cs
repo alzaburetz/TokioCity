@@ -25,6 +25,7 @@ namespace TokioCity.Views.Categories
         {
             BindingContext = viewModel = new BaseCategoryViewModel(categories);
             viewModel.Title = title;
+            
             this.Title = title;
         }
 
@@ -58,6 +59,11 @@ namespace TokioCity.Views.Categories
         {
             var item = (SubcategorySimplified)args.CurrentSelection[0] as SubcategorySimplified;
             viewModel.LoadProductSubcatd.Execute(item.subcat_id);
+        }
+
+        private void CachedImage_Finish(object sender, FFImageLoading.Forms.CachedImageEvents.FinishEventArgs e)
+        {
+            var a = e.ScheduledWork;
         }
     }
 }

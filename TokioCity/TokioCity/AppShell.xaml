@@ -106,6 +106,12 @@
             </ShellContent>
         </Tab>
 
+        <Tab Title="ТЕСТ">
+            <ShellContent>
+                <local:CachedImageTest/>
+            </ShellContent>
+        </Tab>
+
     </FlyoutItem>
     <ShellItem>
         <ShellSection>

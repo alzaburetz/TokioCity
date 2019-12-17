@@ -160,7 +160,7 @@
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
-                <StackLayout>
+                <StackLayout x:Name="Cntnt">
                     <StackLayout Padding="30,30,30,0">
                         <Label Text="БУРГЕРЫ" Style="{StaticResource Title}"/>
                     </StackLayout>
@@ -196,6 +196,12 @@
                     
                 </StackLayout>
             </ScrollView>
+            <AbsoluteLayout AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5"
+                            BackgroundColor="Red">
+                <ActivityIndicator IsVisible="{Binding isBusy}"
+                                   IsEnabled="True"
+                                   IsRunning="{Binding isBusy}"/>
+            </AbsoluteLayout>
             <!--<StackLayout HeightRequest="75" Padding="10">
                 <Frame BackgroundColor="#007AFF" 
                        IsVisible="false"

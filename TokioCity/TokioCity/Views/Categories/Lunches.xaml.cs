@@ -18,6 +18,10 @@ namespace TokioCity.Views
         public Lunches()
         {
             BindingContext = viewModel = new LunchesViewModel();
+            MessagingCenter.Subscribe<Object>(this, "Lunches", (obj) =>
+            {
+                viewModel.LoadLunchesCommand.Execute(null);
+            });
             InitializeComponent();
         }
 
@@ -25,7 +29,7 @@ namespace TokioCity.Views
         {
             base.OnAppearing();
 
-            viewModel.LoadLunchesCommand.Execute(null);
+            
         }
     }
 }

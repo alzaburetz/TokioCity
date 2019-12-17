@@ -65,10 +65,10 @@ namespace TokioCity.ViewModels
                     foreach (var cat in category)
                     {
                         var data = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(cat)));
-                        while (data.MoveNext())
+                        while(data.MoveNext())
                         {
                             products.Add(data.Current);
-                            await Task.Delay(10);
+                        
                         }
                 }
 
@@ -102,7 +102,8 @@ namespace TokioCity.ViewModels
                         this.subcats.Add(new SubcategorySimplified(cat.subcat_id, cat.name));
                     }
                     this.SelectedCategory = this.subcats[0];
-                } catch (ArgumentOutOfRangeException e) { }
+                } 
+                catch (ArgumentOutOfRangeException e) { }
                 
 
             });
@@ -119,13 +120,12 @@ namespace TokioCity.ViewModels
 
             LoadProductSubcatd = new Command(async (categ) =>
             {
-                int count = DataBase.GetRecordCount<AppItem>("Items");
-                var query = Query.Where("category", x => x.AsArray.Contains((int)categ));
-                var itemsFound = DataBase.GetByQueryEnumerable<AppItem>("Items", query);
                 Products.Clear();
+                var items = products.Where(x => x.category.Contains((int)categ));
+                var itemsFound = items.GetEnumerator();
                 while (itemsFound.MoveNext())
                 {
-                    //await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(200));
+                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(20));
                     Products.Add(itemsFound.Current);
                 }
                 itemsFound.Dispose();

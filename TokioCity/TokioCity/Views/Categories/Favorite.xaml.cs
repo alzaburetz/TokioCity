@@ -19,18 +19,21 @@ namespace TokioCity.Views
         public Favorite()
         {
             BindingContext = favViewModel = new FavoriteViewModel();
+            MessagingCenter.Subscribe<Object>(this, "Favorite", (obj) =>
+            {
+                try
+                {
+                    favViewModel.LoadFavorites.Execute(null);
+
+                }
+                catch { }
+            });
             InitializeComponent();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            try
-            {
-                favViewModel.LoadFavorites.Execute(null);
-
-            }
-            catch { }
         }
 
         private async void OpenProduct(object sender, SelectionChangedEventArgs args)
