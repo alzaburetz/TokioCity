@@ -55,9 +55,10 @@ namespace TokioCity.Views.Categories
             Collection.SelectedItem = null;
         }
 
-        protected void LoadSubcat(object sender, SelectionChangedEventArgs args)
+        protected async void LoadSubcat(object sender, SelectionChangedEventArgs args)
         {
             var item = (SubcategorySimplified)args.CurrentSelection[0] as SubcategorySimplified;
+            await Task.Delay(TimeSpan.FromMilliseconds(100));
             viewModel.LoadProductSubcatd.Execute(item.subcat_id);
         }
 

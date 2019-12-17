@@ -40,9 +40,7 @@
                             SelectionChanged="OpenProduct">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal"
-                                               SnapPointsAlignment="Start"
-                                               SnapPointsType="Mandatory"
-                                       ItemSpacing="10"/>
+                                               ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:AppItem">
@@ -117,7 +115,7 @@
                                     <image:CachedImage Source="{Binding image, StringFormat='https://www.tokyo-city.ru/{0}'}"
                                                        DownsampleToViewSize="True"
                                                        DownsampleUseDipUnits="True"
-                                                       DownsampleHeight="50"
+                                                       DownsampleHeight="100"
                                                        Finish="CachedImage_Finish"
                                                        CacheDuration="90"
                                                        RetryDelay="0"
