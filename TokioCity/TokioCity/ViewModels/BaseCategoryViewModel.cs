@@ -29,8 +29,20 @@ namespace TokioCity.ViewModels
         public Command ItemTapped { get; set; }
         public ObservableCollection<SubcategorySimplified> subcats { get; set; }
         public CategorySimplified category { get; set; }
+        private ObservableCollection<AppItem> _Products;
         public ObservableCollection<AppItem> products { get; set; }
-        public ObservableCollection<AppItem> Products { get; set; }
+        public ObservableCollection<AppItem> Products
+        {
+            get
+            {
+                return _Products;
+            }
+            set
+            {
+                _Products = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<AppItem> Toppings { get; set; }
         
         public ToolbarItem cart { get; set; }
@@ -64,11 +76,11 @@ namespace TokioCity.ViewModels
                 this.category = DataBase.GetItem<CategorySimplified>("Categories", Query.EQ("cat_id", category[0]));
                     foreach (var cat in category)
                     {
-                        var data = DataBase.GetByQueryEnumerable<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(cat)));
+                        var database = await DataBase.GetByQueryEnumerableAsync<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(cat)));
+                        var data = database.GetEnumerator();
                         while(data.MoveNext())
                         {
                             products.Add(data.Current);
-                        
                         }
                 }
 
@@ -92,14 +104,15 @@ namespace TokioCity.ViewModels
                     
             });
 
-            ReloadCategories = new Command((categ) =>
+            ReloadCategories = new Command(async (categ) =>
             {
                 try
                 {
-                    var subcats = DataBase.GetItem<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id", (int)categ));
-                    foreach (var cat in subcats.subcats)
+                    
+                    var subcats = await DataBase.GetItemAsync<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id", (int)categ));
+                    foreach (var subcat in subcats.subcats)
                     {
-                        this.subcats.Add(new SubcategorySimplified(cat.subcat_id, cat.name));
+                        this.subcats.Add(subcat);
                     }
                     this.SelectedCategory = this.subcats[0];
                 } 
@@ -121,14 +134,12 @@ namespace TokioCity.ViewModels
             LoadProductSubcatd = new Command(async (categ) =>
             {
                 Products.Clear();
-                var items = products.Where(x => x.category.Contains((int)categ));
-                var itemsFound = items.GetEnumerator();
-                while (itemsFound.MoveNext())
+                var items = await DataBase.GetByQueryEnumerableAsync<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains((int)categ)));
+                var ie = items.GetEnumerator();
+                while (ie.MoveNext())
                 {
-                    await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(20));
-                    Products.Add(itemsFound.Current);
+                    Products.Add(ie.Current);
                 }
-                itemsFound.Dispose();
             });
         }
 

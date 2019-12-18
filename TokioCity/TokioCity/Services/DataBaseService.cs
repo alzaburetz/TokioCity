@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using LiteDB;
-using TokioCity.Models;
+using System.Threading.Tasks;
 
 namespace TokioCity.Services
 {
@@ -25,6 +25,15 @@ namespace TokioCity.Services
             {
                 yield return en.Current;
             }
+        }
+
+        public Task<IEnumerable<T>> GetAllStreamAsync<T>(string collection)
+        {
+            return Task.Run(() => database.GetCollection<T>(collection).FindAll());
+        }
+        public Task<T> GetItemAsync<T>(string collection, Query query)
+        {
+            return Task.Run(() => database.GetCollection<T>(collection).IncludeAll(4).FindOne(query));
         }
 
         public int GetRecordCount<T>(string collection)
@@ -62,6 +71,11 @@ namespace TokioCity.Services
                 .GetEnumerator();
             while (enumeration.MoveNext())
                 yield return enumeration.Current;
+        }
+
+        public Task<IEnumerable<T>> GetByQueryEnumerableAsync<T>(string collection, Query query)
+        {
+            return Task.Run(() => database.GetCollection<T>(collection).Find(query));
         }
 
         public void WriteAll<T>(string collection, List<T> items)

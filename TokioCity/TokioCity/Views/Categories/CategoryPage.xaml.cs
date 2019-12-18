@@ -35,6 +35,7 @@ namespace TokioCity.Views.Categories
             base.OnAppearing();
             viewModel.LoadProducts.Execute(null);
             MainProducts.ItemsSource = viewModel.products;
+            Grid.ItemsSource = viewModel.Products;
         }
 
         protected override void OnDisappearing()
@@ -62,9 +63,11 @@ namespace TokioCity.Views.Categories
             viewModel.LoadProductSubcatd.Execute(item.subcat_id);
         }
 
-        private void CachedImage_Finish(object sender, FFImageLoading.Forms.CachedImageEvents.FinishEventArgs e)
+        private async void CachedImage_Finish(object sender, FFImageLoading.Forms.CachedImageEvents.FinishEventArgs e)
         {
             var a = e.ScheduledWork;
+            return;
+            await ((FFImageLoading.Forms.CachedImage)sender).ScaleTo(1.5f, 500);
         }
     }
 }

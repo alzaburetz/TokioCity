@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LiteDB;
 
 namespace TokioCity.Services
@@ -9,6 +10,9 @@ namespace TokioCity.Services
         T GetProduct<T>(string collection, string uid);
        List<T> GetAll<T>(string collection);
        IEnumerable<T> GetAllStream<T>(string collection);
+       Task<IEnumerable<T>> GetAllStreamAsync<T>(string collection);
+       Task<IEnumerable<T>> GetByQueryEnumerableAsync<T>(string collection, Query query);
+        Task<T> GetItemAsync<T>(string collection, Query query);
        void WriteAll<T>(string collection, List<T> items);
        void RemoveAll<T>(string collection);
        List<T> GetByQuery<T>(string collection, Query query);

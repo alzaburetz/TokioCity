@@ -40,6 +40,8 @@
                             SelectionChanged="OpenProduct">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal"
+                                               SnapPointsAlignment="Start"
+                                               SnapPointsType="MandatorySingle"
                                                ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
@@ -179,7 +181,7 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                    <CollectionView ItemsSource="{Binding Products}"
+                    <CollectionView x:Name="Grid"
                                     SelectionChanged="OpenProduct">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
@@ -210,6 +212,8 @@
                                                          CommandParameter="{Binding}"/>
                                             <image:CachedImage Source="{Binding image, StringFormat='https://www.tokyo-city.ru/{0}'}"
                                                    Aspect="AspectFit"
+                                                   DownsampleToViewSize="True"
+                                                   FadeAnimationEnabled="False"
                                                    CacheType="All"
                                                    Grid.Row="1"
                                                    Grid.ColumnSpan="2"

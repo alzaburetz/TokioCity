@@ -60,21 +60,25 @@ namespace TokioCity.ViewModels
                 data = await RequestHelper.GetData<List<Category>>(client, "data/app_categs_full20.php?version=");
                 CatList.Clear();
                 var categories = new List<CategorySimplified>();
-                foreach (var category in data)
-                {
-                    categories.Add(new CategorySimplified(category));
-                }
-                DataBase.WriteAll<CategorySimplified>("Categories", categories);
-                var count = DataBase.GetRecordCount<CategorySimplified>("Categories");
                 if (data != null)
-                    foreach (Category category in data)
+                {
+                    foreach (var category in data)
                     {
-                        category.image = "https://www.tokyo-city.ru" + category.image;
-                        CatList.Add(category);
+                        categories.Add(new CategorySimplified(category));
                     }
-                CurrentCategory = CatList[0].id;
+                    DataBase.WriteAll<CategorySimplified>("Categories", categories);
+                    var count = DataBase.GetRecordCount<CategorySimplified>("Categories");
+                    if (data != null)
+                        foreach (Category category in data)
+                        {
+                            category.image = "https://www.tokyo-city.ru" + category.image;
+                            CatList.Add(category);
+                        }
+                    CurrentCategory = CatList[0].id;
 
-                LoadItemsCommand.Execute(null);
+                    LoadItemsCommand.Execute(null);
+                }
+               
             });
 
             LoadItemsCommand = new Command(async () =>

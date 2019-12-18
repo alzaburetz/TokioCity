@@ -26,38 +26,7 @@ namespace TokioCity.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            IsBusy = true;
-            StackLayout stack = new StackLayout()
-            {
-                Orientation = StackOrientation.Vertical,
-                Spacing = 10
-            };
             viewModel.LoadProducts.Execute(null);
-            var config = new FFImageLoading.Config.Configuration()
-            {
-                ExecuteCallbacksOnUIThread = true
-            };
-            
-            foreach (var product in viewModel.products)
-            {
-                CachedImage img = new CachedImage()
-                {
-                    Source = string.Format("https://www.tokyo-city.ru/{0}", product.image),
-                    CacheType = FFImageLoading.Cache.CacheType.All,
-                    FadeAnimationEnabled = false,
-                    DownsampleToViewSize = true,
-                    DownsampleHeight = 100,
-                    LoadingPriority = FFImageLoading.Work.LoadingPriority.Highest,
-                    Aspect = Aspect.AspectFit
-                };
-                stack.Children.Add(img);
-            }
-
-            Content = new ScrollView()
-            {
-                Content = stack
-            };
-            IsBusy = false;
         }
     }
 }

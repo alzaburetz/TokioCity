@@ -4,12 +4,45 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:model="clr-namespace:TokioCity.Models"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="TokioCity.Views.CachedImageTest">
     <ContentPage.Content>
         <StackLayout>
-            <ActivityIndicator IsVisible="{Binding IsBusy}"
-                               IsRunning="{Binding IsBusy}"
-                               IsEnabled="{Binding IsBusy}"/>
+            <CollectionView ItemsSource="{Binding products}"
+                            SelectionMode="Single"
+                            Margin="20,0,0,0"
+                            HeightRequest="{Binding height}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                               SnapPointsAlignment="Start"
+                                               SnapPointsType="MandatorySingle"
+                                               ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:AppItem">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.1*"/>
+                                <RowDefinition Height="0.15*"/>
+                                <RowDefinition Height="0.1*"/>
+                                <RowDefinition Height="0.45*"/>
+                                <RowDefinition Height="0.2*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*"/>
+                                <ColumnDefinition Width="0.3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame BackgroundColor="#202123"
+                                   Grid.RowSpan="4"
+                                   CornerRadius="10">
+                                
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
