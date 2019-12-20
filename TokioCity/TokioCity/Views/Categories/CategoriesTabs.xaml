@@ -4,6 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.IsSmoothScrollEnabled="false"
+            android:TabbedPage.OffscreenPageLimit="5"
+            android:TabbedPage.IsSwipePagingEnabled="False"
             xmlns:local="clr-namespace:TokioCity.Views"
              x:Class="TokioCity.Views.CategoriesTabs">
   <!--Pages can be added as references or inline-->

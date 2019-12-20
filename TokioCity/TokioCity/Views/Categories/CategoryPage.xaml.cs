@@ -21,9 +21,9 @@ namespace TokioCity.Views.Categories
             InitializeComponent();
         }
 
-        public CategoryPage(int[] categories, string title) : this()
+        public CategoryPage(int[] categories, string title, bool showSubcats = true) : this()
         {
-            BindingContext = viewModel = new BaseCategoryViewModel(categories);
+            BindingContext = viewModel = new BaseCategoryViewModel(categories, showSubcats);
             viewModel.Title = title;
             
             this.Title = title;
@@ -41,7 +41,7 @@ namespace TokioCity.Views.Categories
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            viewModel.ClearProducts.Execute(null);
+            //viewModel.ClearProducts.Execute(null);
         }
 
         protected async void OpenProduct(object sender, SelectionChangedEventArgs args)

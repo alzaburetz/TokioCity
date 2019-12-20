@@ -69,16 +69,22 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="20"/>
                                             </Grid.ColumnDefinitions>
+                                            
+                                            <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                                   Aspect="AspectFit"
+                                                   Grid.Row="1"
+                                                   FadeAnimationEnabled="False"
+                                                               LoadingPriority="Highest"
+                                                               CacheType="All"
+                                                               CacheDuration="90"
+                                                   Margin="-25, -25, -25,0"
+                                                   Grid.ColumnSpan="2"
+                                                   VerticalOptions="StartAndExpand"
+                                                   HorizontalOptions="FillAndExpand"/>
                                             <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}" Grid.Row="0" Grid.Column="1"
                                              BackgroundColor="Transparent"
                                              Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference PastaPage}}"
                                              CommandParameter="{Binding}"/>
-                                            <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
-                                                   Aspect="AspectFit"
-                                                   Grid.Row="1"
-                                                   Grid.ColumnSpan="2"
-                                                   VerticalOptions="StartAndExpand"
-                                                   HorizontalOptions="FillAndExpand"/>
                                             <Label Text="{Binding name}"
                                        Opacity="0.6"
                                        Grid.ColumnSpan="2"

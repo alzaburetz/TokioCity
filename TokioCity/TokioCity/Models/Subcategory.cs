@@ -25,5 +25,16 @@ namespace TokioCity.Models
         public int max_toppings { get; set; }
         [JsonProperty("min-toppings")]
         public int min_toppings { get; set; }
+
+        public Subcategory()
+        {
+
+        }
+
+        public Subcategory(SubcategorySimplified subcat)
+        {
+            this.id = subcat.subcat_id;
+            this.name = subcat.name;
+        }
     }
 }

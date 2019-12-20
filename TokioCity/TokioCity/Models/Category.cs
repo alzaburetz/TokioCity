@@ -28,5 +28,16 @@ namespace TokioCity.Models
         {
             subcategories = new List<Subcategory>();
         }
+
+        public Category(CategorySimplified cat) : this()
+        {
+            this.id = cat.cat_id;
+            this.name = "";
+            if (cat.subcats != null)
+            foreach (var subcat in cat.subcats)
+            {
+                this.subcategories.Add(new Subcategory(subcat));
+            }
+        }
     }
 }

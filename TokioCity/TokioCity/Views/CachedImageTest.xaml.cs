@@ -19,7 +19,7 @@ namespace TokioCity.Views
         BaseCategoryViewModel viewModel { get; set; }
         public CachedImageTest()
         {
-            viewModel = new BaseCategoryViewModel(new int[] { 2227, 2228, 2230, 2231, 2232 });
+            BindingContext = viewModel = new BaseCategoryViewModel(new int[] { 2227, 2228, 2230, 2231, 2232 });
             InitializeComponent();
         }
 

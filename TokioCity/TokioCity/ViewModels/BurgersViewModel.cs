@@ -25,10 +25,13 @@ namespace TokioCity.ViewModels
         public Command AddToCart { get; set; }
 
         public int height { get; set; }
+        public int widthGrid { get; set; }
 
         public BurgersViewModel()
         {
             burgers = new ObservableCollection<AppItem>();
+            var info = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
+            widthGrid = (int)(info.Width / info.Density);
             toppings = new ObservableCollection<AppItem>();
             height = App.screenHeight / 2;
             AddToFavorite = new Command((item) =>

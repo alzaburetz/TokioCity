@@ -27,8 +27,9 @@ namespace TokioCity.Views
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
+            await Task.Delay(200);
             base.OnAppearing();
 
         }

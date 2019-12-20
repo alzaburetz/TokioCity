@@ -81,6 +81,7 @@ namespace TokioCity.ViewModels
                 foreach (var index in indecies as List<string>)
                 {
                     var topping = DataBase.GetProduct<AppItem>("Items", index as string);
+                    if (topping != null)
                     toppings.Add(topping);
                 }
             });

@@ -57,18 +57,17 @@ namespace TokioCity.ViewModels
 
             LoadCategoriesCommand = new Command(async () =>
             {
-                data = await RequestHelper.GetData<List<Category>>(client, "data/app_categs_full20.php?version=");
+                if (DataBase.GetRecordCount<CategorySimplified>("Categories") == 0)
+                    data = await RequestHelper.GetData<List<Category>>(client, "data/app_categs_full20.php?version=");
                 CatList.Clear();
                 var categories = new List<CategorySimplified>();
-                if (data != null)
+                if (data.Count > 0)
                 {
                     foreach (var category in data)
                     {
                         categories.Add(new CategorySimplified(category));
                     }
                     DataBase.WriteAll<CategorySimplified>("Categories", categories);
-                    var count = DataBase.GetRecordCount<CategorySimplified>("Categories");
-                    if (data != null)
                         foreach (Category category in data)
                         {
                             category.image = "https://www.tokyo-city.ru" + category.image;
@@ -77,6 +76,15 @@ namespace TokioCity.ViewModels
                     CurrentCategory = CatList[0].id;
 
                     LoadItemsCommand.Execute(null);
+                }
+                else
+                {
+                    var categs = await DataBase.GetAllStreamAsync<CategorySimplified>("Categories");
+                    var ie = categs.GetEnumerator();
+                    while(ie.MoveNext())
+                    {
+                        CatList.Add(new Category(ie.Current));
+                    }
                 }
                
             });

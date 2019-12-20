@@ -3,11 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="TokioCity.Views.Components.WokCreate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="Topping">
+                <Grid WidthRequest="150" HeightRequest="350">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame BackgroundColor="#202123"
+                                                       Grid.ColumnSpan="2"
+                                                       Grid.RowSpan="2"
+                                                       CornerRadius="10">
+                        <StackLayout>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="0.3*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}" 
+                                                   Aspect="AspectFill"
+                                                   Grid.Row="0"/>
+                                <Label Text="{Binding price, StringFormat='{0} .-'}"
+                                                               Style="{StaticResource PriceLabel}"
+                                       Grid.Row="1"/>
+                                <Label Text="{Binding name}"
+                                                               Style="{StaticResource CommonLabel}"
+                                       Grid.Row="2"/>
+                            </Grid>
+                            
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Grid.Column="1"
+                                                       IsVisible="{Binding selected}"
+                                                       BackgroundColor="Blue"
+                                                       Padding="0"
+                                                       CornerRadius="20">
+                        <Label Text="1"
+                               TextColor="White"
+                                                           VerticalTextAlignment="Center"
+                                                           FontSize="Medium"
+                                                           HorizontalTextAlignment="Center"/>
+                    </Frame>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentView.Resources>
   <ContentView.Content>
         <StackLayout>
-            <StackLayout BackgroundColor="#202123" HeightRequest="280">
+            <StackLayout BackgroundColor="#202123" HeightRequest="350">
                 <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
                     <Label Text="ОСНОВА" Style="{StaticResource Header}"/>
                     <Label Text="{Binding Path = main.Count}" Style="{StaticResource Counter}"/>
@@ -16,7 +70,7 @@
                                         SelectionMode="Single"
                                         ItemSizingStrategy="MeasureAllItems"
                                         SelectionChanged="ProductSelected"
-                                        ItemTemplate="{StaticResource ProductTopping}"
+                                        ItemTemplate="{StaticResource Topping}"
                                        >
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal"
@@ -26,7 +80,7 @@
                 </CollectionView>
 
             </StackLayout>
-            <StackLayout BackgroundColor="#202123" HeightRequest="280" Margin="0,15,0,0">
+            <StackLayout BackgroundColor="#202123" HeightRequest="350" Margin="0,15,0,0">
                 <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
                     <Label Text="МЯСО, РЫБА, МОРЕПРОДУКТЫ" Style="{StaticResource Header}"/>
                     <Label Text="{Binding Path = meat.Count}" Style="{StaticResource Counter}"/>
@@ -35,7 +89,7 @@
                                             ItemSizingStrategy="MeasureAllItems"
                                             SelectionMode="Single"
                                             SelectionChanged="MeatSelected"
-                                        ItemTemplate="{StaticResource ProductTopping}"
+                                        ItemTemplate="{StaticResource Topping}"
                                        >
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal"
@@ -45,7 +99,7 @@
                 </CollectionView>
 
             </StackLayout>
-            <StackLayout BackgroundColor="#202123" HeightRequest="280" Margin="0,15,0,0">
+            <StackLayout BackgroundColor="#202123" HeightRequest="350" Margin="0,15,0,0">
                 <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
                     <Label Text="СОУС" Style="{StaticResource Header}"/>
                     <Label Text="{Binding Path = sauce.Count}" Style="{StaticResource Counter}"/>
@@ -54,7 +108,7 @@
                                             ItemSizingStrategy="MeasureAllItems"
                                             SelectionMode="Single"
                                             SelectionChanged="SauceSelected"
-                                        ItemTemplate="{StaticResource ProductTopping}"
+                                        ItemTemplate="{StaticResource Topping}"
                                        >
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal"
@@ -63,7 +117,7 @@
                     </CollectionView.ItemsLayout>
                 </CollectionView>
             </StackLayout>
-            <StackLayout BackgroundColor="#202123" HeightRequest="280" Margin="0,15,0,0">
+            <StackLayout BackgroundColor="#202123" HeightRequest="350" Margin="0,15,0,0">
                 <StackLayout Orientation="Horizontal" Padding="20,25,0,0">
                     <Label Text="ТОППИНГИ" Style="{StaticResource Header}"/>
                     <Label Text="{Binding Path = toppings.Count}" Style="{StaticResource Counter}"/>
@@ -72,7 +126,7 @@
                                             ItemSizingStrategy="MeasureAllItems"
                                             SelectionMode="Single"
                                             SelectionChanged="ToppingSelected"
-                                        ItemTemplate="{StaticResource ProductTopping}"
+                                        ItemTemplate="{StaticResource Topping}"
                                        >
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal"

@@ -49,10 +49,15 @@ namespace TokioCity.ViewModels
         private SubcategorySimplified selectedCategory;
         public SubcategorySimplified SelectedCategory { get; set; }
         public int width { get; set; }
+        public int widthGrid { get; set; }
         public int height { get; set; }
-        public BaseCategoryViewModel(int[] category)
+        bool subcatsShow { get; set; }
+        public BaseCategoryViewModel(int[] category, bool showSubcats = true)
         {
+            subcatsShow = showSubcats;
             width = App.screenWidth / 4;
+            var info = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
+            widthGrid = (int)(info.Width / info.Density);
             height = (App.screenHeight / 2);
             products = new ObservableCollection<AppItem>();
             subcats = new ObservableCollection<SubcategorySimplified>();
@@ -69,10 +74,15 @@ namespace TokioCity.ViewModels
             {
                 products.Clear();
                 subcats.Clear();
-                try
+                if (subcatsShow)
                 {
-                    ReloadCategories.Execute(category[0]);
-                } catch(IndexOutOfRangeException e) { }
+                    try
+                    {
+                        ReloadCategories.Execute(category[0]);
+                    }
+                    catch (IndexOutOfRangeException e) { }
+                }
+                
                 this.category = DataBase.GetItem<CategorySimplified>("Categories", Query.EQ("cat_id", category[0]));
                     foreach (var cat in category)
                     {

@@ -34,7 +34,7 @@
 
                 </StackLayout>
                 <CollectionView ItemsSource="{Binding favorites}"
-                                ItemsUpdatingScrollMode="KeepLastItemInView"
+                                RemainingItemsThreshold="10"
                                 
                             SelectionChanged="OpenProduct"
                             SelectionMode="Single"
@@ -73,10 +73,19 @@
                                              CommandParameter="{Binding}"/>
                                         <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
                                                    Aspect="AspectFit"
+                                                           Margin="-25,-20,-25,0"
+                                                           FadeAnimationEnabled="False"
+                                                           CacheType="All"
+                                                           DownsampleToViewSize="True"
+                                                           BitmapOptimizations="True"
                                                    Grid.Row="1"
                                                    Grid.ColumnSpan="2"
                                                    VerticalOptions="StartAndExpand"
                                                    HorizontalOptions="FillAndExpand"/>
+                                        <ImageButton Source="heartfilled.png" Grid.Row="0" Grid.Column="1"
+                                             BackgroundColor="Transparent"
+                                             Command="{Binding Path=BindingContext.RemoveFavorite, Source={x:Reference Fav}}"
+                                             CommandParameter="{Binding}"/>
                                         <Label Text="{Binding name}"
                                        Opacity="0.6"
                                        Grid.ColumnSpan="2"

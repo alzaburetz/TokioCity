@@ -31,13 +31,13 @@
                              CompressedLayout.IsHeadless="true">
                     <Label Text="{Binding Title, Converter={StaticResource ToUpper}}"
                  Style="{StaticResource Title}"
-                 Margin="30,0,0,0"/>
+                 Margin="30,30,0,0"/>
                     <CollectionView 
                             x:Name="MainProducts"
                             SelectionMode="Single"
                             Margin="20,0,0,0"
                             HeightRequest="{Binding height}"
-                            SelectionChanged="OpenProduct">
+                            SelectionChanged="OpenProduct" HorizontalScrollBarVisibility="Never">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal"
                                                SnapPointsAlignment="Start"
@@ -46,100 +46,91 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:AppItem">
-                                <Grid>
+                                <Grid WidthRequest="{Binding Path=BindingContext.widthGrid, Source={x:Reference Cat}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="0.1*"/>
-                                        <RowDefinition Height="0.2*"/>
-                                        <RowDefinition Height="0.2*"/>
-                                        <RowDefinition Height="0.5*"/>
+                                        <RowDefinition Height="0.15*"/>
+                                        <RowDefinition Height="0.1*"/>
+                                        <RowDefinition Height="0.45*"/>
                                         <RowDefinition Height="0.2*"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="5.5*"/>
-                                        <ColumnDefinition Width="3.0*"/>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="0.3*"/>
                                     </Grid.ColumnDefinitions>
                                     <Frame BackgroundColor="#202123"
-                                           CornerRadius="10"
-                                           Grid.Column="0"
-                                           Grid.Row="0"
-                                           Grid.RowSpan="5">
+                                   Grid.RowSpan="5"
+                                   Padding="20"
+                                   CornerRadius="10">
                                         <Grid>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="0.7*"/>
+                                                <RowDefinition Height="0.15*"/>
+                                                <RowDefinition Height="0.25*"/>
+                                                <RowDefinition Height="0.15*"/>
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
+
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.5*"/>
+                                                <ColumnDefinition Width="0.3*"/>
+                                                <ColumnDefinition Width="0.35*"/>
+                                                <ColumnDefinition Width="0.05*"/>
+                                                <ColumnDefinition Width="0.3*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="0.5*"/>
-                                                    <RowDefinition Height="*"/>
-                                                    <RowDefinition Height="0.5*"/>
-                                                </Grid.RowDefinitions>
-                                                <StackLayout Orientation="Horizontal" Grid.Row="0">
-                                                    <Label Text="{Binding price, StringFormat='{0} .-'}" 
-                                                           Style="{StaticResource PriceLabel}" 
-                                                           HorizontalTextAlignment="Start"
-                                                           HorizontalOptions="Start"/>
-                                                    <Frame CornerRadius="5"
-                                                           Padding="2"
-                                                           Margin="0"
-                                                           WidthRequest="100"
-                                                           BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}">
-                                                        <Label Text="{Binding category, Converter={StaticResource Category}}"
+
+                                            <Label Text="{Binding price, StringFormat='{0} .-'}"
+                                           HorizontalTextAlignment="Start"
+                                           Style="{StaticResource PriceLabel}"/>
+                                            <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}"
+                                                 x:DataType="{x:Null}"
+                                                 BackgroundColor="Transparent"
+                                                 Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
+                                                 CommandParameter="{Binding}"
+                                                 Margin="5,5,-40,0"
+                                                 Grid.Column="3"/>
+                                            <StackLayout CompressedLayout.IsHeadless="True"
+                                                 Grid.Row="1"
+                                                 Grid.ColumnSpan="3"
+                                                 Grid.RowSpan="3"
+                                                 BackgroundColor="Red">
+                                                <Label Text="{Binding name}"
+                                               FontSize="Medium"
+                                               Style="{StaticResource CommonLabel}"/>
+                                                <Label Text="{Binding weight1, StringFormat='{0} г'}"
+                                               Opacity="0.5"
+                                               FontSize="Medium"
+                                               Style="{StaticResource CommonLabel}"/>
+                                            </StackLayout>
+                                            <Frame CornerRadius="5"
+                                           Padding="2"
+                                           Grid.Column="1"
+                                           Grid.Row="0"
+                                           BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}">
+                                                <Label Text="{Binding category, Converter={StaticResource Category}}"
                                                                TextColor="White"
                                                                VerticalTextAlignment="Center"
                                                                HorizontalTextAlignment="Center"/>
-                                                    </Frame>
-                                                    <ImageButton 
-                                                        x:DataType="{x:Null}"
-                                                        Source="{Binding Favorite, Converter={StaticResource InFavorite}}"
-                                                        ClassId="{Binding uid}"
-                                                        HeightRequest="20"
-                                                        Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
-                                                        CommandParameter="{Binding}"
-                                                        HorizontalOptions="EndAndExpand"
-                                                        BackgroundColor="Transparent">
-                                                    </ImageButton>
-                                                </StackLayout>
-                                                <Label Text="{Binding name}" 
-                                                       Grid.Row="1"
-                                                       Style="{StaticResource CommonLabel}"
-                                                       WidthRequest="100"
-                                                       VerticalOptions="Start"/>
-                                                <Label Grid.Row="2" 
-                                                       Text="{Binding weight1, StringFormat='{0} г'}" 
-                                                       Style="{StaticResource Counter}"/>
-                                            </Grid>
+                                            </Frame>
                                         </Grid>
                                     </Frame>
-                                    <image:CachedImage Source="{Binding image, StringFormat='https://www.tokyo-city.ru/{0}'}"
-                                                       DownsampleToViewSize="True"
-                                                       DownsampleUseDipUnits="True"
-                                                       DownsampleHeight="100"
-                                                       Finish="CachedImage_Finish"
-                                                       CacheDuration="90"
-                                                       RetryDelay="0"
-                                                       LoadingDelay="0"
-                                                       Margin="20,0,100,20"
-                                                       CacheType="All"
-                                                       FadeAnimationEnabled="False"
-                                                       Grid.Row="2"
-                                                       Grid.Column="0"
-                                                       Grid.ColumnSpan="2"
-                                                       Grid.RowSpan="3"
-                                                       FlowDirection="RightToLeft"
-                                                       Aspect="AspectFit"
-                                                       LoadingPriority="Highest"/>
-                                    <ImageButton BackgroundColor="Transparent"
-                                                 x:DataType="{x:Null}"
-                                                 Command="{Binding Path=BindingContext.AddToCart}" 
-                                                 FlowDirection="LeftToRight"
-                                                 Grid.Column="1"
-                                                 Grid.Row="4"
-                                                 CommandParameter="{Binding}"
-                                                 Source="addtocart.png"/>
+                                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                               DownsampleToViewSize="True"
+                                               BitmapOptimizations="True"
+                                               CacheType="All"
+                                               CacheDuration="90"
+                                               FadeAnimationEnabled="False"
+                                               Margin="60,0,60,0"
+                                               Aspect="AspectFit"
+                                               Grid.Row="2"
+                                               Grid.RowSpan="3"
+                                               Grid.ColumnSpan="2"
+                                               LoadingPriority="Highest"/>
+                                    <ImageButton Source="addtocart"
+                                   Grid.Row="4"
+                                   BackgroundColor="Transparent"
+                                   Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference Cat}}"
+                                   CommandParameter="{Binding}"
+                                   Aspect="AspectFit"
+                                   Grid.Column="1"/>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -205,16 +196,13 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="20"/>
                                             </Grid.ColumnDefinitions>
-                                            <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}" Grid.Row="0" Grid.Column="1"
-                                                         x:DataType="{x:Null}"
-                                                         BackgroundColor="Transparent"
-                                                         Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
-                                                         CommandParameter="{Binding}"/>
+                                           
                                             <image:CachedImage Source="{Binding image, StringFormat='https://www.tokyo-city.ru/{0}'}"
                                                    Aspect="AspectFit"
                                                    DownsampleToViewSize="True"
                                                    FadeAnimationEnabled="False"
                                                    CacheType="All"
+                                                               Margin="-25,-25,-25,0"
                                                    Grid.Row="1"
                                                    Grid.ColumnSpan="2"
                                                    CacheDuration="90"
@@ -237,6 +225,11 @@
                                                              Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference Cat}}"
                                                              CommandParameter="{Binding}"/>
                                             </StackLayout>
+                                             <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}" Grid.Row="0" Grid.Column="1"
+                                                         x:DataType="{x:Null}"
+                                                         BackgroundColor="Transparent"
+                                                         Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
+                                                         CommandParameter="{Binding}"/>
                                         </Grid>
                                     </Frame>
                                 </StackLayout>

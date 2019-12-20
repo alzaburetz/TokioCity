@@ -20,16 +20,17 @@ namespace TokioCity.Views
             BindingContext = viewModel = new LunchesViewModel();
             MessagingCenter.Subscribe<Object>(this, "Lunches", (obj) =>
             {
-                viewModel.LoadLunchesCommand.Execute(null);
+               
             });
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
-            base.OnAppearing();
 
-            
+            base.OnAppearing();
+            await Task.Delay(500);
+            viewModel.LoadLunchesCommand.Execute(null);
         }
     }
 }
