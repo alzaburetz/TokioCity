@@ -17,6 +17,7 @@ namespace TokioCity
             Routing.RegisterRoute("cart/create", typeof(CreateOrder));
             Routing.RegisterRoute("categories", typeof(CategoriesTabs));
             Routing.RegisterRoute("categories/product", typeof(Product));
+         
 
             SetTabBarIsVisible(this, false);
         }

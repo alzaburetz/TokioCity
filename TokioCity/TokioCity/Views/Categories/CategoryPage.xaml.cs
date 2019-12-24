@@ -21,7 +21,7 @@ namespace TokioCity.Views.Categories
             InitializeComponent();
         }
 
-        public CategoryPage(int[] categories, string title, bool showSubcats = true) : this()
+        public CategoryPage(int[] categories, string title = "", bool showSubcats = true) : this()
         {
             BindingContext = viewModel = new BaseCategoryViewModel(categories, showSubcats);
             viewModel.Title = title;

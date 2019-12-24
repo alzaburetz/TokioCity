@@ -189,9 +189,10 @@
                                         <ColumnDefinition Width="0.3*"/>
                                     </Grid.ColumnDefinitions>
                                     <Frame BackgroundColor="#202123"
-                                   Grid.RowSpan="5"
-                                   Padding="20"
-                                   CornerRadius="10">
+                                           IsClippedToBounds="True"
+                                           Grid.RowSpan="5"
+                                           Padding="20"
+                                           CornerRadius="10">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="0.15*"/>
@@ -215,7 +216,7 @@
                                                  BackgroundColor="Transparent"
                                                  Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Burger}}"
                                                  CommandParameter="{Binding}"
-                                                 Margin="5,5,-40,0"
+                                                 Margin="2,2,-20,2"
                                                  Grid.Column="3"/>
                                             <StackLayout CompressedLayout.IsHeadless="True"
                                                  Grid.Row="1"
@@ -266,51 +267,9 @@
                         </CollectionView.ItemTemplate>
 
                     </CollectionView>
-                    <!--<StackLayout BackgroundColor="#202123"
-                                 Margin="0,30,0,0">
-                        <StackLayout Padding="30,10,10,10"
-                                     Orientation="Horizontal">
-
-                            <Label Text="ТОППИНГИ" Style="{StaticResource Header}"/>
-                            <Label Text="{Binding Path=toppings.Count}" Style="{StaticResource Counter}"/>
-                        </StackLayout>
-                        <CollectionView ItemsSource="{Binding toppings}"
-                                        ItemTemplate="{StaticResource ProductItem}"
-                                        SelectionMode="Single"
-                                        HeightRequest="100">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal"/>
-                            </CollectionView.ItemsLayout>
-                        </CollectionView>
-                    </StackLayout>-->
 
                 </StackLayout>
             </ScrollView>
-            <!--<StackLayout HeightRequest="75" Padding="10">
-                <Frame BackgroundColor="#007AFF" 
-                       IsVisible="false"
-                       Padding="10,0,10,0" 
-                       HorizontalOptions="FillAndExpand" 
-                       VerticalOptions="FillAndExpand">
-                    <StackLayout Orientation="Horizontal">
-                        <Label x:Name="FullPrice" 
-                               Text="0.-" 
-                               Style="{StaticResource PriceLabel}" 
-                               HorizontalOptions="Start"/>
-                        <Label Text="Оформить" 
-                               Style="{StaticResource CommonLabel}" 
-                               HorizontalOptions="FillAndExpand" 
-                               HorizontalTextAlignment="End" 
-                               VerticalTextAlignment="Center"
-                               FontSize="Medium">
-                            <Label.GestureRecognizers>
-                                --><!--Добавить добавление в корзину--><!--
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </StackLayout>
-
-                </Frame>
-            </StackLayout>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

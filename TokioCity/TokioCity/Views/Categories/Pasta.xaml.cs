@@ -19,9 +19,10 @@ namespace TokioCity.Views
         public Pasta()
         {
             BindingContext = viewModel = new BaseCategoryViewModel(new int[] { 224 });
-            MessagingCenter.Subscribe<Object>(this, "Pasta", (obj) =>
+            MessagingCenter.Subscribe<Object>(this, "Pasta", async (obj) =>
             {
 
+                await Task.Delay(200);
                 viewModel.LoadProducts.Execute(null);
             });
             InitializeComponent();

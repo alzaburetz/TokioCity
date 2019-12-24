@@ -85,7 +85,7 @@
                                                  BackgroundColor="Transparent"
                                                  Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"
                                                  CommandParameter="{Binding}"
-                                                 Margin="5,5,-40,0"
+                                                 Margin="5,5,-30,0"
                                                  Grid.Column="3"/>
                                             <StackLayout CompressedLayout.IsHeadless="True"
                                                  Grid.Row="1"
@@ -184,6 +184,7 @@
                                      Padding="5">
                                     <Frame BackgroundColor="#202123"
                                            CornerRadius="20"
+                                           IsClippedToBounds="True"
                                            Padding="15">
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -226,6 +227,7 @@
                                                              CommandParameter="{Binding}"/>
                                             </StackLayout>
                                              <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}" Grid.Row="0" Grid.Column="1"
+                                                          Margin="0,0,0,20"
                                                          x:DataType="{x:Null}"
                                                          BackgroundColor="Transparent"
                                                          Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Cat}}"

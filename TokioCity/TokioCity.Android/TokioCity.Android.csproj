@@ -52,6 +52,8 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <Debugger>Xamarin</Debugger>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <AotAssemblies>false</AotAssemblies>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,6 +81,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Debugger>Native</Debugger>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <AndroidLinkTool>proguard</AndroidLinkTool>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
