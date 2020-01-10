@@ -11,6 +11,7 @@ namespace TokioCity.Services
         private static string version = "1.8";
         private static HttpClient clientStatic = new HttpClient()
         {
+            Timeout = TimeSpan.FromSeconds(10),
             BaseAddress = new Uri("https://www.tokyo-city.ru")
         };
         public async static Task<T> GetData<T>(HttpClient client, string endpoint)
@@ -39,6 +40,10 @@ namespace TokioCity.Services
                 {
                     return default(T);
                 }
+            }
+            catch (TaskCanceledException e)
+            {
+                return default(T);
             }
             catch (System.Net.Sockets.SocketException e)
             {

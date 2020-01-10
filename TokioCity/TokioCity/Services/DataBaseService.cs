@@ -5,6 +5,8 @@ using System.IO;
 using LiteDB;
 using System.Threading.Tasks;
 
+using TokioCity.Models;
+
 namespace TokioCity.Services
 {
     public class DataBaseService: IDataBase
@@ -18,13 +20,7 @@ namespace TokioCity.Services
 
         public IEnumerable<T> GetAllStream<T>(string collection)
         {
-            IEnumerable<T> result;
-            var items = database.GetCollection<T>(collection).FindAll();
-            var en = items.GetEnumerator();
-            while (en.MoveNext())
-            {
-                yield return en.Current;
-            }
+            return database.GetCollection<T>(collection).FindAll();
         }
 
         public Task<IEnumerable<T>> GetAllStreamAsync<T>(string collection)
@@ -52,25 +48,16 @@ namespace TokioCity.Services
             return result;
         }
 
-        public List<T> GetByQuery<T>(string collection, Query query)
+        public IEnumerable<T> GetByQuery<T>(string collection, Query query)
         {
-            List<T> result = new List<T>();
-            var list = database.GetCollection<T>(collection);
-            var found = list.Find(query);
-            while (found.GetEnumerator().MoveNext())
-            {
-                result.Add(found.GetEnumerator().Current);
-            }
-            return result;
+            return database.GetCollection<T>(collection).Find(query);
         }
 
         public IEnumerator<T> GetByQueryEnumerable<T>(string collection, Query query)
         {
-            var enumeration = database.GetCollection<T>(collection)
+            return database.GetCollection<T>(collection)
                 .Find(query)
                 .GetEnumerator();
-            while (enumeration.MoveNext())
-                yield return enumeration.Current;
         }
 
         public Task<IEnumerable<T>> GetByQueryEnumerableAsync<T>(string collection, Query query)
@@ -97,9 +84,9 @@ namespace TokioCity.Services
             return database.GetCollection<T>(collection).FindOne(Query.EQ("uid", uid));
         }
 
-        public IEnumerator<T> GetOneItem<T>(string collection, Query query = null)
+        public T GetOneItem<T>(string collection, Query query = null)
         {
-            return database.GetCollection<T>(collection).Find(Query.Where("id",x => x.AsInt32 != 0)).GetEnumerator();
+            return database.GetCollection<T>(collection).FindOne(Query.Where("id", x => x.AsInt32 != 0));
         }
 
         public void WriteItem<T>(string collection, T item)
@@ -134,6 +121,7 @@ namespace TokioCity.Services
                 .Personal), @"database.db");
 
             database = new LiteDatabase(DataBasePath);
+            
         }
     }
 }

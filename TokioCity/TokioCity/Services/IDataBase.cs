@@ -15,11 +15,11 @@ namespace TokioCity.Services
         Task<T> GetItemAsync<T>(string collection, Query query);
        void WriteAll<T>(string collection, List<T> items);
        void RemoveAll<T>(string collection);
-       List<T> GetByQuery<T>(string collection, Query query);
+       IEnumerable<T> GetByQuery<T>(string collection, Query query);
        IEnumerator<T> GetByQueryEnumerable<T>(string collection, Query query);
        int GetRecordCount<T>(string collection);
        T GetOneOfCategory<T>(string collection, int category);
-        IEnumerator<T> GetOneItem<T>(string collection, Query query = null);
+        T GetOneItem<T>(string collection, Query query = null);
         T GetItem<T>(string collection, Query query);
         void WriteItem<T>(string collection, T item);
         /// <summary>

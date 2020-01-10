@@ -31,11 +31,9 @@ namespace TokioCity.Views
 
         protected override async void OnAppearing()
         {
-            await Task.Delay(300);
             base.OnAppearing();
+            await Task.Delay(300);
             viewModel.LoadProducts.Execute(null);
-            MainProducts.ItemsSource = viewModel.products;
-            Grid.ItemsSource = viewModel.Products;
         }
 
         protected override void OnDisappearing()

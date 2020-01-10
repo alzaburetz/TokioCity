@@ -25,13 +25,11 @@ namespace TokioCity.Views.Categories
         {
             BindingContext = viewModel = new BaseCategoryViewModel(categories, showSubcats);
             viewModel.Title = title;
-            
             this.Title = title;
         }
 
         protected override async void OnAppearing()
         {
-            await Task.Delay(300);
             base.OnAppearing();
             viewModel.LoadProducts.Execute(null);
             MainProducts.ItemsSource = viewModel.products;
@@ -46,20 +44,20 @@ namespace TokioCity.Views.Categories
 
         protected async void OpenProduct(object sender, SelectionChangedEventArgs args)
         {
-            try
-            {
+            //try
+            //{
                 var item = ((AppItem)args.CurrentSelection[0] as AppItem);
                 await Navigation.PushModalAsync(new Product(item));
-            }
-            catch { }
-            var Collection = (CollectionView)sender;
-            Collection.SelectedItem = null;
+            //}
+            //catch { }
+            //var Collection = (CollectionView)sender;
+            //Collection.SelectedItem = null;
         }
 
-        protected async void LoadSubcat(object sender, SelectionChangedEventArgs args)
+        protected void LoadSubcat(object sender, SelectionChangedEventArgs args)
         {
             var item = (SubcategorySimplified)args.CurrentSelection[0] as SubcategorySimplified;
-            await Task.Delay(TimeSpan.FromMilliseconds(100));
+            //await Task.Delay(TimeSpan.FromMilliseconds(100));
             viewModel.LoadProductSubcatd.Execute(item.subcat_id);
         }
 

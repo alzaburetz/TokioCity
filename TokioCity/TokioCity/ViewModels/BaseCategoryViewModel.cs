@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 
 using TokioCity.Models;
 using TokioCity.Services;
+using TokioCity.Extentions;
 
 using FFImageLoading.Forms;
 using System.Linq;
@@ -29,9 +30,9 @@ namespace TokioCity.ViewModels
         public Command ItemTapped { get; set; }
         public ObservableCollection<SubcategorySimplified> subcats { get; set; }
         public CategorySimplified category { get; set; }
-        private ObservableCollection<AppItem> _Products;
-        public ObservableCollection<AppItem> products { get; set; }
-        public ObservableCollection<AppItem> Products
+        private ObservableCollectionFast<AppItem> _Products;
+        public ObservableCollectionFast<AppItem> products { get; set; }
+        public ObservableCollectionFast<AppItem> Products
         {
             get
             {
@@ -59,9 +60,9 @@ namespace TokioCity.ViewModels
             var info = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
             widthGrid = (int)(info.Width / info.Density);
             height = (App.screenHeight / 2);
-            products = new ObservableCollection<AppItem>();
+            products = new ObservableCollectionFast<AppItem>();
             subcats = new ObservableCollection<SubcategorySimplified>();
-            Products = new ObservableCollection<AppItem>();
+            Products = new ObservableCollectionFast<AppItem>();
             Toppings = new ObservableCollection<AppItem>();
             selectedCategory = new SubcategorySimplified();
             SelectedCategory = new SubcategorySimplified();
@@ -87,17 +88,18 @@ namespace TokioCity.ViewModels
                     foreach (var cat in category)
                     {
                         var database = await DataBase.GetByQueryEnumerableAsync<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(cat)));
-                        var data = database.GetEnumerator();
-                        while(data.MoveNext())
-                        {
-                            products.Add(data.Current);
-                        }
-                }
+                        var data = database;
+                        products.AddRange(database);
+                        await Task.Delay(500);
+                    }
 
             });
             AddFavorite = new Command((item) =>
             {
-              
+                var inFavorite = (item as AppItem).Favorite;
+                (item as AppItem).Favorite = !inFavorite;
+                DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
+                return;
                 var check = DataBase.GetProduct<AppItem>("Favorite", (item as AppItem).uid);
                 if (check == null)
                 {
@@ -118,38 +120,36 @@ namespace TokioCity.ViewModels
             {
                 try
                 {
-                    
                     var subcats = await DataBase.GetItemAsync<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id", (int)categ));
-                    foreach (var subcat in subcats.subcats)
+                    if (subcats != null)
                     {
-                        this.subcats.Add(subcat);
+                        foreach (var subcat in subcats.subcats)
+                        {
+                            this.subcats.Add(subcat);
+                        }
+                        this.SelectedCategory = this.subcats[0];
                     }
-                    this.SelectedCategory = this.subcats[0];
                 } 
                 catch (ArgumentOutOfRangeException e) { }
                 
 
             });
 
-            AddToCart = new Command(async (item) =>
+            AddToCart = new Command((item) =>
             {
                 var Item = (AppItem)item as AppItem;
-                await Task.Run(()=>
+                Task.Run(()=>
                 {
                     AddToCartMethod(Item);
                 });
                 
             });
 
-            LoadProductSubcatd = new Command(async (categ) =>
+            LoadProductSubcatd = new Command((categ) =>
             {
                 Products.Clear();
-                var items = await DataBase.GetByQueryEnumerableAsync<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains((int)categ)));
-                var ie = items.GetEnumerator();
-                while (ie.MoveNext())
-                {
-                    Products.Add(ie.Current);
-                }
+                var items = DataBase.GetByQuery<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains((int)categ)));
+                Products.AddRange(items);
             });
         }
 

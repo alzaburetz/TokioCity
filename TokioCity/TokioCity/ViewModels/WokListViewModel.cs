@@ -41,6 +41,7 @@ namespace TokioCity.ViewModels
                         }
                         en.Current.Cost = cost;
                         MyWoks.Add(en.Current);
+                        await Task.Delay(100);
                     }
                 } catch { }
                 

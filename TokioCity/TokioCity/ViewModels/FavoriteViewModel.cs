@@ -4,35 +4,34 @@ using System.Text;
 using Xamarin.Forms;
 
 using TokioCity.Models;
+using TokioCity.Extentions;
 
 namespace TokioCity.ViewModels
 {
     public class FavoriteViewModel: BaseViewModel
     {
-        public ObservableCollection<AppItem> favorites { get; set; }
+        public ObservableCollectionFast<AppItem> favorites { get; set; }
         public Command LoadFavorites { get; set; }
         public Command RemoveFavorite { get; set; }
         public Command AddToCart { get; set; }
 
         public FavoriteViewModel()
         {
-            favorites = new ObservableCollection<AppItem>();
-            LoadFavorites = new Command(() =>
+            favorites = new ObservableCollectionFast<AppItem>();
+            LoadFavorites = new Command(async () =>
             {
                 favorites.Clear();
-                var fav = DataBase.GetAllStream<AppItem>("Favorite");
-                var enumerator = fav.GetEnumerator();
-
-                while (enumerator.MoveNext())
-                {
-                    favorites.Add(enumerator.Current);
-                }
-                fav = null;
+                var fav = await DataBase.GetByQueryEnumerableAsync<AppItem>("Item", LiteDB.Query.Where("Favorite", x => x.AsBoolean == true));
+                favorites.AddRange(fav);
             });
 
             RemoveFavorite = new Command((item) =>
             {
+                var inFavorite = (item as AppItem).Favorite;
+                (item as AppItem).Favorite = !inFavorite;
+                DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
                 favorites.Remove(item as AppItem);
+                return;
                 DataBase.RemoveItem<AppItem>("Favorite", LiteDB.Query.Where("uid", x => x.AsString == (item as AppItem).uid));
                 (item as AppItem).Favorite = false;
                 DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
