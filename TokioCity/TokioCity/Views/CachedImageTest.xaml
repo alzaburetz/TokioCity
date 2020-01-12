@@ -23,6 +23,9 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Test"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout CompressedLayout.IsHeadless="true">
             <ScrollView>

@@ -21,17 +21,12 @@ namespace TokioCity.ViewModels
             LoadFavorites = new Command(async () =>
             {
                 favorites.Clear();
-                var fav = await DataBase.GetByQueryEnumerableAsync<AppItem>("Item", LiteDB.Query.Where("Favorite", x => x.AsBoolean == true));
+                var fav = await DataBase.GetAllStreamAsync<AppItem>("Favorite");
                 favorites.AddRange(fav);
             });
 
             RemoveFavorite = new Command((item) =>
             {
-                var inFavorite = (item as AppItem).Favorite;
-                (item as AppItem).Favorite = !inFavorite;
-                DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
-                favorites.Remove(item as AppItem);
-                return;
                 DataBase.RemoveItem<AppItem>("Favorite", LiteDB.Query.Where("uid", x => x.AsString == (item as AppItem).uid));
                 (item as AppItem).Favorite = false;
                 DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));

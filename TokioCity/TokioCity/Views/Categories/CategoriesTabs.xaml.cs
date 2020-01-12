@@ -12,7 +12,7 @@ using System.Net.Http;
 
 using AndroidSpec = Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using TokioCity.Views.Categories;
-
+using TokioCity.Services;
 
 namespace TokioCity.Views
 {
@@ -105,7 +105,6 @@ namespace TokioCity.Views
         {
             await Task.Delay(500);
             base.OnAppearing();
-            
         }
 
         protected override void OnDisappearing()

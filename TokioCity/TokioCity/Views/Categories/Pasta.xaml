@@ -48,29 +48,27 @@
                             SelectionChanged="OpenProduct">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Span="2"
+                                             VerticalItemSpacing="10"
+                                             HorizontalItemSpacing="5"
                                              Orientation="Vertical"/>
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <StackLayout BackgroundColor="#181818"
-                                     Padding="5">
-                                    <Frame BackgroundColor="#202123"
-                               CornerRadius="20"
+                                <Grid BackgroundColor="#202123"
                                    Padding="15">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="120"/>
-                                                <RowDefinition Height="40"/>
-                                                <RowDefinition Height="40"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="20"/>
-                                            </Grid.ColumnDefinitions>
-                                            
-                                            <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="120"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
                                                    Aspect="AspectFit"
                                                    Grid.Row="1"
                                                    FadeAnimationEnabled="False"
@@ -81,31 +79,28 @@
                                                    Grid.ColumnSpan="2"
                                                    VerticalOptions="StartAndExpand"
                                                    HorizontalOptions="FillAndExpand"/>
-                                            <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}" Grid.Row="0" Grid.Column="1"
+                                    <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}" Grid.Row="0" Grid.Column="1"
                                              BackgroundColor="Transparent"
                                              Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference PastaPage}}"
                                              CommandParameter="{Binding}"/>
-                                            <Label Text="{Binding name}"
+                                    <Label Text="{Binding name}"
                                        Opacity="0.6"
                                        Grid.ColumnSpan="2"
                                        Grid.Row="2"/>
-                                            <StackLayout Orientation="Horizontal"
+                                    <StackLayout Orientation="Horizontal"
                                              Grid.Row="3"
                                              Grid.ColumnSpan="2">
-                                                <Label Text="{Binding price, Converter={StaticResource Price}}"
+                                        <Label Text="{Binding price, Converter={StaticResource Price}}"
                                                    FontAttributes="Bold"
                                                        HorizontalOptions="StartAndExpand"
                                                    />
-                                                <ImageButton Source="addtocart.png"
+                                        <ImageButton Source="addtocart.png"
                                                              VerticalOptions="EndAndExpand"
                                                              WidthRequest="30"
                                                              Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference PastaPage}}"
                                                              CommandParameter="{Binding}"/>
-                                            </StackLayout>
-                                        </Grid>
-                                    </Frame>
-                                </StackLayout>
-
+                                    </StackLayout>
+                                </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

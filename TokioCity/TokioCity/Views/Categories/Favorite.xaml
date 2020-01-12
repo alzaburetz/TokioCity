@@ -47,31 +47,29 @@
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="2"
                                      Orientation="Vertical"
+                                        VerticalItemSpacing="10"
+                                         HorizontalItemSpacing="5"
                                      SnapPointsAlignment="Start"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout BackgroundColor="#181818"
-                                     Padding="5">
-                                <Frame BackgroundColor="#202123"
-                               CornerRadius="20"
-                                   Padding="15">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="120"/>
-                                            <RowDefinition Height="40"/>
-                                            <RowDefinition Height="40"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="20"/>
-                                        </Grid.ColumnDefinitions>
-                                        <ImageButton Source="heartfilled.png" Grid.Row="0" Grid.Column="1"
+                            <Grid BackgroundColor="#202123"
+                                          Padding="15">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <ImageButton Source="heartfilled.png" Grid.Row="0" Grid.Column="1"
                                              BackgroundColor="Transparent"
                                              Command="{Binding Path=BindingContext.RemoveFavorite, Source={x:Reference Fav}}"
                                              CommandParameter="{Binding}"/>
-                                        <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
+                                <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
                                                    Aspect="AspectFit"
                                                            Margin="-25,-20,-25,0"
                                                            FadeAnimationEnabled="False"
@@ -82,31 +80,29 @@
                                                    Grid.ColumnSpan="2"
                                                    VerticalOptions="StartAndExpand"
                                                    HorizontalOptions="FillAndExpand"/>
-                                        <ImageButton Source="heartfilled.png" Grid.Row="0" Grid.Column="1"
+                                <ImageButton Source="heartfilled.png" Grid.Row="0" Grid.Column="1"
                                              BackgroundColor="Transparent"
                                              Command="{Binding Path=BindingContext.RemoveFavorite, Source={x:Reference Fav}}"
                                              CommandParameter="{Binding}"/>
-                                        <Label Text="{Binding name}"
+                                <Label Text="{Binding name}"
                                        Opacity="0.6"
                                        Grid.ColumnSpan="2"
                                        Grid.Row="2"/>
-                                        <StackLayout Orientation="Horizontal"
+                                <StackLayout Orientation="Horizontal"
                                              Grid.Row="3"
                                              Grid.ColumnSpan="2">
-                                            <Label Text="{Binding price, Converter={StaticResource Price}}"
+                                    <Label Text="{Binding price, Converter={StaticResource Price}}"
                                                    FontAttributes="Bold"
                                                        HorizontalOptions="StartAndExpand"
                                                    />
-                                            <ImageButton Source="addtocart.png"
+                                    <ImageButton Source="addtocart.png"
                                                              VerticalOptions="EndAndExpand"
                                                      BackgroundColor="Transparent"
                                                     Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference Fav}}"
                                              CommandParameter="{Binding}"
                                                              WidthRequest="30"/>
-                                        </StackLayout>
-                                    </Grid>
-                                </Frame>
-                            </StackLayout>
+                                </StackLayout>
+                            </Grid>
 
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

@@ -134,7 +134,12 @@ namespace TokioCity.ViewModels
                 {
                     DataBase.WriteAll("Items", items);
                 }
-                Application.Current.Properties.Add("Hash", hash);
+                try
+                {
+                    Application.Current.Properties.Add("Hash", hash);
+
+                }
+                catch { }
             }
             else if (hash != Application.Current.Properties["Hash"].ToString())
             {

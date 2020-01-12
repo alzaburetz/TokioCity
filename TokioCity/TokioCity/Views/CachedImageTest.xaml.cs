@@ -11,6 +11,7 @@ using FFImageLoading.Forms;
 
 using TokioCity.ViewModels;
 using TokioCity.Models;
+using TokioCity.Services;
 
 namespace TokioCity.Views
 {
@@ -34,6 +35,8 @@ namespace TokioCity.Views
             base.OnAppearing();
             await Task.Delay(300);
             viewModel.LoadProducts.Execute(null);
+            DependencyService.Get<IToolbarItemBadgeService>().SetBadge(this, ToolbarItems.First(), "1", Color.Red, Color.White);
+
         }
 
         protected override void OnDisappearing()

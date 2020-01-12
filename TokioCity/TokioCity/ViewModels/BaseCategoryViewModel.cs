@@ -96,10 +96,6 @@ namespace TokioCity.ViewModels
             });
             AddFavorite = new Command((item) =>
             {
-                var inFavorite = (item as AppItem).Favorite;
-                (item as AppItem).Favorite = !inFavorite;
-                DataBase.UpdateItem<AppItem>("Items", null, (item as AppItem));
-                return;
                 var check = DataBase.GetProduct<AppItem>("Favorite", (item as AppItem).uid);
                 if (check == null)
                 {

@@ -299,12 +299,9 @@
                     <Image Source="scrim.png" Grid.ColumnSpan="3" Aspect="AspectFill">
                         
                     </Image>
-                    <Image Source="back.png" Grid.Column="0" Margin="20">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="GoBack"/>
-                        </Image.GestureRecognizers>
+                    <ImageButton Source="back.png" Grid.Column="0" Margin="20" Clicked="GoBack">
 
-                    </Image>
+                    </ImageButton>
                     <Image Source="cart.png" Grid.Column="2" Margin="15">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OpenCart"/>
