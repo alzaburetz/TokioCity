@@ -26,118 +26,6 @@
                 </StackLayout>
             </DataTemplate>
         </ResourceDictionary>
-        <DataTemplate x:Key="HorizontalProductsSushi">
-            <Grid>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.2*"/>
-                    <RowDefinition Height="0.2*"/>
-                    <RowDefinition Height="0.5*"/>
-                    <RowDefinition Height="0.2*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5.5*"/>
-                    <ColumnDefinition Width="3.0*"/>
-                </Grid.ColumnDefinitions>
-                <Frame BackgroundColor="#202123"
-                                   CornerRadius="10"
-                                   Grid.Column="0"
-                                   Grid.Row="0"
-                                   Grid.RowSpan="5">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.7*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.5*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="0.5*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                                <Label Text="{Binding price, Converter={StaticResource Price}}" 
-                                                           Style="{StaticResource PriceLabel}" 
-                                                           HorizontalTextAlignment="Start"
-                                                           HorizontalOptions="Start"
-                                                           />
-                                <StackLayout Padding="10" WidthRequest="70">
-                                    <Frame CornerRadius="5"
-                                                           Padding="2"
-                                                           Margin="-7"
-                                                           BackgroundColor="{Binding category,Converter={StaticResource CategoryColor}}">
-                                        <Label Text="{Binding category, Converter={StaticResource Category}}"
-                                                                       TextColor="White"
-                                                                       VerticalTextAlignment="Center"
-                                                                       HorizontalTextAlignment="Center"/>
-                                    </Frame>
-
-                                </StackLayout>
-
-                                <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}"
-                                                 ClassId="{Binding uid}"
-                                                 HeightRequest="20"
-                                                 Command="{Binding Path=BindingContext.AddToFavorite, Source={x:Reference Burger}}"
-                                                 CommandParameter="{Binding}"
-                                                 HorizontalOptions="EndAndExpand"
-                                                 BackgroundColor="Transparent">
-                                </ImageButton>
-                            </StackLayout>
-                            <Label Text="{Binding name}" 
-                                                   Grid.Row="1"
-                                                   Style="{StaticResource CommonLabel}"
-                                                                         HorizontalOptions="Fill"
-                                                                         WidthRequest="100"
-                                                                         VerticalOptions="Start"/>
-                            <Label Grid.Row="2" 
-                                                Text="{Binding weight1, Converter={StaticResource Weight}}" 
-                                                   Style="{StaticResource Counter}"/>
-                        </Grid>
-
-                    </Grid>
-                </Frame>
-
-                <AbsoluteLayout 
-                                        Margin="20,0,80,20"
-                                               Grid.Row="1"
-                                               FlowDirection="RightToLeft"
-                                               Grid.Column="0"
-                                               Grid.ColumnSpan="2"
-                                               Grid.RowSpan="4">
-                    <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
-                                           LoadingDelay="0"
-                                           FlowDirection="RightToLeft"
-                                           Aspect="AspectFill"
-                                           LoadingPriority="Highest"/>
-
-
-                </AbsoluteLayout>
-
-                <StackLayout FlowDirection="LeftToRight"
-                                           Grid.Column="1"
-                                           Grid.Row="4"
-                                                 Orientation="Horizontal"
-                                           >
-
-                    <ImageButton BackgroundColor="Transparent"
-                                           Source="addtocart.png"
-                                             Command="{Binding Path=BindingContext.AddToCart, Source={x:Reference Burger}}"
-                                             CommandParameter="{Binding}"/>
-                </StackLayout>
-
-
-            </Grid>
-        </DataTemplate>
-
         <Style TargetType="StackLayout">
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
@@ -166,13 +54,14 @@
                         <Label Text="БУРГЕРЫ" Style="{StaticResource Title}"/>
                     </StackLayout>
                     <CollectionView ItemsSource="{Binding burgers}"
+                                    
                             SelectionMode="Single"
                             SelectionChanged="SelectBurger"
                             HeightRequest="{Binding height}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal"
                                      SnapPointsAlignment="Start"
-                                     SnapPointsType="Mandatory"/>
+                                     SnapPointsType="MandatorySingle"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:AppItem">
@@ -188,10 +77,6 @@
                                         <ColumnDefinition Width="0.7*"/>
                                         <ColumnDefinition Width="0.3*"/>
                                     </Grid.ColumnDefinitions>
-                                    <!--<Frame 
-                                           HasShadow="False"
-                                   
-                                   CornerRadius="10">-->
                                     <Grid BackgroundColor="#202123"
                                               Padding="20"
                                               Grid.RowSpan="5"
@@ -216,7 +101,7 @@
                                         <ImageButton Source="{Binding Favorite, Converter={StaticResource InFavorite}}"
                                                  x:DataType="{x:Null}"
                                                  BackgroundColor="Transparent"
-                                                 Command="{Binding Path=BindingContext.AddFavorite, Source={x:Reference Burger}}"
+                                                 Command="{Binding Path=BindingContext.AddToFavorite, Source={x:Reference Burger}}"
                                                  CommandParameter="{Binding}"
                                                  Margin="5,5,-30,0"
                                                  Grid.Column="3"/>
@@ -244,7 +129,6 @@
                                                                HorizontalTextAlignment="Center"/>
                                         </Frame>
                                     </Grid>
-                                    <!--</Frame>-->
                                     <image:CachedImage Source="{Binding image, Converter={StaticResource Image}}"
                                                DownsampleToViewSize="True"
                                                BitmapOptimizations="True"

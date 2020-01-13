@@ -34,6 +34,8 @@ namespace TokioCity.Views.Categories
             viewModel.LoadProducts.Execute(null);
             MainProducts.ItemsSource = viewModel.products;
             Grid.ItemsSource = viewModel.Products;
+            await Task.Delay(400);
+            Subcats.SelectedItem = viewModel.SelectedCategory;
         }
 
         protected override void OnDisappearing()

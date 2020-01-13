@@ -49,7 +49,7 @@
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Span="2"
                                              VerticalItemSpacing="10"
-                                             HorizontalItemSpacing="5"
+                                             HorizontalItemSpacing="10"
                                              Orientation="Vertical"/>
                         </CollectionView.ItemsLayout>
 

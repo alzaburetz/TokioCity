@@ -57,6 +57,7 @@ namespace TokioCity.ViewModels
             {
                 CartItem cartitem = (item as MyProduct).ConvertToCartItem(1);
                 DataBase.WriteItem<CartItem>("Cart", cartitem);
+                CategoriesTabs.RenewCount();
             });
         }
     }

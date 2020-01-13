@@ -47,8 +47,8 @@
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="2"
                                      Orientation="Vertical"
-                                        VerticalItemSpacing="10"
-                                         HorizontalItemSpacing="5"
+                                     VerticalItemSpacing="10"
+                                     HorizontalItemSpacing="10"
                                      SnapPointsAlignment="Start"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>

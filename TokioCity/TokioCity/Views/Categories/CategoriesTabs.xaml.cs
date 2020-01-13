@@ -19,7 +19,7 @@ namespace TokioCity.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoriesTabs : TabbedPage
     {
-        
+        public static CategoriesTabs instance;
         public CategoriesViewModel viewModel { get; set; }
         public static int ProductCounter { get; set; }
         public ToolbarItem Cart
@@ -55,12 +55,14 @@ namespace TokioCity.Views
         }
         public CategoriesTabs()
         {
+            instance = this;
             AndroidSpec.TabbedPage.SetOffscreenPageLimit(this, 10);
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://www.tokyo-city.ru");
             BindingContext = viewModel = new CategoriesViewModel(client);
             BarBackgroundColor = Color.FromHex("#181818");
             BarTextColor = Color.White;
+            
             InitializeComponent();
             
             Children.Add(new Favorite() { IconImageSource = "favorite" });
@@ -103,8 +105,32 @@ namespace TokioCity.Views
 
         protected async override void OnAppearing()
         {
+            
             await Task.Delay(500);
             base.OnAppearing();
+            await Task.Run(() =>
+            {
+                viewModel.GetCartCountCommand.Execute(null);
+            });
+            await Task.Delay(200);
+            await Task.Run(() => 
+            { 
+                ProductCounter = viewModel.CartCount;
+            }).ContinueWith((obj) =>
+            {
+                DependencyService.Get<IToolbarItemBadgeService>().SetBadge(this, ToolbarItems[0], $"{ProductCounter}", Color.FromHex("#007AFF"), Color.White);
+            });
+        }
+
+        public static async void RenewCount()
+        {
+            await Task.Run(() =>
+            {
+                ProductCounter++;
+            }).ContinueWith((obj) =>
+            {
+                DependencyService.Get<IToolbarItemBadgeService>().SetBadge(instance, instance.ToolbarItems[0], $"{ProductCounter}", Color.FromHex("#007AFF"), Color.White);
+            });
         }
 
         protected override void OnDisappearing()

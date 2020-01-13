@@ -13,19 +13,24 @@ namespace TokioCity.Droid.Services
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                var toolbar = CrossCurrentActivity.Current.Activity.FindViewById(Resource.Id.toolbar) as Android.Support.V7.Widget.Toolbar;
-                if (toolbar != null)
+                var Current = CrossCurrentActivity.Current.Activity;
+                if (Current != null)
                 {
-                    if (!string.IsNullOrEmpty(value))
+                    var toolbar = MyShellToolbarAppearanceTracker.mytoolbar;
+                    if (toolbar != null)
                     {
-                        var idx = page.ToolbarItems.IndexOf(item);
-                        if (toolbar.Menu.Size() > idx)
+                        if (!string.IsNullOrEmpty(value))
                         {
-                            var menuItem = toolbar.Menu.GetItem(idx);
-                            //BadgeDrawable.SetBadgeText(CrossCurrentActivity.Current.Activity, menuItem, value, backgroundColor.ToAndroid(), textColor.ToAndroid());
+                            var idx = page.ToolbarItems.IndexOf(item);
+                            if (toolbar.Menu.Size() > idx)
+                            {
+                                var menuItem = toolbar.Menu.GetItem(idx);
+                                BadgeDrawable.SetBadgeText(CrossCurrentActivity.Current.Activity, menuItem, value, backgroundColor.ToAndroid(), textColor.ToAndroid());
+                            }
                         }
                     }
                 }
+                
             });
         }
     }

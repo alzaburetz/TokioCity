@@ -221,7 +221,8 @@
                                            Grid.Row="2"
                                            Grid.ColumnSpan="3"
                                            Style="{StaticResource CommonLabel}"/>
-                                <Label Text="{Binding price}"
+                                <Label Text="{Binding price, StringFormat='{0} .-'}"
+                                       
                                            Grid.Row="3"
                                            Grid.Column="0"
                                            Margin="0"

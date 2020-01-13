@@ -14,6 +14,7 @@ using TokioCity.Extentions;
 
 using FFImageLoading.Forms;
 using System.Linq;
+using TokioCity.ViewModels;
 
 namespace TokioCity.ViewModels
 {
@@ -28,7 +29,8 @@ namespace TokioCity.ViewModels
         private Command ReloadCategories { get; set; }
         public Command LoadProductSubcatd { get; set; }
         public Command ItemTapped { get; set; }
-        public ObservableCollection<SubcategorySimplified> subcats { get; set; }
+        public Command GetCartCountCommand { get; set; }
+        public ObservableCollectionFast<SubcategorySimplified> subcats { get; set; }
         public CategorySimplified category { get; set; }
         private ObservableCollectionFast<AppItem> _Products;
         public ObservableCollectionFast<AppItem> products { get; set; }
@@ -53,15 +55,18 @@ namespace TokioCity.ViewModels
         public int widthGrid { get; set; }
         public int height { get; set; }
         bool subcatsShow { get; set; }
+        bool wasLoaded { get; set; }
+
         public BaseCategoryViewModel(int[] category, bool showSubcats = true)
         {
+            wasLoaded = false;
             subcatsShow = showSubcats;
             width = App.screenWidth / 4;
             var info = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
             widthGrid = (int)(info.Width / info.Density);
             height = (App.screenHeight / 2);
             products = new ObservableCollectionFast<AppItem>();
-            subcats = new ObservableCollection<SubcategorySimplified>();
+            subcats = new ObservableCollectionFast<SubcategorySimplified>();
             Products = new ObservableCollectionFast<AppItem>();
             Toppings = new ObservableCollection<AppItem>();
             selectedCategory = new SubcategorySimplified();
@@ -73,25 +78,41 @@ namespace TokioCity.ViewModels
             });
             LoadProducts = new Command(async () =>
             {
-                products.Clear();
-                subcats.Clear();
-                if (subcatsShow)
+                if (wasLoaded)
                 {
-                    try
+                    this.SelectedCategory = this.subcats[0];
+                    return;
+                }
+                else
+                {
+                    if (subcatsShow)
                     {
-                        ReloadCategories.Execute(category[0]);
+                        try
+                        {
+                            ReloadCategories.Execute(category[0]);
+                        }
+                        catch (IndexOutOfRangeException e) { }
                     }
-                    catch (IndexOutOfRangeException e) { }
+
+                    this.category = await DataBase.GetItemAsync<CategorySimplified>("Categories", Query.EQ("cat_id", category[0]));
+                    foreach (var subcat in category)
+                    {
+                        await Task.Run(async () =>
+                        {
+                            var query = Query.Where("category", x => x.AsArray.Contains(subcat));
+                            var database = await DataBase.GetByQueryEnumerableAsync<AppItem>("Items", query);
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                products.AddRange(database);
+                            });
+
+                        });
+
+                    }
+                    wasLoaded = true;
                 }
                 
-                this.category = DataBase.GetItem<CategorySimplified>("Categories", Query.EQ("cat_id", category[0]));
-                    foreach (var cat in category)
-                    {
-                        var database = await DataBase.GetByQueryEnumerableAsync<AppItem>("Items", Query.Where("category", x => x.AsArray.Contains(cat)));
-                        var data = database;
-                        products.AddRange(database);
-                        await Task.Delay(500);
-                    }
+
 
             });
             AddFavorite = new Command((item) =>
@@ -114,17 +135,21 @@ namespace TokioCity.ViewModels
 
             ReloadCategories = new Command(async (categ) =>
             {
-                try
+               try
                 {
-                    var subcats = await DataBase.GetItemAsync<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id", (int)categ));
-                    if (subcats != null)
+                    await Task.Run(async () =>
                     {
-                        foreach (var subcat in subcats.subcats)
+                        var subcats = await DataBase.GetItemAsync<CategorySimplified>("Categories", LiteDB.Query.EQ("cat_id", (int)categ));
+                        if (subcats != null)
                         {
-                            this.subcats.Add(subcat);
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                this.subcats.AddRange(subcats.subcats);
+                                this.SelectedCategory = this.subcats[0];
+                            });
                         }
-                        this.SelectedCategory = this.subcats[0];
-                    }
+                    });
+                    
                 } 
                 catch (ArgumentOutOfRangeException e) { }
                 
@@ -134,9 +159,12 @@ namespace TokioCity.ViewModels
             AddToCart = new Command((item) =>
             {
                 var Item = (AppItem)item as AppItem;
-                Task.Run(()=>
+                Task.Run(() =>
                 {
                     AddToCartMethod(Item);
+                }).ContinueWith((obj) =>
+                {
+                    TokioCity.Views.CategoriesTabs.RenewCount();
                 });
                 
             });

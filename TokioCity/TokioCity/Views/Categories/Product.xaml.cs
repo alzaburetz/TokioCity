@@ -21,7 +21,10 @@ namespace TokioCity.Views
         {
             BindingContext = viewModel = new ProductViewModel();
             viewModel.product = item;
+            viewModel.LoadProductCommand.Execute(item.uid);
+            bool hasToppings = item.toppings.Count > 1;
             InitializeComponent();
+            Toppings.IsVisible = hasToppings;
         }
 
         public Product()
@@ -32,9 +35,6 @@ namespace TokioCity.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            viewModel.LoadProductCommand.Execute(viewModel.product.uid);
-            bool hasToppings = viewModel.product.toppings.Count > 1;
-            Toppings.IsVisible = hasToppings;
         }
 
         public async void GoBack(object sender, EventArgs args)

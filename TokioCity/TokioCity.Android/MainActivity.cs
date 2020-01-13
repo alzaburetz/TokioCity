@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Plugin.CurrentActivity;
 
 namespace TokioCity.Droid
 {
@@ -24,6 +25,7 @@ namespace TokioCity.Droid
             
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             var widthPixels = Resources.DisplayMetrics.WidthPixels;//getting the width in pixels  
             var scale = Resources.DisplayMetrics.Density;//density i.e., pixels per inch or cms  

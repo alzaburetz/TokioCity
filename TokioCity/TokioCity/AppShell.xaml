@@ -112,6 +112,12 @@
             </ShellContent>
         </Tab>
 
+        <Tab Title="Счетчик">
+            <ShellContent>
+                <local:Page1/>
+            </ShellContent>
+        </Tab>
+
     </FlyoutItem>
     <ShellItem>
         <ShellSection>

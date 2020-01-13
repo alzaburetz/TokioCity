@@ -297,11 +297,14 @@
                         <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="scrim.png" Grid.ColumnSpan="3" Aspect="AspectFill">
-                        
-                    </Image>
-                    <ImageButton Source="back.png" Grid.Column="0" Margin="20" Clicked="GoBack">
 
-                    </ImageButton>
+                    </Image>
+                    <StackLayout BackgroundColor="Transparent">
+                        <Image Source="back" Scale="0.2" Aspect="AspectFit"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GoBack"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
                     <Image Source="cart.png" Grid.Column="2" Margin="15">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OpenCart"/>

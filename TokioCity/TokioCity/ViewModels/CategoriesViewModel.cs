@@ -16,7 +16,7 @@ namespace TokioCity.ViewModels
 {
     public class CategoriesViewModel : BaseViewModel
     {
-
+        public int CartCount {get; set;}
         public ObservableCollection<Category> CatList { get; set; }
         public ObservableCollection<AppItem> Products { get; set; }
         public ObservableCollection<Subcategory> SubCats { get; set; }
@@ -32,6 +32,8 @@ namespace TokioCity.ViewModels
         public int CurrentCategory { get; set; }
         public int CategoryIndex { get; set; }
 
+        public Command GetCartCountCommand { get; set; }
+
         public CategoriesViewModel(HttpClient client)
         {
             CatList = new ObservableCollection<Category>();
@@ -40,6 +42,16 @@ namespace TokioCity.ViewModels
             items = new List<AppItem>();
             data = new List<Category>();
             MainProduct = new AppItem();
+            GetCartCountCommand = new Command(async () =>
+            {
+                var cart = await DataBase.GetAllStreamAsync<Models.CartItem>("Cart");
+                var Count = 0;
+                    foreach (var item in cart)
+                    {
+                        Count += item.Count;
+                    }
+                this.CartCount = Count;
+            });
 
             LoadSubcat = new Command(async (subcat) =>
             {
