@@ -54,7 +54,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AotAssemblies>false</AotAssemblies>
     <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
-    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidKeyStore>false</AndroidKeyStore>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -84,6 +84,10 @@
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidLinkTool>r8</AndroidLinkTool>
+    <AndroidSigningKeyStore>C:\Program Files\Java\jdk-14.0.1\bin\fooddelivery.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>dsfgntye33</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>deliery</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>dsfgntye33</AndroidSigningKeyPass>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
